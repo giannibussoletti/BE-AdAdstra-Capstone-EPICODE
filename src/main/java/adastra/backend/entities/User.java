@@ -1,5 +1,6 @@
 package adastra.backend.entities;
 
+import adastra.backend.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,9 @@ public class User {
     @Column(columnDefinition = "TEXT", name = "profile_pic_link")
     private String profilePicLink;
 
+    @Column(nullable = false, name = "user_role")
+    private UserRole userRole;
+
     public User(String name, String surname, String email,
                 LocalDate birthDate,
                 String password) {
@@ -45,5 +49,6 @@ public class User {
         this.birthDate = birthDate;
         this.password = password;
         this.profilePicLink = "https://placehold.co/100";
+        this.userRole = UserRole.USER;
     }
 }
