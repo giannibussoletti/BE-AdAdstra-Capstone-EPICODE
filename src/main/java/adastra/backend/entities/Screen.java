@@ -18,13 +18,13 @@ public class Screen {
     private UUID id;
 
     @Column(name = "screen_number", nullable = false)
-    private Integer screenNumber;
+    private int screenNumber;
 
     @ManyToOne
     @JoinColumn(name = "cinema_id", nullable = false)
     private Cinema cinemaId;
 
-    public Screen(Integer screenNumber, Cinema cinemaId) {
+    public Screen(int screenNumber, Cinema cinemaId) {
         this.screenNumber = screenNumber;
         this.cinemaId = cinemaId;
     }
