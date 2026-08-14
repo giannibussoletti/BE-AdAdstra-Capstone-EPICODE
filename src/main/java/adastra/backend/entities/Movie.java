@@ -1,5 +1,6 @@
 package adastra.backend.entities;
 
+import adastra.backend.enums.MovieIsDeleted;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,10 +22,14 @@ public class Movie {
     private String starring;
 
     @Column(nullable = false)
-    private Integer duration;
+    private int duration;
 
     @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false, name = "movie_is_deleted")
+    @Enumerated(EnumType.STRING)
+    private MovieIsDeleted movieIsDeleted;
 
     @Column(nullable = false, name = "poster_link", columnDefinition = "TEXT")
     private String posterLink;
@@ -32,7 +37,7 @@ public class Movie {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String plot;
 
-    public Movie(String starring, Integer duration, String title, String posterLink, String plot) {
+    public Movie(String starring, int duration, String title, String posterLink, String plot) {
 
         this.starring = starring;
         this.duration = duration;
