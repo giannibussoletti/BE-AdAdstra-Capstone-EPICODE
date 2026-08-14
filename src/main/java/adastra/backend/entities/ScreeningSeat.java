@@ -22,11 +22,14 @@ public class ScreeningSeat {
     @GeneratedValue
     @Column(nullable = false)
     private UUID id;
-    @Column(nullable = false, name = "seat_id")
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "seat_id")
     private Seat seatId;
-    @Column(nullable = false, name = "screening_time_id")
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "screening_time_id")
     private ScreeningTime screeningTimeId;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private ScreenSeatStatus status;
     @Column(nullable = false)
     private Double price;

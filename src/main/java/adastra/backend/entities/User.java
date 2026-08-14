@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 public class User {
+
     @Id
     @GeneratedValue
     @Column(nullable = false)
@@ -26,12 +27,23 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private LocalDate birth_date;
+    @Column(nullable = false, name = "birth_date")
+    private LocalDate birthDate;
 
     @Column(nullable = false)
     private String password;
 
     @Column(columnDefinition = "TEXT", name = "profile_pic_link")
     private String profilePicLink;
+
+    public User(String name, String surname, String email,
+                LocalDate birthDate,
+                String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.password = password;
+        this.profilePicLink = "https://placehold.co/100";
+    }
 }
