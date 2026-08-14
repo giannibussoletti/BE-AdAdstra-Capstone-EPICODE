@@ -20,6 +20,12 @@ public class Screen {
     @Column(name = "screen_number", nullable = false)
     private Integer screenNumber;
 
+    @ManyToOne
     @JoinColumn(name = "cinema_id", nullable = false)
     private Cinema cinemaId;
+
+    public Screen(Integer screenNumber, Cinema cinemaId) {
+        this.screenNumber = screenNumber;
+        this.cinemaId = cinemaId;
+    }
 }
