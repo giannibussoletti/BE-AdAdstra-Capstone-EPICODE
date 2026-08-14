@@ -1,0 +1,44 @@
+package adastra.backend.entities;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
+@Entity
+@Table(name = "movies")
+@Getter
+@NoArgsConstructor
+public class Movie {
+
+    @Id
+    @GeneratedValue
+    @Column(nullable = false)
+    private UUID id;
+
+    @Column(nullable = false)
+    private String cast;
+
+    @Column(nullable = false)
+    private Integer duration;
+
+    @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false, name = "poster_link")
+    private String posterLink;
+
+    @Column(nullable = false)
+    private String plot;
+
+    public Movie(String cast, Integer duration, String title, String posterLink, String plot) {
+
+        this.cast = cast;
+        this.duration = duration;
+        this.title = title;
+        this.posterLink = posterLink;
+        this.plot = plot;
+    }
+}
+
