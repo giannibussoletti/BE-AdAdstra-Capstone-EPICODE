@@ -44,6 +44,7 @@ public class Movie {
         this.title = title;
         this.posterLink = posterLink;
         this.plot = plot;
+        this.movieIsDeleted = MovieIsDeleted.FALSE;
     }
 }
 
