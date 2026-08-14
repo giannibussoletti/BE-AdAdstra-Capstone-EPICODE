@@ -18,7 +18,8 @@ public class Booking {
     @Column(nullable = false)
     private UUID id;
 
-    @Column(nullable = false, name = "user_id")
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "user_id")
     private User userId;
 
     @Column(nullable = false, name = "created_at")

@@ -9,7 +9,7 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @Getter
-@Table(name = "cinemas")
+@Table(name = "screens")
 public class Screen {
 
     @Id

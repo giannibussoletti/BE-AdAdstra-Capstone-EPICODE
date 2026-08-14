@@ -18,7 +18,7 @@ public class Movie {
     private UUID id;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String cast;
+    private String starring;
 
     @Column(nullable = false)
     private Integer duration;
@@ -32,9 +32,9 @@ public class Movie {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String plot;
 
-    public Movie(String cast, Integer duration, String title, String posterLink, String plot) {
+    public Movie(String starring, Integer duration, String title, String posterLink, String plot) {
 
-        this.cast = cast;
+        this.starring = starring;
         this.duration = duration;
         this.title = title;
         this.posterLink = posterLink;

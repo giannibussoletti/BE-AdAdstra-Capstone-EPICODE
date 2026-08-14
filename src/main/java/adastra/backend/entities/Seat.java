@@ -21,7 +21,7 @@ public class Seat {
     @Column(nullable = false)
     private Integer number;
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, name = "screen_id")
     private Screen screenId;
     @Column(nullable = false)
     private String color;
