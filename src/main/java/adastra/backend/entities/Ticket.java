@@ -19,7 +19,7 @@ public class Ticket {
     private UUID id;
 
     @Column(nullable = false, name = "final_price")
-    private Double finalPrice;
+    private double finalPrice;
 
     @OneToOne
     @JoinColumn(nullable = false, name = "screening_seat_id")
@@ -29,7 +29,7 @@ public class Ticket {
     @JoinColumn(nullable = false, name = "booking_id")
     private Booking bookingId;
 
-    public Ticket(Double finalPrice, ScreeningSeat screeningSeatId, Booking bookingId) {
+    public Ticket(double finalPrice, ScreeningSeat screeningSeatId, Booking bookingId) {
         this.finalPrice = finalPrice;
         this.screeningSeatId = screeningSeatId;
         this.bookingId = bookingId;

@@ -32,9 +32,9 @@ public class ScreeningSeat {
     @Enumerated(EnumType.STRING)
     private ScreenSeatStatus status;
     @Column(nullable = false)
-    private Double price;
+    private double price;
 
-    public ScreeningSeat(Seat seatId, ScreeningTime screeningTimeId, ScreenSeatStatus status, Double price) {
+    public ScreeningSeat(Seat seatId, ScreeningTime screeningTimeId, ScreenSeatStatus status, double price) {
         this.seatId = seatId;
         this.screeningTimeId = screeningTimeId;
         this.status = status;
