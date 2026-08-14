@@ -17,7 +17,7 @@ public class Movie {
     @Column(nullable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String cast;
 
     @Column(nullable = false)
@@ -26,10 +26,10 @@ public class Movie {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, name = "poster_link")
+    @Column(nullable = false, name = "poster_link", columnDefinition = "TEXT")
     private String posterLink;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String plot;
 
     public Movie(String cast, Integer duration, String title, String posterLink, String plot) {

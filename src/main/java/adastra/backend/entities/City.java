@@ -17,8 +17,8 @@ public class City {
     @Column(nullable = false)
     private UUID id;
 
+    @Column(nullable = false)
     private String city;
-
 
     public City(String city) {
         this.city = city;
