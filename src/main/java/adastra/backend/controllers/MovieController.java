@@ -6,6 +6,7 @@ import adastra.backend.DTO.ResponseDTO;
 import adastra.backend.DTO.ResponseDeleteDTO;
 import adastra.backend.entities.Movie;
 import adastra.backend.services.MoviesService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -33,14 +34,14 @@ public class MovieController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDTO save(@RequestBody MovieDTO body) {
+    public ResponseDTO save(@Valid @RequestBody MovieDTO body) {
         Movie saved = this.moviesService.save(body);
         return new ResponseDTO("Film salvato correttamente", saved.getId(), LocalDateTime.now());
     }
 
     @PutMapping("/{movieId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDTO findMovieAndUpdate(@PathVariable UUID movieId, @RequestBody MovieDTO body) {
+    public ResponseDTO findMovieAndUpdate(@PathVariable UUID movieId, @Valid @RequestBody MovieDTO body) {
         Movie updated = this.moviesService.findMovieAndUpdate(movieId, body);
         return new ResponseDTO("Film aggiornato con successo", updated.getId(), LocalDateTime.now());
     }
