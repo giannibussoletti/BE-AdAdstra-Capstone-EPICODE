@@ -1,9 +1,9 @@
 package adastra.backend.controllers;
 
-import adastra.backend.DTO.DeleteMovieDTO;
+import adastra.backend.DTO.DeleteDTO;
 import adastra.backend.DTO.MovieDTO;
 import adastra.backend.DTO.ResponseDTO;
-import adastra.backend.DTO.ResponseDeleteMovieDTO;
+import adastra.backend.DTO.ResponseDeleteDTO;
 import adastra.backend.entities.Movie;
 import adastra.backend.services.MoviesService;
 import lombok.AllArgsConstructor;
@@ -47,9 +47,9 @@ public class MovieController {
 
     @PatchMapping("/{movieId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDeleteMovieDTO softDeleteMovie(@PathVariable UUID movieId, @RequestBody DeleteMovieDTO body) {
-        this.moviesService.softDeleteMovie(movieId, body);
-        return new ResponseDeleteMovieDTO("visibilità del film aggiornata", LocalDateTime.now());
+    public ResponseDeleteDTO softDeleteMovie(@PathVariable UUID movieId, @RequestBody DeleteDTO body) {
+        this.moviesService.softDeleteGeneric(movieId, body.deletion());
+        return new ResponseDeleteDTO("visibilità del film aggiornata", LocalDateTime.now());
     }
 
 }

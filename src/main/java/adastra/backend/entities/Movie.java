@@ -1,6 +1,7 @@
 package adastra.backend.entities;
 
-import adastra.backend.enums.MovieIsDeleted;
+import adastra.backend.enums.IsDeleted;
+import adastra.backend.softDeletion.SoftDeleteInt;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @Setter
-public class Movie {
+public class Movie implements SoftDeleteInt {
 
     @Id
     @GeneratedValue
@@ -33,7 +34,7 @@ public class Movie {
 
     @Column(nullable = false, name = "movie_is_deleted")
     @Enumerated(EnumType.STRING)
-    private MovieIsDeleted movieIsDeleted;
+    private IsDeleted isDeleted;
 
     @Column(nullable = false, name = "poster_link", columnDefinition = "TEXT")
     private String posterLink;
@@ -48,7 +49,7 @@ public class Movie {
         this.title = title;
         this.posterLink = posterLink;
         this.plot = plot;
-        this.movieIsDeleted = MovieIsDeleted.FALSE;
+        this.isDeleted = IsDeleted.FALSE;
     }
 }
 
