@@ -1,5 +1,5 @@
 package adastra.backend.enums;
 
-public enum MovieIsDeleted {
+public enum IsDeleted {
     TRUE, FALSE
 }
