@@ -6,11 +6,13 @@ import adastra.backend.DTO.ResponseDTO;
 import adastra.backend.DTO.ResponseDeleteDTO;
 import adastra.backend.entities.City;
 import adastra.backend.services.CitiesService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,18 +22,32 @@ public class CitiesController {
 
     private CitiesService citiesService;
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<City> findAllCities() {
+        return this.citiesService.findAllCities();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDTO save(@RequestBody CityDTO body) {
+    public ResponseDTO save(@Valid @RequestBody CityDTO body) {
         City saved = this.citiesService.save(body);
         return new ResponseDTO("Città salvata correttamente", saved.getId(), LocalDateTime.now());
     }
 
-    @PatchMapping("/{cityId}")
+    @PatchMapping("/delete/{cityId}")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseDeleteDTO softDelete(@PathVariable UUID cityId, @RequestBody DeleteDTO body) {
         this.citiesService.softDeleteGeneric(cityId, body.deletion());
 
         return new ResponseDeleteDTO("stato della città aggiornato correttamente", LocalDateTime.now());
+    }
+
+    @PatchMapping("/{cityId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseDeleteDTO nameUpdate(@PathVariable UUID cityId, @Valid @RequestBody CityDTO body) {
+        this.citiesService.renameCity(cityId, body);
+
+        return new ResponseDeleteDTO("Nome della città aggiornato correttamente", LocalDateTime.now());
     }
 }
