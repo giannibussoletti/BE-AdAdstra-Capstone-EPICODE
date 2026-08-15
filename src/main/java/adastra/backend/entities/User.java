@@ -38,6 +38,7 @@ public class User {
     private String profilePicLink;
 
     @Column(nullable = false, name = "user_role")
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
     public User(String name, String surname, String email,
