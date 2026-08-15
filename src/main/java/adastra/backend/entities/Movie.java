@@ -2,8 +2,10 @@ package adastra.backend.entities;
 
 import adastra.backend.enums.MovieIsDeleted;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -11,11 +13,13 @@ import java.util.UUID;
 @Table(name = "movies")
 @Getter
 @NoArgsConstructor
+@Setter
 public class Movie {
 
     @Id
     @GeneratedValue
     @Column(nullable = false)
+    @Setter(AccessLevel.NONE)
     private UUID id;
 
     @Column(nullable = false, columnDefinition = "TEXT")
