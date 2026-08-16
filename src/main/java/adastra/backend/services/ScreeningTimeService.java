@@ -4,6 +4,7 @@ import adastra.backend.DTO.ScreeningTimeDTO;
 import adastra.backend.entities.Movie;
 import adastra.backend.entities.Screen;
 import adastra.backend.entities.ScreeningTime;
+import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.ScreeningTimesRepository;
 import adastra.backend.softDeletion.SoftDeleteMethod;
 import lombok.AllArgsConstructor;
@@ -25,11 +26,31 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
         return this.screeningTimesRepository.findAll();
     }
 
+    public List<ScreeningTime> findAllByScreen(UUID screenId) {
+        Screen found = this.screensService.findById(screenId);
+        return this.screeningTimesRepository.findScreeningTimeByScreenId(found);
+    }
+
+
     public ScreeningTime save(ScreeningTimeDTO body) {
         Movie movieFound = this.moviesService.findById(body.movieId());
         Screen screenFound = this.screensService.findById(body.screenId());
 
         return this.screeningTimesRepository.save(new ScreeningTime(body.dateTime(), movieFound, screenFound));
+    }
+
+    public void updateScreening(ScreeningTimeDTO body, UUID screeningId) {
+        ScreeningTime found = this.findById(screeningId);
+        found.setDateTime(body.dateTime());
+        Movie movieFound = this.moviesService.findById(body.movieId());
+        Screen screenFound = this.screensService.findById(body.screenId());
+        found.setMovieId(movieFound);
+        found.setScreenId(screenFound);
+        this.screeningTimesRepository.save(found);
+    }
+
+    public ScreeningTime findById(UUID screeningId) {
+        return this.screeningTimesRepository.findById(screeningId).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
     }
 
     @Override
