@@ -4,7 +4,7 @@ import adastra.backend.DTO.MovieDTO;
 import adastra.backend.entities.Movie;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.MoviesRepository;
-import adastra.backend.softDeletion.SoftDeleteMethod;
+import adastra.backend.softDelete.SoftDeleteMethod;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

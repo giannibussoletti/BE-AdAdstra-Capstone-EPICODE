@@ -5,7 +5,7 @@ import adastra.backend.entities.Cinema;
 import adastra.backend.entities.City;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.CinemasRepository;
-import adastra.backend.softDeletion.SoftDeleteMethod;
+import adastra.backend.softDelete.SoftDeleteMethod;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

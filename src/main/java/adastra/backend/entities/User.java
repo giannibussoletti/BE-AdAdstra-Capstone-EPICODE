@@ -2,10 +2,12 @@ package adastra.backend.entities;
 
 import adastra.backend.enums.IsDeleted;
 import adastra.backend.enums.UserRole;
-import adastra.backend.softDeletion.SoftDeleteInt;
+import adastra.backend.softDelete.SoftDeleteInt;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -14,9 +16,11 @@ import java.util.UUID;
 @Table(name = "users")
 @NoArgsConstructor
 @Getter
+@Setter
 public class User implements SoftDeleteInt {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @GeneratedValue
     @Column(nullable = false)
     private UUID id;

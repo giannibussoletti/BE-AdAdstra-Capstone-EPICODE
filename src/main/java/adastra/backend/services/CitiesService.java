@@ -4,7 +4,7 @@ import adastra.backend.DTO.CityDTO;
 import adastra.backend.entities.City;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.CitiesRepository;
-import adastra.backend.softDeletion.SoftDeleteMethod;
+import adastra.backend.softDelete.SoftDeleteMethod;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

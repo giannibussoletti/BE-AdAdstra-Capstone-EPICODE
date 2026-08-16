@@ -6,7 +6,7 @@ import adastra.backend.entities.Cinema;
 import adastra.backend.entities.Screen;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.ScreensRepository;
-import adastra.backend.softDeletion.SoftDeleteMethod;
+import adastra.backend.softDelete.SoftDeleteMethod;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
