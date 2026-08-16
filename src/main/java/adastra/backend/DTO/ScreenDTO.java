@@ -1,7 +1,6 @@
 package adastra.backend.DTO;
 
 import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
@@ -12,6 +11,6 @@ public record ScreenDTO(
         @Max(message = "il numero massimo della sala può essere solo 20", value = 20)
         @NotNull(message = "Il campo non può essere lasciato vuoto")
         int screenNumber,
-        @NotBlank(message = "il campo non può essere lasciato vuoto")
+        @NotNull(message = "il campo non può essere lasciato vuoto")
         UUID cinemaId) {
 }

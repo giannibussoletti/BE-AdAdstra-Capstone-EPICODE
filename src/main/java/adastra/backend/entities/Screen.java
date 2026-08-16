@@ -14,7 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "screens")
+@Table(name = "screens", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"cinemaId", "screenNumber"})
+})
 public class Screen implements SoftDeleteInt {
 
     @Id
