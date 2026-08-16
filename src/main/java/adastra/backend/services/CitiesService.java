@@ -33,7 +33,7 @@ public class CitiesService extends SoftDeleteMethod<City, UUID> {
     }
 
     public City save(CityDTO body) {
-        City saved = new City(body.name());
+        City saved = new City(body.name().toLowerCase());
         return this.citiesRepository.save(saved);
     }
 

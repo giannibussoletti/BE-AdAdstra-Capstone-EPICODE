@@ -45,13 +45,13 @@ public class CinemasService extends SoftDeleteMethod<Cinema, UUID> {
 
     public Cinema save(CinemaDTO body) {
         City cinemaCity = this.citiesService.findCityById(body.cityId());
-        return new Cinema(body.cinemaName(), body.address(), cinemaCity);
+        return this.cinemasRepository.save(new Cinema(body.cinemaName().toLowerCase(), body.address().toLowerCase(), cinemaCity));
     }
 
     public void cinemaUpdate(CinemaDTO body, UUID cinemaId) {
         Cinema found = this.cinemasRepository.findById(cinemaId).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
-        found.setAddress(body.address());
-        found.setCinemaName(body.cinemaName());
+        found.setAddress(body.address().toLowerCase());
+        found.setCinemaName(body.cinemaName().toLowerCase());
         this.cinemasRepository.save(found);
     }
 
