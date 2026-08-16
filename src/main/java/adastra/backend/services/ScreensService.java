@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -38,6 +39,15 @@ public class ScreensService extends SoftDeleteMethod<Screen, UUID> {
     public Screen save(ScreenDTO body) {
         Cinema found = this.cinemasService.findByID(body.cinemaId());
         return this.screensRepository.save(new Screen(body.screenNumber(), found));
+    }
+
+    public List<Screen> findAll() {
+        return this.screensRepository.findAll();
+    }
+
+    public List<Screen> findAllByCinema(UUID cinemaId) {
+        Cinema found = this.cinemasService.findByID(cinemaId);
+        return this.screensRepository.findScreenByCinemaId(found);
     }
 
     public void screenUpdate(ScreenUpdateDTO body, UUID screenId) {
