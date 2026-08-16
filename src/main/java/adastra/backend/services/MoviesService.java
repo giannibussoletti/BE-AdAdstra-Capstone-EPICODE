@@ -26,6 +26,10 @@ public class MoviesService extends SoftDeleteMethod<Movie, UUID> {
         return this.moviesRepository.findAll(pageable);
     }
 
+    public Movie findById(UUID movieId) {
+        return this.moviesRepository.findById(movieId).orElseThrow(() -> new NotFoundException("nessun film con questo id trovato"));
+    }
+
     public Movie save(MovieDTO payload) {
         return this.moviesRepository.save(new Movie(
                 payload.starring(),
@@ -36,7 +40,7 @@ public class MoviesService extends SoftDeleteMethod<Movie, UUID> {
     }
 
     public Movie findMovieAndUpdate(UUID movieId, MovieDTO body) {
-        Movie found = this.moviesRepository.findById(movieId).orElseThrow(() -> new NotFoundException("nessun film con questo id trovato"));
+        Movie found = this.findById(movieId);
         found.setDuration(body.duration());
         found.setPlot(body.plot());
         found.setTitle(body.title());
