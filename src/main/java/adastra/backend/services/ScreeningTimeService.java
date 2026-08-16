@@ -1,14 +1,15 @@
 package adastra.backend.services;
 
 import adastra.backend.DTO.ScreeningTimeDTO;
-import adastra.backend.entities.Cinema;
 import adastra.backend.entities.Movie;
 import adastra.backend.entities.Screen;
 import adastra.backend.entities.ScreeningTime;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.ScreeningTimesRepository;
-import adastra.backend.softDeletion.SoftDeleteMethod;
+import adastra.backend.softDelete.SoftDeleteMethod;
+import adastra.backend.specifications.ScreeningTimeSpecs;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,15 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
     private ScreensService screensService;
     private CinemasService cinemasService;
 
-    public List<ScreeningTime> findAll() {
-        return this.screeningTimesRepository.findAll();
+    public List<ScreeningTime> findAll(UUID cinemaId, UUID movieId) {
+
+        Specification<ScreeningTime> spec = Specification.where(ScreeningTimeSpecs.filterByCinema(cinemaId));
+
+        if (movieId != null) {
+            spec = spec.and(ScreeningTimeSpecs.filterByMovie(movieId));
+        }
+
+        return this.screeningTimesRepository.findAll(spec);
     }
 
     public List<ScreeningTime> findAllByScreen(UUID screenId) {
@@ -56,10 +64,15 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
         return this.screeningTimesRepository.findById(screeningId).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
     }
 
-    public List<ScreeningTime> findByCinemaId(UUID cinemaId) {
+    /*public List<ScreeningTime> findByCinemaId(UUID cinemaId) {
         Cinema found = this.cinemasService.findByID(cinemaId);
         return this.screeningTimesRepository.filterTimesFromCinema(found);
     }
+
+    public List<ScreeningTime> findByMovieId(UUID movieId) {
+        Movie found = this.moviesService.findById(movieId);
+        return this.screeningTimesRepository.findScreeningTimeByMovieId(found);
+    }*/
 
     @Override
     protected JpaRepository<ScreeningTime, UUID> getRepository() {
