@@ -41,9 +41,12 @@ public class ScreensService extends SoftDeleteMethod<Screen, UUID> {
     }
 
     public void screenUpdate(ScreenUpdateDTO body, UUID screenId) {
-        Screen found = this.screensRepository.findById(screenId).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
+        Screen found = this.findById(screenId);
         found.setScreenNumber(body.screenNumber());
         this.screensRepository.save(found);
+    }
 
+    public Screen findById(UUID screenId) {
+        return this.screensRepository.findById(screenId).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
     }
 }
