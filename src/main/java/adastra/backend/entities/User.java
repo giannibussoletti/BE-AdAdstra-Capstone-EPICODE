@@ -1,6 +1,8 @@
 package adastra.backend.entities;
 
+import adastra.backend.enums.IsDeleted;
 import adastra.backend.enums.UserRole;
+import adastra.backend.softDeletion.SoftDeleteInt;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,7 @@ import java.util.UUID;
 @Table(name = "users")
 @NoArgsConstructor
 @Getter
-public class User {
+public class User implements SoftDeleteInt {
 
     @Id
     @GeneratedValue
@@ -41,6 +43,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
+    @Column(nullable = false, name = "movie_is_deleted")
+    @Enumerated(EnumType.STRING)
+    private IsDeleted isDeleted;
+
     public User(String name, String surname, String email,
                 LocalDate birthDate,
                 String password) {
@@ -51,5 +57,6 @@ public class User {
         this.password = password;
         this.profilePicLink = "https://placehold.co/100";
         this.userRole = UserRole.USER;
+        this.isDeleted = IsDeleted.FALSE;
     }
 }
