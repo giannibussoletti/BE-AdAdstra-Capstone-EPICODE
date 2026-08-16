@@ -27,6 +27,12 @@ public class ScreeningTimesController {
         return this.screeningTimeService.findAll();
     }
 
+    @GetMapping("/{cinemaId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ScreeningTime> findByCinemaId(@PathVariable UUID cinemaId) {
+        return this.screeningTimeService.findByCinemaId(cinemaId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseDTO save(@Valid @RequestBody ScreeningTimeDTO body) {
