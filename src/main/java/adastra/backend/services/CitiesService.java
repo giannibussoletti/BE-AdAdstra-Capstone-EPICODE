@@ -48,4 +48,8 @@ public class CitiesService extends SoftDeleteMethod<City, UUID> {
         this.citiesRepository.save(found);
 
     }
+
+    public City findCityById(UUID cityId) {
+        return this.citiesRepository.findById(cityId).orElseThrow(() -> new NotFoundException("Nessuna città con questo id trovato"));
+    }
 }
