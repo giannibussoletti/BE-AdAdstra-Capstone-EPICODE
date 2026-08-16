@@ -33,6 +33,11 @@ public class CinemasService extends SoftDeleteMethod<Cinema, UUID> {
         return "cinema";
     }
 
+    @Override
+    public void softDeleteGeneric(UUID cinemaId, String isDeleted) {
+        super.softDeleteGeneric(cinemaId, isDeleted);
+    }
+
     public Page<Cinema> findAll(int page, int size, String searchBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(searchBy));
         return this.cinemasRepository.findAll(pageable);
@@ -50,8 +55,8 @@ public class CinemasService extends SoftDeleteMethod<Cinema, UUID> {
         this.cinemasRepository.save(found);
     }
 
-    @Override
-    public void softDeleteGeneric(UUID cinemaId, String isDeleted) {
-        super.softDeleteGeneric(cinemaId, isDeleted);
+
+    public Cinema findByID(UUID cinemaId) {
+        return this.cinemasRepository.findById(cinemaId).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
     }
 }
