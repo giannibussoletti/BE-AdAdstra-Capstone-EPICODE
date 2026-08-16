@@ -2,20 +2,24 @@ package adastra.backend.entities;
 
 import adastra.backend.softDeletion.SoftDeleteInt;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
 @Getter
+@Setter
 @Table(name = "cinemas")
 public class Cinema implements SoftDeleteInt {
 
     @Id
     @GeneratedValue
     @Column(nullable = false)
+    @Setter(AccessLevel.NONE)
     private UUID id;
 
     @Column(name = "cinema_name", nullable = false)
