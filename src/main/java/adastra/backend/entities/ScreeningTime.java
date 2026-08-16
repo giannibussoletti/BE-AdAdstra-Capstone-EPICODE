@@ -3,6 +3,7 @@ package adastra.backend.entities;
 import adastra.backend.enums.IsDeleted;
 import adastra.backend.softDeletion.SoftDeleteInt;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class ScreeningTime implements SoftDeleteInt {
     @Id
     @GeneratedValue
     @Column(nullable = false)
+    @Setter(AccessLevel.NONE)
     private UUID id;
 
     @Column(nullable = false, name = "date_time")
