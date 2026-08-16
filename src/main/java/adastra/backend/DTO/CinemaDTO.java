@@ -1,6 +1,7 @@
 package adastra.backend.DTO;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
@@ -11,6 +12,6 @@ public record CinemaDTO(
         String cinemaName,
         @NotBlank(message = "Il campo non può essere lasciato vuoto")
         String address,
-        @NotBlank(message = "Il campo non può essere lasciato vuoto")
+        @NotNull(message = "Il campo non può essere lasciato vuoto")
         UUID cityId) {
 }
