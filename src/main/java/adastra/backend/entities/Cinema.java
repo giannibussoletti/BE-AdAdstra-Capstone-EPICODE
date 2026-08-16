@@ -1,5 +1,6 @@
 package adastra.backend.entities;
 
+import adastra.backend.softDeletion.SoftDeleteInt;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Table(name = "cinemas")
-public class Cinema {
+public class Cinema implements SoftDeleteInt {
 
     @Id
     @GeneratedValue
