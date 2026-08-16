@@ -1,4 +1,4 @@
-package adastra.backend.softDeletion;
+package adastra.backend.softDelete;
 
 import adastra.backend.enums.IsDeleted;
 

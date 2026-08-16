@@ -1,7 +1,7 @@
 package adastra.backend.entities;
 
 import adastra.backend.enums.IsDeleted;
-import adastra.backend.softDeletion.SoftDeleteInt;
+import adastra.backend.softDelete.SoftDeleteInt;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
