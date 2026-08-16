@@ -1,5 +1,7 @@
 package adastra.backend.entities;
 
+import adastra.backend.enums.IsDeleted;
+import adastra.backend.softDeletion.SoftDeleteInt;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Table(name = "screens")
-public class Screen {
+public class Screen implements SoftDeleteInt {
 
     @Id
     @GeneratedValue
@@ -24,8 +26,13 @@ public class Screen {
     @JoinColumn(name = "cinema_id", nullable = false)
     private Cinema cinemaId;
 
+    @Column(nullable = false, name = "screen_is_deleted")
+    @Enumerated(EnumType.STRING)
+    private IsDeleted isDeleted;
+
     public Screen(int screenNumber, Cinema cinemaId) {
         this.screenNumber = screenNumber;
         this.cinemaId = cinemaId;
+        this.isDeleted = IsDeleted.FALSE;
     }
 }
