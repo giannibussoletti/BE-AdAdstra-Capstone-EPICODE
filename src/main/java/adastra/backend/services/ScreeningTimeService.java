@@ -37,11 +37,6 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
         return this.screeningTimesRepository.findAll(spec);
     }
 
-    public List<ScreeningTime> findAllByScreen(UUID screenId) {
-        Screen found = this.screensService.findById(screenId);
-        return this.screeningTimesRepository.findScreeningTimeByScreenId(found);
-    }
-
 
     public ScreeningTime save(ScreeningTimeDTO body) {
         Movie movieFound = this.moviesService.findById(body.movieId());

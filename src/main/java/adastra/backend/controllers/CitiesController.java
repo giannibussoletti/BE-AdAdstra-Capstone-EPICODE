@@ -3,7 +3,7 @@ package adastra.backend.controllers;
 import adastra.backend.DTO.CityDTO;
 import adastra.backend.DTO.DeleteDTO;
 import adastra.backend.DTO.ResponseDTO;
-import adastra.backend.DTO.ResponseDeleteDTO;
+import adastra.backend.DTO.ResponseNoIdDTO;
 import adastra.backend.entities.City;
 import adastra.backend.services.CitiesService;
 import jakarta.validation.Valid;
@@ -37,17 +37,17 @@ public class CitiesController {
 
     @PatchMapping("/delete/{cityId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDeleteDTO softDelete(@PathVariable UUID cityId, @RequestBody DeleteDTO body) {
+    public ResponseNoIdDTO softDelete(@PathVariable UUID cityId, @RequestBody DeleteDTO body) {
         this.citiesService.softDeleteGeneric(cityId, body.deletion());
 
-        return new ResponseDeleteDTO("stato della città aggiornato correttamente", LocalDateTime.now());
+        return new ResponseNoIdDTO("stato della città aggiornato correttamente", LocalDateTime.now());
     }
 
     @PatchMapping("/{cityId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDeleteDTO nameUpdate(@PathVariable UUID cityId, @Valid @RequestBody CityDTO body) {
+    public ResponseNoIdDTO nameUpdate(@PathVariable UUID cityId, @Valid @RequestBody CityDTO body) {
         this.citiesService.renameCity(cityId, body);
 
-        return new ResponseDeleteDTO("Nome della città aggiornato correttamente", LocalDateTime.now());
+        return new ResponseNoIdDTO("Nome della città aggiornato correttamente", LocalDateTime.now());
     }
 }

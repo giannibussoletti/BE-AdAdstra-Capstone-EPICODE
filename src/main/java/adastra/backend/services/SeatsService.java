@@ -10,10 +10,6 @@ import adastra.backend.repository.SeatsRepository;
 import adastra.backend.softDelete.SoftDeleteMethod;
 import adastra.backend.specifications.SeatSpecification;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -97,11 +93,6 @@ public class SeatsService extends SoftDeleteMethod<Seat, UUID> {
         found.setNumber(body.number());
         this.seatsRepository.save(found);
 
-    }
-
-    public Page<Seat> findAll(int page, int size, String searchBy) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(searchBy));
-        return this.seatsRepository.findAll(pageable);
     }
 
     public List<Seat> findAll(UUID cinemaId, Character row, Integer number, UUID screenId) {
