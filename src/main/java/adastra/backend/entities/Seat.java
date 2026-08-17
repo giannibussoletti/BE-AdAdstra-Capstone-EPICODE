@@ -22,13 +22,17 @@ public class Seat implements SoftDeleteInt {
     @Setter(AccessLevel.NONE)
     @Column(nullable = false)
     private UUID id;
+
     @Column(nullable = false)
     private char row;
+
     @Column(nullable = false)
     private int number;
+
     @ManyToOne
     @JoinColumn(nullable = false, name = "screen_id")
     private Screen screenId;
+
     @Column(nullable = false)
     private String color;
 
