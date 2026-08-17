@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -23,5 +24,11 @@ public class UsersController {
     public ResponseDTO saveUser(@Valid @RequestBody UserDTO body) {
         User saved = this.usersService.save(body);
         return new ResponseDTO("Registrazione avvenuta con successo", saved.getId(), LocalDateTime.now());
+    }
+
+    @GetMapping("/profile/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public User userProfile(@PathVariable UUID userId) {
+        return this.usersService.findById(userId);
     }
 }
