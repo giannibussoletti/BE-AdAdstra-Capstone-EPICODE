@@ -24,7 +24,7 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
     private ScreeningTimesRepository screeningTimesRepository;
     private MoviesService moviesService;
     private ScreensService screensService;
-    private CinemasService cinemasService;
+
 
     public List<ScreeningTime> findAll(UUID cinemaId, UUID movieId) {
 
