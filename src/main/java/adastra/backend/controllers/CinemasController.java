@@ -3,7 +3,7 @@ package adastra.backend.controllers;
 import adastra.backend.DTO.CinemaDTO;
 import adastra.backend.DTO.DeleteDTO;
 import adastra.backend.DTO.ResponseDTO;
-import adastra.backend.DTO.ResponseDeleteDTO;
+import adastra.backend.DTO.ResponseNoIdDTO;
 import adastra.backend.entities.Cinema;
 import adastra.backend.services.CinemasService;
 import jakarta.validation.Valid;
@@ -46,9 +46,9 @@ public class CinemasController {
 
     @PatchMapping("/delete/{cinemaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseDeleteDTO softDelete(@RequestBody DeleteDTO body, @PathVariable UUID cinemaId) {
+    public ResponseNoIdDTO softDelete(@RequestBody DeleteDTO body, @PathVariable UUID cinemaId) {
         this.cinemasService.softDeleteGeneric(cinemaId, body.deletion());
-        return new ResponseDeleteDTO("Stato del cinema aggiornato correttamente", LocalDateTime.now());
+        return new ResponseNoIdDTO("Stato del cinema aggiornato correttamente", LocalDateTime.now());
     }
 
 }

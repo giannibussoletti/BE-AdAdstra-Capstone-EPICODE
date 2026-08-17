@@ -46,8 +46,8 @@ public class ScreensController {
 
     @PatchMapping("/delete/{screenId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseDeleteDTO softDelete(@RequestBody DeleteDTO body, @PathVariable UUID screenId) {
+    public ResponseNoIdDTO softDelete(@RequestBody DeleteDTO body, @PathVariable UUID screenId) {
         this.screensService.softDeleteGeneric(screenId, body.deletion());
-        return new ResponseDeleteDTO("Stato della sala aggiornato correttamente", LocalDateTime.now());
+        return new ResponseNoIdDTO("Stato della sala aggiornato correttamente", LocalDateTime.now());
     }
 }
