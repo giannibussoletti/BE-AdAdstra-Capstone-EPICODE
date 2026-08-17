@@ -19,9 +19,9 @@ public abstract class SoftDeleteMethod<T extends SoftDeleteInt, ID> {
 
 
         if (bodyTrue && foundTrue) {
-            throw new WrongBodyDeletionException("L'elemento " + getEntityName() + " è già disponibile");
-        } else if (!bodyTrue && !foundTrue) {
             throw new WrongBodyDeletionException("L'elemento " + getEntityName() + " risulta già cancellato");
+        } else if (!bodyTrue && !foundTrue) {
+            throw new WrongBodyDeletionException("L'elemento " + getEntityName() + " è già disponibile");
         }
         switch (body.toLowerCase()) {
             case "true" -> found.setIsDeleted(IsDeleted.TRUE);
