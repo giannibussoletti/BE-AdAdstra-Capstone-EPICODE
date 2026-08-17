@@ -28,21 +28,6 @@ public class ScreeningTimesController {
         return this.screeningTimeService.findAll(body.cinemaId(), body.movieId());
     }
 
-    /*public  List<ScreeningTime> findAll() {
-        return this.screeningTimeService.findAll();
-    }*/
-   /* @GetMapping("/{cinemaId}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ScreeningTime> findByCinemaId(@PathVariable UUID cinemaId) {
-        return this.screeningTimeService.findByCinemaId(cinemaId);
-    }
-
-    @GetMapping("/{movieId}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ScreeningTime> findByMovieId(@PathVariable UUID movieId) {
-        return this.screeningTimeService.findByCinemaId(movieId);
-    }*/
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseDTO save(@Valid @RequestBody ScreeningTimeDTO body) {
@@ -56,7 +41,7 @@ public class ScreeningTimesController {
         this.screeningTimeService.updateScreening(body, screeningId);
     }
 
-    @PatchMapping("/delete/{screeningId}")
+    @PatchMapping("/{screeningId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteScreening(@RequestBody DeleteDTO body, @PathVariable UUID screeningId) {
         this.screeningTimeService.softDeleteGeneric(screeningId, body.deletion());
