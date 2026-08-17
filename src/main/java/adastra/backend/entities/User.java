@@ -3,6 +3,7 @@ package adastra.backend.entities;
 import adastra.backend.enums.IsDeleted;
 import adastra.backend.enums.UserRole;
 import adastra.backend.softDelete.SoftDeleteInt;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties(value = {"id", "password", "userRole", "isDeleted"})
 public class User implements SoftDeleteInt {
 
     @Id

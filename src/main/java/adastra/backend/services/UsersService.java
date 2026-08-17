@@ -7,6 +7,8 @@ import adastra.backend.repository.UsersRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class UsersService {
@@ -20,5 +22,9 @@ public class UsersService {
 
     public User findByEmail(String email) {
         return this.usersRepository.findUserByEmail(email).orElseThrow(() -> new NotFoundException("Email non trovata nel database"));
+    }
+
+    public User findById(UUID userId) {
+        return this.usersRepository.findById(userId).orElseThrow(() -> new NotFoundException("Utente non trovato"));
     }
 }
