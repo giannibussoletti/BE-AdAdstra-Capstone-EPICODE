@@ -3,6 +3,7 @@ package adastra.backend.entities;
 import adastra.backend.enums.IsDeleted;
 import adastra.backend.enums.UserRole;
 import adastra.backend.softDelete.SoftDeleteInt;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties(value = {"id", "password", "userRole", "isDeleted"})
 public class User implements SoftDeleteInt {
 
     @Id
@@ -31,7 +33,7 @@ public class User implements SoftDeleteInt {
     @Column(nullable = false)
     private String surname;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false, name = "birth_date")
@@ -47,7 +49,7 @@ public class User implements SoftDeleteInt {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @Column(nullable = false, name = "movie_is_deleted")
+    @Column(nullable = false, name = "user_is_deleted")
     @Enumerated(EnumType.STRING)
     private IsDeleted isDeleted;
 
