@@ -1,6 +1,8 @@
 package adastra.backend.services;
 
+import adastra.backend.DTO.DeleteRowDTO;
 import adastra.backend.DTO.SeatDTO;
+import adastra.backend.DTO.SeatUpdateDTO;
 import adastra.backend.entities.Screen;
 import adastra.backend.entities.Seat;
 import adastra.backend.exceptions.NotFoundException;
@@ -59,6 +61,44 @@ public class SeatsService extends SoftDeleteMethod<Seat, UUID> {
 
     }
 
+    public void updateRow(SeatUpdateDTO body) {
+        List<String> seatColors = List.of("green", "blue", "red");
+        boolean trueColor = seatColors.stream().noneMatch(color -> Objects.equals(body.color(), color));
+        if (trueColor) throw new NotFoundException("Il colore può essere solo, green, blue o red");
+        Screen found = this.screensService.findById(body.screenId());
+        body.seats().forEach(uuid -> {
+            Seat seatFound = this.findById(uuid);
+            seatFound.setColor(body.color());
+            seatFound.setRow(body.row());
+            seatFound.setScreenId(found);
+            this.seatsRepository.save(seatFound);
+
+        });
+
+    }
+
+    public void deleteRow(DeleteRowDTO body) {
+
+        body.seats().forEach(uuid -> {
+            this.softDeleteGeneric(uuid, body.deletion());
+        });
+
+    }
+
+    public void updateSingleSeat(SeatDTO body, UUID seatId) {
+        List<String> seatColors = List.of("green", "blue", "red");
+        boolean trueColor = seatColors.stream().noneMatch(color -> Objects.equals(body.color(), color));
+        if (trueColor) throw new NotFoundException("Il colore può essere solo, green, blue o red");
+        Seat found = this.findById(seatId);
+        Screen foundScreen = this.screensService.findById(body.screenId());
+        found.setScreenId(foundScreen);
+        found.setRow(body.row());
+        found.setColor(body.color());
+        found.setNumber(body.number());
+        this.seatsRepository.save(found);
+
+    }
+
     public Page<Seat> findAll(int page, int size, String searchBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(searchBy));
         return this.seatsRepository.findAll(pageable);
@@ -79,9 +119,12 @@ public class SeatsService extends SoftDeleteMethod<Seat, UUID> {
         if (screenId != null) {
             spec = spec.and(SeatSpecification.filterByScreen(screenId));
         }
-        
+
         return this.seatsRepository.findAll(spec);
     }
 
+    public Seat findById(UUID seatId) {
+        return this.seatsRepository.findById(seatId).orElseThrow(() -> new NotFoundException("Nessun posto con questo id trovato"));
+    }
 
 }

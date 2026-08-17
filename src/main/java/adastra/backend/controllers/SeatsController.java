@@ -1,9 +1,6 @@
 package adastra.backend.controllers;
 
-import adastra.backend.DTO.DeleteDTO;
-import adastra.backend.DTO.FilterSeatsDTO;
-import adastra.backend.DTO.ResponseSeatsDTO;
-import adastra.backend.DTO.SeatDTO;
+import adastra.backend.DTO.*;
 import adastra.backend.entities.Seat;
 import adastra.backend.services.SeatsService;
 import jakarta.validation.Valid;
@@ -32,7 +29,6 @@ public class SeatsController {
         return this.seatsService.findAll(body.cinemaId(), row, number, body.screenId());
     }
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseSeatsDTO save(@Valid @RequestBody SeatDTO body) {
@@ -42,7 +38,26 @@ public class SeatsController {
 
     @PatchMapping("/{seatId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void softDelete(@RequestBody DeleteDTO body, UUID seatId) {
+    public void softDeleteSeat(@RequestBody DeleteDTO body, @PathVariable UUID seatId) {
         this.seatsService.softDeleteGeneric(seatId, body.deletion());
+    }
+
+    @PatchMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void softDeleteRow(@RequestBody DeleteRowDTO body) {
+        this.seatsService.deleteRow(body);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateRow(@Valid @RequestBody SeatUpdateDTO body) {
+        this.seatsService.updateRow(body);
+
+    }
+
+    @PutMapping("/{seatId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateSingleSeat(@RequestBody SeatDTO body, @PathVariable UUID seatId) {
+        this.seatsService.updateSingleSeat(body, seatId);
     }
 }
