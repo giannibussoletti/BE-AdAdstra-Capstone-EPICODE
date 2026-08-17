@@ -31,7 +31,7 @@ public class User implements SoftDeleteInt {
     @Column(nullable = false)
     private String surname;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false, name = "birth_date")
@@ -47,7 +47,7 @@ public class User implements SoftDeleteInt {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @Column(nullable = false, name = "movie_is_deleted")
+    @Column(nullable = false, name = "user_is_deleted")
     @Enumerated(EnumType.STRING)
     private IsDeleted isDeleted;
 
