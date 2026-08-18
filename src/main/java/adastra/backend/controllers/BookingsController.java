@@ -1,0 +1,28 @@
+package adastra.backend.controllers;
+
+import adastra.backend.DTO.BookingDTO;
+import adastra.backend.DTO.ResponseDTO;
+import adastra.backend.entities.Booking;
+import adastra.backend.services.BookingsService;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+
+@RestController
+@RequestMapping("/bookings")
+@AllArgsConstructor
+public class BookingsController {
+
+    private BookingsService bookingsService;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseDTO save(@Valid @RequestBody BookingDTO body) {
+        Booking saved = this.bookingsService.save(body);
+
+        return new ResponseDTO("Acquisto avvenuto con successo", saved.getId(), LocalDateTime.now());
+    }
+}
