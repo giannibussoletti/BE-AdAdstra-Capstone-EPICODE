@@ -59,15 +59,6 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
         return this.screeningTimesRepository.findById(screeningId).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
     }
 
-    /*public List<ScreeningTime> findByCinemaId(UUID cinemaId) {
-        Cinema found = this.cinemasService.findByID(cinemaId);
-        return this.screeningTimesRepository.filterTimesFromCinema(found);
-    }
-
-    public List<ScreeningTime> findByMovieId(UUID movieId) {
-        Movie found = this.moviesService.findById(movieId);
-        return this.screeningTimesRepository.findScreeningTimeByMovieId(found);
-    }*/
 
     @Override
     protected JpaRepository<ScreeningTime, UUID> getRepository() {
