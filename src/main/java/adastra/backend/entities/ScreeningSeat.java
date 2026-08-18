@@ -34,10 +34,10 @@ public class ScreeningSeat {
     @Column(nullable = false)
     private double price;
 
-    public ScreeningSeat(Seat seatId, ScreeningTime screeningTimeId, ScreenSeatStatus status, double price) {
+    public ScreeningSeat(Seat seatId, ScreeningTime screeningTimeId, double price) {
         this.seatId = seatId;
         this.screeningTimeId = screeningTimeId;
-        this.status = status;
+        this.status = ScreenSeatStatus.FREE;
         this.price = price;
     }
 }
