@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-public record SeatUpdateDTO(
+public record RowUpdateDTO(
         List<UUID> seats,
         @NotNull(message = "il campo non può essere lasciato vuoto")
         Character row,
