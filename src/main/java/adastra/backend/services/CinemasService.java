@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -58,5 +59,10 @@ public class CinemasService extends SoftDeleteMethod<Cinema, UUID> {
 
     public Cinema findByID(UUID cinemaId) {
         return this.cinemasRepository.findById(cinemaId).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
+    }
+
+    public List<Cinema> findByCityID(UUID cityId) {
+        City found = this.citiesService.findCityById(cityId);
+        return this.cinemasRepository.findCinemaByCityId(found).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
     }
 }

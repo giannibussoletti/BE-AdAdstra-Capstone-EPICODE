@@ -1,9 +1,6 @@
 package adastra.backend.controllers;
 
-import adastra.backend.DTO.CinemaDTO;
-import adastra.backend.DTO.DeleteDTO;
-import adastra.backend.DTO.ResponseDTO;
-import adastra.backend.DTO.ResponseNoIdDTO;
+import adastra.backend.DTO.*;
 import adastra.backend.entities.Cinema;
 import adastra.backend.services.CinemasService;
 import jakarta.validation.Valid;
@@ -17,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("cinemas")
+@RequestMapping("/cinemas")
 public class CinemasController {
 
     private CinemasService cinemasService;
@@ -29,6 +26,12 @@ public class CinemasController {
                                    @RequestParam(defaultValue = "10") int size,
                                    @RequestParam(defaultValue = "cinemaName") String searchBy) {
         return this.cinemasService.findAll(page, size, searchBy);
+    }
+
+    @PostMapping("/{city}")
+    @ResponseStatus(HttpStatus.OK)
+    public Cinema findCinemaByCity(@RequestBody FindCinemaByCityDTO body, @PathVariable String city) {
+        return this.cinemasService.findByCityID(body.cityId()).getFirst();
     }
 
     @PostMapping
