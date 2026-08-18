@@ -20,13 +20,13 @@ public class ScreeningTimeSpecs {
         });
     }
 
-    public static Specification<ScreeningTime> filterByMovie(UUID movieId) {
-        return ((root, query, criteriaBuilder) -> {
-            if (movieId == null) {
-                return criteriaBuilder.conjunction();
-            }
-
-            return criteriaBuilder.equal(root.get("movieId").get("Id"), movieId);
-        });
-    }
+//    public static Specification<ScreeningTime> filterByMovie(UUID movieId) {
+//        return ((root, query, criteriaBuilder) -> {
+//            if (movieId == null) {
+//                return criteriaBuilder.conjunction();
+//            }
+//
+//            return criteriaBuilder.equal(root.get("movieId").get("Id"), movieId);
+//        });
+//    }
 }

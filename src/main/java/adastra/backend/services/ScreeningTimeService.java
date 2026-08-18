@@ -26,13 +26,9 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
     private ScreensService screensService;
 
 
-    public List<ScreeningTime> findAll(UUID cinemaId, UUID movieId) {
+    public List<ScreeningTime> findAll(UUID cinemaId) {
 
         Specification<ScreeningTime> spec = Specification.where(ScreeningTimeSpecs.filterByCinema(cinemaId));
-
-        if (movieId != null) {
-            spec = spec.and(ScreeningTimeSpecs.filterByMovie(movieId));
-        }
 
         return this.screeningTimesRepository.findAll(spec);
     }

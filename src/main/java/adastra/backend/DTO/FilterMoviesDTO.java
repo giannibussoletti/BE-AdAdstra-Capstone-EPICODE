@@ -2,5 +2,5 @@ package adastra.backend.DTO;
 
 import java.util.UUID;
 
-public record FilterMoviesDTO(UUID cinemaId, UUID movieId) {
+public record FilterMoviesDTO(UUID cinemaId) {
 }
