@@ -50,14 +50,14 @@ public class SeatsController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateRow(@Valid @RequestBody SeatUpdateDTO body) {
+    public void updateRow(@Valid @RequestBody RowUpdateDTO body) {
         this.seatsService.updateRow(body);
 
     }
 
     @PutMapping("/{seatId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateSingleSeat(@RequestBody SeatDTO body, @PathVariable UUID seatId) {
+    public void updateSingleSeat(@Valid @RequestBody UpdateSingleSeatDTO body, @PathVariable UUID seatId) {
         this.seatsService.updateSingleSeat(body, seatId);
     }
 }

@@ -1,8 +1,9 @@
 package adastra.backend.services;
 
 import adastra.backend.DTO.DeleteRowDTO;
+import adastra.backend.DTO.RowUpdateDTO;
 import adastra.backend.DTO.SeatDTO;
-import adastra.backend.DTO.SeatUpdateDTO;
+import adastra.backend.DTO.UpdateSingleSeatDTO;
 import adastra.backend.entities.Screen;
 import adastra.backend.entities.Seat;
 import adastra.backend.exceptions.NotFoundException;
@@ -45,19 +46,19 @@ public class SeatsService extends SoftDeleteMethod<Seat, UUID> {
         List<String> seatColors = List.of("green", "blue", "red");
         boolean trueColor = seatColors.stream().noneMatch(color -> Objects.equals(body.color(), color));
         if (trueColor) throw new NotFoundException("Il colore può essere solo, green, blue o red");
-        int seatNumber = body.number();
+        int seatNumber = body.minNumber();
         Screen found = this.screensService.findById(body.screenId());
         ArrayList<UUID> seatsIds = new ArrayList<>();
-        while (seatNumber > 0) {
+        while (seatNumber <= body.maxNumber()) {
             Seat saved = this.seatsRepository.save(new Seat(body.row(), seatNumber, found, body.color()));
-            seatNumber -= 1;
+            seatNumber += 1;
             seatsIds.add(saved.getId());
         }
         return seatsIds;
 
     }
 
-    public void updateRow(SeatUpdateDTO body) {
+    public void updateRow(RowUpdateDTO body) {
         List<String> seatColors = List.of("green", "blue", "red");
         boolean trueColor = seatColors.stream().noneMatch(color -> Objects.equals(body.color(), color));
         if (trueColor) throw new NotFoundException("Il colore può essere solo, green, blue o red");
@@ -81,7 +82,7 @@ public class SeatsService extends SoftDeleteMethod<Seat, UUID> {
 
     }
 
-    public void updateSingleSeat(SeatDTO body, UUID seatId) {
+    public void updateSingleSeat(UpdateSingleSeatDTO body, UUID seatId) {
         List<String> seatColors = List.of("green", "blue", "red");
         boolean trueColor = seatColors.stream().noneMatch(color -> Objects.equals(body.color(), color));
         if (trueColor) throw new NotFoundException("Il colore può essere solo, green, blue o red");
