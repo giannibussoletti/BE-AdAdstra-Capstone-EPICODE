@@ -25,7 +25,7 @@ public class ScreeningTimesController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ScreeningTime> getScreeningTime(@RequestBody FilterMoviesDTO body) {
-        return this.screeningTimeService.findAll(body.cinemaId(), body.movieId());
+        return this.screeningTimeService.findAll(body.cinemaId());
     }
 
     @PostMapping
