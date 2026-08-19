@@ -1,6 +1,8 @@
 package adastra.backend.services;
 
 import adastra.backend.DTO.ScreeningTimeDTO;
+import adastra.backend.DTO.ScreeningTimeMappedDTO;
+import adastra.backend.DTO.ScreeningTimeResponseDTO;
 import adastra.backend.entities.Movie;
 import adastra.backend.entities.Screen;
 import adastra.backend.entities.ScreeningTime;
@@ -12,8 +14,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -24,9 +29,32 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
     private ScreensService screensService;
 
 
-    public List<ScreeningTime> findAll(UUID cinemaId) {
+    public List<ScreeningTimeMappedDTO> findAll(UUID cinemaId) {
 
-        return this.screeningTimesRepository.findTimeByCinema(cinemaId);
+        List<ScreeningTime> listScreenTime = this.screeningTimesRepository.findTimeByCinema(cinemaId);
+        return listScreenTime.stream()
+                .sorted(Comparator.comparing(ScreeningTime::getDateTime)) // Ordina gli ScreeningTime in base a data e orario
+                .collect(Collectors.groupingBy(
+                        ScreeningTime::getMovieId,
+                        Collectors.groupingBy(
+                                screen -> screen.getDateTime().toLocalDate(),
+                                TreeMap::new, // Mantiene le date (LocalDate) ordinate in ordine crescente
+                                Collectors.mapping(
+                                        screeningTime -> new ScreeningTimeResponseDTO(
+                                                screeningTime.getDateTime(),
+                                                screeningTime.getScreenId().getScreenNumber()
+                                        ),
+                                        Collectors.toList()
+                                )
+                        )
+                ))
+                .entrySet()
+                .stream()
+                .map(entry -> new ScreeningTimeMappedDTO(
+                        entry.getKey(),
+                        entry.getValue()
+                ))
+                .toList();
     }
 
 
