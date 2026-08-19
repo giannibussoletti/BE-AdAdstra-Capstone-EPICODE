@@ -2,6 +2,7 @@ package adastra.backend.entities;
 
 import adastra.backend.enums.IsDeleted;
 import adastra.backend.softDelete.SoftDeleteInt;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Screen implements SoftDeleteInt {
 
     @ManyToOne
     @JoinColumn(name = "cinema_id", nullable = false)
+    @JsonIgnore
     private Cinema cinemaId;
 
     @Column(nullable = false, name = "screen_is_deleted")
