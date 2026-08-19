@@ -1,7 +1,7 @@
 package adastra.backend.controllers;
 
 import adastra.backend.DTO.DeleteDTO;
-import adastra.backend.DTO.FilterMoviesDTO;
+import adastra.backend.DTO.FilterByCinemaDTO;
 import adastra.backend.DTO.ResponseDTO;
 import adastra.backend.DTO.ScreeningTimeDTO;
 import adastra.backend.entities.ScreeningTime;
@@ -22,13 +22,13 @@ public class ScreeningTimesController {
 
     private ScreeningTimeService screeningTimeService;
 
-    @GetMapping
+    @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ScreeningTime> getScreeningTime(@RequestBody FilterMoviesDTO body) {
+    public List<ScreeningTime> getScreeningTime(@RequestBody FilterByCinemaDTO body) {
         return this.screeningTimeService.findAll(body.cinemaId());
     }
 
-    @PostMapping
+    @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseDTO save(@Valid @RequestBody ScreeningTimeDTO body) {
         ScreeningTime saved = this.screeningTimeService.save(body);
