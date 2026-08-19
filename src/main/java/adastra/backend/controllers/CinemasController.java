@@ -5,11 +5,11 @@ import adastra.backend.entities.Cinema;
 import adastra.backend.services.CinemasService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -22,10 +22,8 @@ public class CinemasController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Page<Cinema> getCinemas(@RequestParam(defaultValue = "0") int page,
-                                   @RequestParam(defaultValue = "10") int size,
-                                   @RequestParam(defaultValue = "cinemaName") String searchBy) {
-        return this.cinemasService.findAll(page, size, searchBy);
+    public List<Cinema> getCinemas() {
+        return this.cinemasService.findAll();
     }
 
     @PostMapping("/{city}")

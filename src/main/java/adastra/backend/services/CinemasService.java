@@ -7,10 +7,6 @@ import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.CinemasRepository;
 import adastra.backend.softDelete.SoftDeleteMethod;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,9 +35,8 @@ public class CinemasService extends SoftDeleteMethod<Cinema, UUID> {
         super.softDeleteGeneric(cinemaId, isDeleted);
     }
 
-    public Page<Cinema> findAll(int page, int size, String searchBy) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(searchBy));
-        return this.cinemasRepository.findAll(pageable);
+    public List<Cinema> findAll() {
+        return this.cinemasRepository.findAll();
     }
 
     public Cinema save(CinemaDTO body) {
