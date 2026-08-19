@@ -7,9 +7,7 @@ import adastra.backend.entities.ScreeningTime;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.ScreeningTimesRepository;
 import adastra.backend.softDelete.SoftDeleteMethod;
-import adastra.backend.specifications.ScreeningTimeSpecs;
 import lombok.AllArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +26,7 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
 
     public List<ScreeningTime> findAll(UUID cinemaId) {
 
-        Specification<ScreeningTime> spec = Specification.where(ScreeningTimeSpecs.filterByCinema(cinemaId));
-
-        return this.screeningTimesRepository.findAll(spec);
+        return this.screeningTimesRepository.findTimeByCinema(cinemaId);
     }
 
 
