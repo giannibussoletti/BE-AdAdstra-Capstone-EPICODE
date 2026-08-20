@@ -19,11 +19,14 @@ public class BookingsService {
 
 
     public Booking save(BookingDTO body) {
-        User found = this.usersService.findById(body.userId());
-
-        return this.bookingRepository.save(new Booking(found));
+        if (body.userId() != null) {
+            User found = this.usersService.findById(body.userId());
+            return this.bookingRepository.save(new Booking(found));
+        } else {
+            return this.bookingRepository.save(new Booking(body.guestEmail()));
+        }
     }
-
+    
     public Booking findById(UUID bookingId) {
         return this.bookingRepository.findById(bookingId).orElseThrow(() -> new NotFoundException("Acquisto non trovato non trovato"));
     }
