@@ -42,6 +42,7 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
                                 Collectors.mapping(
                                         screeningTime -> new ScreeningTimeResponseDTO(
                                                 screeningTime.getDateTime(),
+                                                screeningTime.getScreenId().getId(),
                                                 screeningTime.getScreenId().getScreenNumber()
                                         ),
                                         Collectors.toList()

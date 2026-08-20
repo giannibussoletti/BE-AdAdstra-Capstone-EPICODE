@@ -12,7 +12,7 @@ public class SeatSpecification {
             if (screenId == null) {
                 return criteriaBuilder.conjunction();
             }
-            return criteriaBuilder.equal(root.get("screenId").get("id"), screenId);
+            return criteriaBuilder.equal(root.get("screenIds").get("id"), screenId);
         });
     }
 
@@ -23,7 +23,7 @@ public class SeatSpecification {
             }
 
 
-            return criteriaBuilder.equal(root.get("screenId").get("cinemaId").get("id"), cinemaId);
+            return criteriaBuilder.equal(root.get("screenIds").get("cinemaId").get("id"), cinemaId);
         });
     }
 

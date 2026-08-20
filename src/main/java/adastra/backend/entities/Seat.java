@@ -1,6 +1,7 @@
 package adastra.backend.entities;
 
 import adastra.backend.enums.SeatStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class Seat {
     @Column(nullable = false, name = "svg_coordinates")
     private String svgCoordinates;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "seat_screen",
