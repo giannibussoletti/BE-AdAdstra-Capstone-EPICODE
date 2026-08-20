@@ -33,12 +33,12 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
 
         List<ScreeningTime> listScreenTime = this.screeningTimesRepository.findTimeByCinema(cinemaId);
         return listScreenTime.stream()
-                .sorted(Comparator.comparing(ScreeningTime::getDateTime)) // Ordina gli ScreeningTime in base a data e orario
+                .sorted(Comparator.comparing(ScreeningTime::getDateTime))
                 .collect(Collectors.groupingBy(
                         ScreeningTime::getMovieId,
                         Collectors.groupingBy(
                                 screen -> screen.getDateTime().toLocalDate(),
-                                TreeMap::new, // Mantiene le date (LocalDate) ordinate in ordine crescente
+                                TreeMap::new,
                                 Collectors.mapping(
                                         screeningTime -> new ScreeningTimeResponseDTO(
                                                 screeningTime.getDateTime(),
