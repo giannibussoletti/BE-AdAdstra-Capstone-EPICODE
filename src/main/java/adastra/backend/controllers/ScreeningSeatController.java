@@ -7,6 +7,7 @@ import adastra.backend.services.ScreeningSeatsServices;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class ScreeningSeatController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseDTO save(@Valid @RequestBody ScreeningSeatDTO body) {
+    private ResponseDTO save(@Valid @Validated @RequestBody ScreeningSeatDTO body) {
         ScreeningSeat saved = this.screeningSeatsServices.save(body);
         return new ResponseDTO("posto ed orario salvati correttamente", saved.getId(), LocalDateTime.now());
     }
