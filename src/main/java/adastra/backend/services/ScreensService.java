@@ -69,4 +69,8 @@ public class ScreensService extends SoftDeleteMethod<Screen, UUID> {
     public Screen findById(UUID screenId) {
         return this.screensRepository.findById(screenId).orElseThrow(() -> new NotFoundException("Nessun cinema trovato con questo id"));
     }
+
+    public List<Screen> findAllById(List<UUID> screenIds) {
+        return this.screensRepository.findAllById(screenIds);
+    }
 }

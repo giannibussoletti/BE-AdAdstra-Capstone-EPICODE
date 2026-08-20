@@ -19,11 +19,19 @@ public class Booking {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(nullable = false, name = "user_id")
+    @JoinColumn(name = "user_id")
     private User userId;
+
+    @Column(name = "guest_mail")
+    private String guestMail;
 
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
+
+    public Booking(String guestMail) {
+        this.createdAt = LocalDateTime.now();
+        this.guestMail = guestMail;
+    }
 
     public Booking(User userId) {
         this.userId = userId;
