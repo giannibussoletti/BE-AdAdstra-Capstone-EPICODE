@@ -47,7 +47,6 @@ public class SeatsService {
             Seat seatFound = this.findById(uuid);
             seatFound.setColor(body.color());
             seatFound.setRow(body.row());
-//            seatFound.setScreenId(found);
             this.seatsRepository.save(seatFound);
 
         });
@@ -59,8 +58,6 @@ public class SeatsService {
         boolean trueColor = seatColors.stream().noneMatch(color -> Objects.equals(body.color(), color));
         if (trueColor) throw new NotFoundException("Il colore può essere solo, green, blue o red");
         Seat found = this.findById(seatId);
-        Screen foundScreen = this.screensService.findById(body.screenId());
-//        found.setScreenId(foundScreen);
         found.setRow(body.row());
         found.setColor(body.color());
         found.setNumber(body.number());
