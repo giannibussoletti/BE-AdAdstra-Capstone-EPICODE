@@ -46,16 +46,12 @@ public class SeatsService extends SoftDeleteMethod<Seat, UUID> {
         List<String> seatColors = List.of("green", "blue", "red");
         boolean trueColor = seatColors.stream().noneMatch(color -> Objects.equals(body.color(), color));
         if (trueColor) throw new NotFoundException("Il colore può essere solo, green, blue o red");
-        int seatNumber = body.minNumber();
         Screen found = this.screensService.findById(body.screenId());
         ArrayList<UUID> seatsIds = new ArrayList<>();
-        while (seatNumber <= body.maxNumber()) {
-            Seat saved = this.seatsRepository.save(new Seat(body.row(), seatNumber, found, body.color()));
-            seatNumber += 1;
-            seatsIds.add(saved.getId());
+        for (int i = (body.minNumber() - 1); i < body.maxNumber(); i++) {
+            seatsIds.add(this.seatsRepository.save(new Seat(body.row(), (i + 1), found, body.color(), body.svgCoordinates().get(i))).getId());
         }
         return seatsIds;
-
     }
 
     public void updateRow(RowUpdateDTO body) {

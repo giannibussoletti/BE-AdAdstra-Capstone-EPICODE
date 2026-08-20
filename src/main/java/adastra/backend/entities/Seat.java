@@ -29,6 +29,9 @@ public class Seat implements SoftDeleteInt {
     @Column(nullable = false)
     private int number;
 
+    @Column(nullable = false, name = "svg_coordinates")
+    private String svgCoordinates;
+
     @ManyToOne
     @JoinColumn(nullable = false, name = "screen_id")
     private Screen screenId;
@@ -41,11 +44,12 @@ public class Seat implements SoftDeleteInt {
     private IsDeleted isDeleted;
 
 
-    public Seat(char row, int number, Screen screenId, String color) {
+    public Seat(char row, int number, Screen screenId, String color, String svgCoordinates) {
         this.row = row;
         this.number = number;
         this.screenId = screenId;
         this.color = color;
+        this.svgCoordinates = svgCoordinates;
         this.isDeleted = IsDeleted.FALSE;
     }
 
