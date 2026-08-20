@@ -20,7 +20,7 @@ public class SeatsController {
 
     private SeatsService seatsService;
 
-    @GetMapping
+    @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Seat> getSeats(@RequestBody FilterSeatsDTO body,
                                @RequestParam(required = false) Integer number,
@@ -29,7 +29,7 @@ public class SeatsController {
         return this.seatsService.findAll(body.cinemaId(), row, number, body.screenId());
     }
 
-    @PostMapping
+    @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseSeatsDTO save(@Valid @RequestBody SeatDTO body) {
         ArrayList<UUID> saved = this.seatsService.save(body);

@@ -2,6 +2,7 @@ package adastra.backend.DTO;
 
 import jakarta.validation.constraints.*;
 
+import java.util.List;
 import java.util.UUID;
 
 public record SeatDTO(
@@ -18,5 +19,8 @@ public record SeatDTO(
         @NotNull(message = "Il campo non può essere lasciato vuoto")
         UUID screenId,
         @NotBlank(message = "Il campo non può essere lasciato vuoto")
-        String color) {
+        String color,
+        @NotNull(message = "Il campo non può essere lasciato vuoto")
+        List<String> svgCoordinates
+) {
 }
