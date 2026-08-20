@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tickets")
+
 @NoArgsConstructor
 @Getter
+@Table(name = "tickets", uniqueConstraints = {@UniqueConstraint(columnNames = {"screeningTimeId", "seatId"})}
+)
 
 public class Ticket {
 
@@ -18,20 +20,35 @@ public class Ticket {
     @Column(nullable = false)
     private UUID id;
 
-    @Column(nullable = false, name = "final_price")
-    private double finalPrice;
+    @Column(nullable = false)
+    private double price;
 
     @OneToOne
-    @JoinColumn(nullable = false, name = "screening_seat_id")
-    private ScreeningSeat screeningSeatId;
+    @JoinColumn(nullable = false, name = "seat_id")
+    private Seat seatId;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "booking_id")
     private Booking bookingId;
 
-    public Ticket(double finalPrice, ScreeningSeat screeningSeatId, Booking bookingId) {
-        this.finalPrice = finalPrice;
-        this.screeningSeatId = screeningSeatId;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "screening_time_id")
+    private ScreeningTime screeningTimeId;
+
+    private String coupon;
+
+    public Ticket(double price, Booking bookingId, Seat seatId, ScreeningTime screeningTimeId) {
+        this.price = price;
         this.bookingId = bookingId;
+        this.seatId = seatId;
+        this.screeningTimeId = screeningTimeId;
+    }
+
+    public Ticket(double price, Booking bookingId, Seat seatId, ScreeningTime screeningTimeId, String coupon) {
+        this.price = price;
+        this.bookingId = bookingId;
+        this.seatId = seatId;
+        this.screeningTimeId = screeningTimeId;
+        this.coupon = coupon;
     }
 }

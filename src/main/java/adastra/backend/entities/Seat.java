@@ -1,21 +1,21 @@
 package adastra.backend.entities;
 
-import adastra.backend.enums.IsDeleted;
-import adastra.backend.softDelete.SoftDeleteInt;
+import adastra.backend.enums.SeatStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "seats")
-public class Seat implements SoftDeleteInt {
+
+public class Seat {
 
     @Id
     @GeneratedValue
@@ -32,25 +32,31 @@ public class Seat implements SoftDeleteInt {
     @Column(nullable = false, name = "svg_coordinates")
     private String svgCoordinates;
 
-    @ManyToOne
-    @JoinColumn(nullable = false, name = "screen_id")
-    private Screen screenId;
+    @ManyToMany
+    @JoinTable(
+            name = "seat_screen",
+            joinColumns = @JoinColumn(name = "seat_id"),
+            inverseJoinColumns = @JoinColumn(name = "screen_id"))
+    private List<Screen> screenIds;
+
 
     @Column(nullable = false)
     private String color;
 
-    @Column(nullable = false, name = "seat_is_deleted")
     @Enumerated(EnumType.STRING)
-    private IsDeleted isDeleted;
+    @Column(nullable = false)
+    private SeatStatus seatStatus;
 
 
-    public Seat(char row, int number, Screen screenId, String color, String svgCoordinates) {
+    public Seat(String color, char row, int number, String svgCoordinates, List<Screen> screenIds) {
         this.row = row;
         this.number = number;
-        this.screenId = screenId;
+        this.screenIds = screenIds;
         this.color = color;
         this.svgCoordinates = svgCoordinates;
-        this.isDeleted = IsDeleted.FALSE;
+        this.seatStatus = SeatStatus.OK;
+
+
     }
 
 }

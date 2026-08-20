@@ -1,6 +1,5 @@
 package adastra.backend.services;
 
-import adastra.backend.DTO.DeleteRowDTO;
 import adastra.backend.DTO.RowUpdateDTO;
 import adastra.backend.DTO.SeatDTO;
 import adastra.backend.DTO.UpdateSingleSeatDTO;
@@ -8,11 +7,9 @@ import adastra.backend.entities.Screen;
 import adastra.backend.entities.Seat;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.SeatsRepository;
-import adastra.backend.softDelete.SoftDeleteMethod;
 import adastra.backend.specifications.SeatSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,34 +19,21 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class SeatsService extends SoftDeleteMethod<Seat, UUID> {
+public class SeatsService {
 
     private SeatsRepository seatsRepository;
     private ScreensService screensService;
 
-    @Override
-    protected JpaRepository<Seat, UUID> getRepository() {
-        return this.seatsRepository;
-    }
-
-    @Override
-    protected String getEntityName() {
-        return "posto";
-    }
-
-    @Override
-    public void softDeleteGeneric(UUID entityId, String body) {
-        super.softDeleteGeneric(entityId, body);
-    }
 
     public ArrayList<UUID> save(SeatDTO body) {
         List<String> seatColors = List.of("green", "blue", "red");
         boolean trueColor = seatColors.stream().noneMatch(color -> Objects.equals(body.color(), color));
         if (trueColor) throw new NotFoundException("Il colore può essere solo, green, blue o red");
-        Screen found = this.screensService.findById(body.screenId());
+        List<Screen> foundScreens = this.screensService.findAllById(body.screenIds());
+
         ArrayList<UUID> seatsIds = new ArrayList<>();
         for (int i = (body.minNumber() - 1); i < body.maxNumber(); i++) {
-            seatsIds.add(this.seatsRepository.save(new Seat(body.row(), (i + 1), found, body.color(), body.svgCoordinates().get(i))).getId());
+            seatsIds.add(this.seatsRepository.save(new Seat(body.color(), body.row(), (i + 1), body.svgCoordinates().get(i), foundScreens)).getId());
         }
         return seatsIds;
     }
@@ -63,17 +47,9 @@ public class SeatsService extends SoftDeleteMethod<Seat, UUID> {
             Seat seatFound = this.findById(uuid);
             seatFound.setColor(body.color());
             seatFound.setRow(body.row());
-            seatFound.setScreenId(found);
+//            seatFound.setScreenId(found);
             this.seatsRepository.save(seatFound);
 
-        });
-
-    }
-
-    public void deleteRow(DeleteRowDTO body) {
-
-        body.seats().forEach(uuid -> {
-            this.softDeleteGeneric(uuid, body.deletion());
         });
 
     }
@@ -84,7 +60,7 @@ public class SeatsService extends SoftDeleteMethod<Seat, UUID> {
         if (trueColor) throw new NotFoundException("Il colore può essere solo, green, blue o red");
         Seat found = this.findById(seatId);
         Screen foundScreen = this.screensService.findById(body.screenId());
-        found.setScreenId(foundScreen);
+//        found.setScreenId(foundScreen);
         found.setRow(body.row());
         found.setColor(body.color());
         found.setNumber(body.number());
