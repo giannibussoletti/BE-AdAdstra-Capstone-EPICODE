@@ -4,7 +4,9 @@ import adastra.backend.DTO.ScreenDTO;
 import adastra.backend.DTO.ScreenUpdateDTO;
 import adastra.backend.entities.Cinema;
 import adastra.backend.entities.Screen;
+import adastra.backend.enums.EmergencyExits;
 import adastra.backend.exceptions.NotFoundException;
+import adastra.backend.exceptions.WrongBodyException;
 import adastra.backend.repository.ScreensRepository;
 import adastra.backend.softDelete.SoftDeleteMethod;
 import lombok.AllArgsConstructor;
@@ -38,7 +40,15 @@ public class ScreensService extends SoftDeleteMethod<Screen, UUID> {
 
     public Screen save(ScreenDTO body) {
         Cinema found = this.cinemasService.findByID(body.cinemaId());
-        return this.screensRepository.save(new Screen(body.screenNumber(), found));
+        EmergencyExits exit;
+
+        switch (body.emergencyExit()) {
+            case "left" -> exit = EmergencyExits.LEFT;
+            case "right" -> exit = EmergencyExits.RIGHT;
+            default -> throw new WrongBodyException("Le uscite possono essere solo 'left' o 'right'");
+        }
+
+        return this.screensRepository.save(new Screen(body.screenNumber(), found, exit));
     }
 
     public List<Screen> findAll() {
