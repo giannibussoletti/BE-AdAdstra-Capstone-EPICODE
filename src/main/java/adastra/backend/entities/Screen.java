@@ -1,5 +1,6 @@
 package adastra.backend.entities;
 
+import adastra.backend.enums.EmergencyExits;
 import adastra.backend.enums.IsDeleted;
 import adastra.backend.softDelete.SoftDeleteInt;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,9 +39,14 @@ public class Screen implements SoftDeleteInt {
     @Enumerated(EnumType.STRING)
     private IsDeleted isDeleted;
 
-    public Screen(int screenNumber, Cinema cinemaId) {
+    @Column(nullable = false, name = "emergency_exits")
+    @Enumerated(EnumType.STRING)
+    private EmergencyExits emergencyExits;
+
+    public Screen(int screenNumber, Cinema cinemaId, EmergencyExits emergencyExits) {
         this.screenNumber = screenNumber;
         this.cinemaId = cinemaId;
         this.isDeleted = IsDeleted.FALSE;
+        this.emergencyExits = emergencyExits;
     }
 }
