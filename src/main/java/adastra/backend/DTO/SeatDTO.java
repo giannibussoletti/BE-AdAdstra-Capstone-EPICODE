@@ -17,7 +17,7 @@ public record SeatDTO(
         @Max(value = 20, message = "il numero del posto può essere massimo 20")
         Integer maxNumber,
         @NotNull(message = "Il campo non può essere lasciato vuoto")
-        UUID screenId,
+        List<UUID> screenIds,
         @NotBlank(message = "Il campo non può essere lasciato vuoto")
         String color,
         @NotNull(message = "Il campo non può essere lasciato vuoto")
