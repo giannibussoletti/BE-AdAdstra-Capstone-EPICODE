@@ -28,13 +28,34 @@ public class Booking {
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
-    public Booking(String guestMail) {
+    @Column(nullable = false)
+    private Double price;
+
+    private String coupon;
+
+    public Booking(String guestMail, Double price) {
         this.createdAt = LocalDateTime.now();
         this.guestMail = guestMail;
+        this.price = price;
     }
 
-    public Booking(User userId) {
+    public Booking(User userId, Double price) {
         this.userId = userId;
         this.createdAt = LocalDateTime.now();
+        this.price = price;
+    }
+
+    public Booking(String guestMail, Double price, String coupon) {
+        this.createdAt = LocalDateTime.now();
+        this.guestMail = guestMail;
+        this.price = price;
+        this.coupon = coupon;
+    }
+
+    public Booking(User userId, Double price, String coupon) {
+        this.userId = userId;
+        this.createdAt = LocalDateTime.now();
+        this.price = price;
+        this.coupon = coupon;
     }
 }

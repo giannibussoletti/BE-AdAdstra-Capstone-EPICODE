@@ -1,6 +1,5 @@
 package adastra.backend.services;
 
-import adastra.backend.DTO.TicketDTO;
 import adastra.backend.entities.Booking;
 import adastra.backend.entities.ScreeningTime;
 import adastra.backend.entities.Seat;
@@ -19,15 +18,8 @@ public class TicketsService {
     private SeatsService seatsService;
 
 
-    public Ticket save(TicketDTO body) {
-        Booking foundBooking = this.bookingsService.findById(body.bookingId());
-        ScreeningTime foundTime = this.screeningTimeService.findById(body.screeningTime());
-        Seat foundSeat = this.seatsService.findById(body.seatId());
-        if (body.coupon().isEmpty() || body.coupon().isBlank()) {
-            return this.ticketsRepository.save(new Ticket(body.price(), foundBooking, foundSeat, foundTime));
-        }
-
-        return this.ticketsRepository.save(new Ticket(body.price(), foundBooking, foundSeat, foundTime, body.coupon()));
+    public Ticket save(Booking booking, ScreeningTime time, Seat seat) {
+        return this.ticketsRepository.save(new Ticket(booking, seat, time));
 
 
     }
