@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 public class TicketsService {
 
     private TicketsRepository ticketsRepository;
-    private BookingsService bookingsService;
-    private ScreeningTimeService screeningTimeService;
-    private SeatsService seatsService;
 
 
     public Ticket save(Booking booking, ScreeningTime time, Seat seat) {
