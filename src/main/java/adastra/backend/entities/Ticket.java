@@ -20,8 +20,6 @@ public class Ticket {
     @Column(nullable = false)
     private UUID id;
 
-    @Column(nullable = false)
-    private double price;
 
     @OneToOne
     @JoinColumn(nullable = false, name = "seat_id")
@@ -35,20 +33,16 @@ public class Ticket {
     @JoinColumn(nullable = false, name = "screening_time_id")
     private ScreeningTime screeningTimeId;
 
-    private String coupon;
 
-    public Ticket(double price, Booking bookingId, Seat seatId, ScreeningTime screeningTimeId) {
-        this.price = price;
+    public Ticket(Booking bookingId, Seat seatId, ScreeningTime screeningTimeId) {
         this.bookingId = bookingId;
         this.seatId = seatId;
         this.screeningTimeId = screeningTimeId;
     }
 
-    public Ticket(double price, Booking bookingId, Seat seatId, ScreeningTime screeningTimeId, String coupon) {
-        this.price = price;
+    public Ticket(Booking bookingId, Seat seatId, ScreeningTime screeningTimeId, String coupon) {
         this.bookingId = bookingId;
         this.seatId = seatId;
         this.screeningTimeId = screeningTimeId;
-        this.coupon = coupon;
     }
 }
