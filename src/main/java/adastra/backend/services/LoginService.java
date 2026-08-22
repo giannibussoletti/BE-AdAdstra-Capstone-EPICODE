@@ -2,18 +2,27 @@ package adastra.backend.services;
 
 import adastra.backend.DTO.LoginDTO;
 import adastra.backend.entities.User;
-import jakarta.validation.Valid;
+import adastra.backend.exceptions.UnauthorizedException;
+import adastra.backend.security.JwtTools;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @AllArgsConstructor
 public class LoginService {
 
     private UsersService usersService;
+    private PasswordEncoder bcrypt;
+    private JwtTools jwtTools;
 
-    public User login(@Valid @RequestBody LoginDTO body) {
-        return this.usersService.findByEmail(body.email());
+    public String login(LoginDTO body) {
+        User found = this.usersService.findByEmail(body.email());
+
+        if (this.bcrypt.matches(body.password(), found.getPassword())) {
+            return this.jwtTools.generateToken(found);
+        } else {
+            throw new UnauthorizedException("Credenziali Sbagliate");
+        }
     }
 }

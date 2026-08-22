@@ -5,11 +5,13 @@ import adastra.backend.entities.User;
 import adastra.backend.services.UsersService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+
 
 @RestController
 @AllArgsConstructor
@@ -18,41 +20,40 @@ public class UsersController {
 
     private UsersService usersService;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDTO saveUser(@Valid @RequestBody UserRegistrationDTO body) {
-        User saved = this.usersService.save(body);
-        return new ResponseDTO("Registrazione avvenuta con successo", saved.getId(), LocalDateTime.now());
+    @GetMapping("/profile")
+    public User userProfile(@AuthenticationPrincipal User authenticatedUser) {
+        return authenticatedUser;
     }
 
-    @GetMapping("/profile/{userId}")
-    @ResponseStatus(HttpStatus.OK)
-    public User userProfile(@PathVariable UUID userId) {
-        return this.usersService.findById(userId);
-    }
 
-    @PutMapping("/profile/{userId}")
+    @PutMapping("/profile")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseNoIdDTO updateProfile(@Valid @RequestBody UserUpdateDTO body, @PathVariable UUID userId) {
+    public ResponseNoIdDTO updateProfile(@AuthenticationPrincipal User authenticatedUser, @RequestBody UserUpdateDTO body) {
 
-        this.usersService.profileUpdate(body, userId);
+        this.usersService.profileUpdate(body, authenticatedUser.getId());
         return new ResponseNoIdDTO("Profilo aggiornato con successo", LocalDateTime.now());
     }
 
-    @PatchMapping("/profile/{userId}")
+    @PatchMapping("profile/email")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseNoIdDTO updateMail(@Valid @RequestBody EmailAndPasswordUpdateDTO body, @PathVariable UUID userId) {
-        this.usersService.emailAndPasswordUpdate(body, userId);
-
-        if (body.email() != null && !body.email().isBlank()) {
-            return new ResponseNoIdDTO("Email aggiornata con successo", LocalDateTime.now());
-        }
-        if (body.password() != null && !body.password().isBlank()) {
-            return new ResponseNoIdDTO("Password aggiornata con successo", LocalDateTime.now());
-        }
-
-        return new ResponseNoIdDTO("Nessun aggiornamento effettuato", LocalDateTime.now());
+    public ResponseNoIdDTO updateMail(@AuthenticationPrincipal User authenticatedUser, @RequestBody EmailUpdateDTO body) {
+        this.usersService.emailUpdate(body, authenticatedUser.getId());
+        return new ResponseNoIdDTO("email aggiornata", LocalDateTime.now());
 
     }
+
+    @PatchMapping("profile/password")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updatePassword(@AuthenticationPrincipal User authenticatedUser, @RequestBody PasswordUpdateDTO body) throws BadRequestException {
+        this.usersService.passwordUpdate(authenticatedUser.getId(), body);
+    }
+
+
+    @DeleteMapping("/delete")
+    public void deleteOwnProfile(@AuthenticationPrincipal User authenticatedUser) {
+        this.usersService.findByIdAndDelete(authenticatedUser.getId());
+    }
+
+
 }
 

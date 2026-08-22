@@ -1,6 +1,8 @@
 package adastra.backend.controllers;
 
-import adastra.backend.DTO.*;
+import adastra.backend.DTO.DeleteDTO;
+import adastra.backend.DTO.ResponseDTO;
+import adastra.backend.DTO.ScreeningTimeDTO;
 import adastra.backend.entities.ScreeningTime;
 import adastra.backend.services.ScreeningTimeService;
 import jakarta.validation.Valid;
@@ -9,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -18,12 +19,6 @@ import java.util.UUID;
 public class ScreeningTimesController {
 
     private ScreeningTimeService screeningTimeService;
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<ScreeningTimeMappedDTO> getScreeningTime(@RequestBody FilterByCinemaDTO body) {
-        return this.screeningTimeService.findAll(body.cinemaId());
-    }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
