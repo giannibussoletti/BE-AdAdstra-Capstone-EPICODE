@@ -1,8 +1,15 @@
 package adastra.backend.DTO;
 
+import java.util.List;
 import java.util.UUID;
 
 public record BookingDTO(
-        String guestEmail,
-        UUID userId) {
+        UUID userId,
+        UUID screenTimeId,
+        List<BookedSeatsDTO> maxSeats,
+        Double totalCost,
+        String guestEmail
+
+
+) {
 }
