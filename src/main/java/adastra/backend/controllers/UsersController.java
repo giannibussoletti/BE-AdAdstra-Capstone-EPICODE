@@ -6,10 +6,11 @@ import adastra.backend.services.UsersService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+
 
 @RestController
 @AllArgsConstructor
@@ -18,6 +19,11 @@ public class UsersController {
 
     private UsersService usersService;
 
+    @GetMapping("/profile")
+    public User userProfile(@AuthenticationPrincipal User authenticatedUser) {
+        return authenticatedUser;
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseDTO saveUser(@Valid @RequestBody UserRegistrationDTO body) {
@@ -25,34 +31,29 @@ public class UsersController {
         return new ResponseDTO("Registrazione avvenuta con successo", saved.getId(), LocalDateTime.now());
     }
 
-    @GetMapping("/profile/{userId}")
-    @ResponseStatus(HttpStatus.OK)
-    public User userProfile(@PathVariable UUID userId) {
-        return this.usersService.findById(userId);
-    }
 
     @PutMapping("/profile/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseNoIdDTO updateProfile(@Valid @RequestBody UserUpdateDTO body, @PathVariable UUID userId) {
+    public ResponseNoIdDTO updateProfile(@AuthenticationPrincipal User authenticatedUser, @RequestBody UserUpdateDTO body) {
 
-        this.usersService.profileUpdate(body, userId);
+        this.usersService.profileUpdate(body, authenticatedUser.getId());
         return new ResponseNoIdDTO("Profilo aggiornato con successo", LocalDateTime.now());
     }
 
     @PatchMapping("/profile/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseNoIdDTO updateMail(@Valid @RequestBody EmailAndPasswordUpdateDTO body, @PathVariable UUID userId) {
-        this.usersService.emailAndPasswordUpdate(body, userId);
-
-        if (body.email() != null && !body.email().isBlank()) {
-            return new ResponseNoIdDTO("Email aggiornata con successo", LocalDateTime.now());
-        }
-        if (body.password() != null && !body.password().isBlank()) {
-            return new ResponseNoIdDTO("Password aggiornata con successo", LocalDateTime.now());
-        }
-
-        return new ResponseNoIdDTO("Nessun aggiornamento effettuato", LocalDateTime.now());
+    public ResponseNoIdDTO updateMail(@AuthenticationPrincipal User authenticatedUser, @RequestBody EmailUpdateDTO body) {
+        this.usersService.emailUpdate(body, authenticatedUser.getId());
+        return new ResponseNoIdDTO("email aggiornata", LocalDateTime.now());
 
     }
+
+
+    @DeleteMapping("/delete")
+    public void deleteOwnProfile(@AuthenticationPrincipal User authenticatedUser) {
+        this.usersService.findByIdAndDelete(authenticatedUser.getId());
+    }
+
+
 }
 

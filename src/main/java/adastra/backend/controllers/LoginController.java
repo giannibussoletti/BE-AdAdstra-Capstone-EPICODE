@@ -1,7 +1,7 @@
 package adastra.backend.controllers;
 
 import adastra.backend.DTO.LoginDTO;
-import adastra.backend.entities.User;
+import adastra.backend.DTO.LoginResponseDTO;
 import adastra.backend.services.LoginService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -15,9 +15,9 @@ public class LoginController {
 
     private LoginService loginService;
 
-    @GetMapping
+    @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public User login(@Valid @RequestBody LoginDTO body) {
-        return this.loginService.login(body);
+    public LoginResponseDTO login(@Valid @RequestBody LoginDTO body) {
+        return new LoginResponseDTO(this.loginService.login(body));
     }
 }
