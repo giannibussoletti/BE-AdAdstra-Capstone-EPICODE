@@ -65,17 +65,9 @@ public class SeatsService {
 
     }
 
-    public List<Seat> findAll(UUID cinemaId, Character row, Integer number, UUID screenId) {
+    public List<Seat> findAll(UUID cinemaId, UUID screenId) {
 
         Specification<Seat> spec = Specification.where(SeatSpecification.filterByCinema(cinemaId));
-
-        if (number != null) {
-            spec = spec.and(SeatSpecification.filterByNumber(number));
-        }
-
-        if (row != null) {
-            spec = spec.and(SeatSpecification.filterByRow(row));
-        }
 
         if (screenId != null) {
             spec = spec.and(SeatSpecification.filterByScreen(screenId));

@@ -5,6 +5,7 @@ import adastra.backend.entities.User;
 import adastra.backend.services.UsersService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -24,15 +25,8 @@ public class UsersController {
         return authenticatedUser;
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDTO saveUser(@Valid @RequestBody UserRegistrationDTO body) {
-        User saved = this.usersService.save(body);
-        return new ResponseDTO("Registrazione avvenuta con successo", saved.getId(), LocalDateTime.now());
-    }
 
-
-    @PutMapping("/profile/{userId}")
+    @PutMapping("/profile")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseNoIdDTO updateProfile(@AuthenticationPrincipal User authenticatedUser, @RequestBody UserUpdateDTO body) {
 
@@ -40,12 +34,18 @@ public class UsersController {
         return new ResponseNoIdDTO("Profilo aggiornato con successo", LocalDateTime.now());
     }
 
-    @PatchMapping("/profile/{userId}")
+    @PatchMapping("profile/email")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseNoIdDTO updateMail(@AuthenticationPrincipal User authenticatedUser, @RequestBody EmailUpdateDTO body) {
         this.usersService.emailUpdate(body, authenticatedUser.getId());
         return new ResponseNoIdDTO("email aggiornata", LocalDateTime.now());
 
+    }
+
+    @PatchMapping("profile/password")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updatePassword(@AuthenticationPrincipal User authenticatedUser, @RequestBody PasswordUpdateDTO body) throws BadRequestException {
+        this.usersService.passwordUpdate(authenticatedUser.getId(), body);
     }
 
 

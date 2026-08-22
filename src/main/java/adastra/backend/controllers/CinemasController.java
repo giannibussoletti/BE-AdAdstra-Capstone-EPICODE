@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -19,12 +18,6 @@ public class CinemasController {
 
     private CinemasService cinemasService;
 
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<Cinema> getCinemas() {
-        return this.cinemasService.findAll();
-    }
 
     @PostMapping("/{city}")
     @ResponseStatus(HttpStatus.OK)

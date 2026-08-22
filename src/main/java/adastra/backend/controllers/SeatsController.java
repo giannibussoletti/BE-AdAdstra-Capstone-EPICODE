@@ -22,11 +22,9 @@ public class SeatsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<Seat> getSeats(@RequestBody FilterSeatsDTO body,
-                               @RequestParam(required = false) Integer number,
-                               @RequestParam(required = false) Character row) {
+    public List<Seat> getSeats(@RequestBody FilterSeatsDTO body) {
 
-        return this.seatsService.findAll(body.cinemaId(), row, number, body.screenId());
+        return this.seatsService.findAll(body.cinemaId(), body.screenId());
     }
 
     @PostMapping("/save")
@@ -35,7 +33,7 @@ public class SeatsController {
         ArrayList<UUID> saved = this.seatsService.save(body);
         return new ResponseSeatsDTO("posto salvato correttamente", saved, LocalDateTime.now());
     }
-    
+
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateRow(@Valid @RequestBody RowUpdateDTO body) {
