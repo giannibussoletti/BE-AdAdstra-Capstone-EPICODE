@@ -7,3 +7,5 @@ public record EmailUpdateDTO(
         String email
 ) {
 }
+
+

@@ -48,7 +48,7 @@ public class UsersService {
         this.usersRepository.save(found);
     }
 
-    public void updatePassword(UUID userId, PasswordUpdateDTO body) throws BadRequestException {
+    public void passwordUpdate(UUID userId, PasswordUpdateDTO body) throws BadRequestException {
         User found = this.findById(userId);
 
         if (this.bcrypt.matches(body.oldPassword(), found.getPassword())) {

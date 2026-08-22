@@ -16,6 +16,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -29,12 +30,9 @@ public class TokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer "))
-            throw new UnauthorizedException("Inserire il token nell'authorization header nel formato Bearer ");
-
+            throw new UnauthorizedException("Inserire il token nello header nel formato Bearer ");
 
         String accessToken = authHeader.replace("Bearer ", "");
-        System.out.println(accessToken);
-
 
         this.jwtTools.verifyToken(accessToken);
 
@@ -52,12 +50,16 @@ public class TokenFilter extends OncePerRequestFilter {
     }
 
     @Override
-
-
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 
-        return new AntPathMatcher().match("/**", request.getServletPath());
-
+        List<String> excludedPaths = List.of(
+                "/tickets",
+                "/public/**",
+                "auth/**",
+                "/bookings"
+        );
+        return excludedPaths.stream()
+                .anyMatch(excludedPath -> new AntPathMatcher().match(excludedPath, request.getServletPath()));
 
     }
 }
