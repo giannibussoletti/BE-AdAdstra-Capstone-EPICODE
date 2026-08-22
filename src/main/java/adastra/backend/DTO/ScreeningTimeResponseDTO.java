@@ -12,5 +12,7 @@ public record ScreeningTimeResponseDTO(
         @NotNull(message = "il campo non può essere lasciato vuoto")
         UUID screenId,
         @NotNull(message = "il campo non può essere lasciato vuoto")
-        Integer screenNumber) {
+        Integer screenNumber,
+        @NotNull(message = "il campo non può essere lasciato vuoto")
+        UUID screeningTimeId) {
 }
