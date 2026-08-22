@@ -9,8 +9,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +24,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @JsonIgnoreProperties(value = {"id", "password", "userRole", "isDeleted"})
-public class User implements SoftDeleteInt {
+public class User implements SoftDeleteInt, UserDetails {
 
     @Id
     @Setter(AccessLevel.NONE)
@@ -64,5 +69,15 @@ public class User implements SoftDeleteInt {
         this.profilePicLink = "https://placehold.co/100";
         this.userRole = UserRole.USER;
         this.isDeleted = IsDeleted.FALSE;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.userRole.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 }
