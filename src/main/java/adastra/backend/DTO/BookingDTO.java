@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 public record BookingDTO(
-        UUID userId,
         UUID screenTimeId,
         List<BookedSeatsDTO> maxSeats,
         Double totalCost,

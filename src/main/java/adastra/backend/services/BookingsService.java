@@ -31,10 +31,10 @@ public class BookingsService {
 //    Double totalCost,
 //    String guestEmail
 
-    public Booking save(BookingDTO body) {
+    public Booking save(BookingDTO body, UUID authUser) {
         Booking booking = null;
-        if (body.userId() != null) {
-            User found = this.usersService.findById(body.userId());
+        if (authUser != null) {
+            User found = this.usersService.findById(authUser);
             booking = this.bookingRepository.save(new Booking(found, body.totalCost()));
         } else {
             booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost()));

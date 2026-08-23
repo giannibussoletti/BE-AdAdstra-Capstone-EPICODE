@@ -23,7 +23,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@JsonIgnoreProperties(value = {"id", "password", "userRole", "isDeleted"})
+
+
+@JsonIgnoreProperties(value = {"id", "password", "userRole", "isDeleted", "accountNonExpired", "accountNonLocked",
+        "authorities", "credentialsNonExpired",
+        "enabled"})
 public class User implements SoftDeleteInt, UserDetails {
 
     @Id
