@@ -20,21 +20,13 @@ public class BookingsService {
     private UsersService usersService;
     private TicketsService ticketsService;
     private ScreeningTimeService screeningTimeService;
-    private ScreensService screensService;
     private SeatsService seatsService;
 
 
-//    UUID userId,
-//    UUID screenTimeId,
-//    UUID screenId,
-//    List<BookedSeatsDTO> maxSeats,
-//    Double totalCost,
-//    String guestEmail
-
-    public Booking save(BookingDTO body, UUID authUser) {
+    public Booking save(BookingDTO body, User authUser) {
         Booking booking = null;
         if (authUser != null) {
-            User found = this.usersService.findById(authUser);
+            User found = this.usersService.findById(authUser.getId());
             booking = this.bookingRepository.save(new Booking(found, body.totalCost()));
         } else {
             booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost()));
