@@ -25,7 +25,7 @@ public class BookingsService {
 
 
 //    UUID userId,
-//    UUID screenTimeId,
+//    UUID screeningTimeId,
 //    UUID screenId,
 //    List<BookedSeatsDTO> maxSeats,
 //    Double totalCost,
