@@ -32,7 +32,6 @@ public class PublicAccessController {
         return this.ticketsService.findSeatByScreeningTime(body.screeningTimeId());
     }
 
-
     @GetMapping("/cinemas")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Cinema> getCinemas() {
