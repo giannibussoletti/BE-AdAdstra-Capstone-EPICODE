@@ -1,20 +1,30 @@
 package adastra.backend.entities;
 
+import adastra.backend.enums.EmergencyExits;
+import adastra.backend.enums.IsDeleted;
+import adastra.backend.softDelete.SoftDeleteInt;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
 @Getter
-@Table(name = "screens")
-public class Screen {
+@Setter
+@Table(name = "screens", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"cinemaId", "screenNumber"})
+})
+public class Screen implements SoftDeleteInt {
 
     @Id
     @GeneratedValue
     @Column(nullable = false)
+    @Setter(AccessLevel.NONE)
     private UUID id;
 
     @Column(name = "screen_number", nullable = false)
@@ -22,10 +32,21 @@ public class Screen {
 
     @ManyToOne
     @JoinColumn(name = "cinema_id", nullable = false)
+    @JsonIgnore
     private Cinema cinemaId;
 
-    public Screen(int screenNumber, Cinema cinemaId) {
+    @Column(nullable = false, name = "screen_is_deleted")
+    @Enumerated(EnumType.STRING)
+    private IsDeleted isDeleted;
+
+    @Column(nullable = false, name = "emergency_exits")
+    @Enumerated(EnumType.STRING)
+    private EmergencyExits emergencyExits;
+
+    public Screen(int screenNumber, Cinema cinemaId, EmergencyExits emergencyExits) {
         this.screenNumber = screenNumber;
         this.cinemaId = cinemaId;
+        this.isDeleted = IsDeleted.FALSE;
+        this.emergencyExits = emergencyExits;
     }
 }
