@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tickets")
+
 @NoArgsConstructor
 @Getter
+@Table(name = "tickets", uniqueConstraints = {@UniqueConstraint(columnNames = {"screeningTimeId", "seatId"})}
+)
 
 public class Ticket {
 
@@ -18,20 +20,29 @@ public class Ticket {
     @Column(nullable = false)
     private UUID id;
 
-    @Column(nullable = false, name = "final_price")
-    private double finalPrice;
 
     @OneToOne
-    @JoinColumn(nullable = false, name = "screening_seat_id")
-    private ScreeningSeat screeningSeatId;
+    @JoinColumn(nullable = false, name = "seat_id")
+    private Seat seatId;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "booking_id")
     private Booking bookingId;
 
-    public Ticket(double finalPrice, ScreeningSeat screeningSeatId, Booking bookingId) {
-        this.finalPrice = finalPrice;
-        this.screeningSeatId = screeningSeatId;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "screening_time_id")
+    private ScreeningTime screeningTimeId;
+
+
+    public Ticket(Booking bookingId, Seat seatId, ScreeningTime screeningTimeId) {
         this.bookingId = bookingId;
+        this.seatId = seatId;
+        this.screeningTimeId = screeningTimeId;
+    }
+
+    public Ticket(Booking bookingId, Seat seatId, ScreeningTime screeningTimeId, String coupon) {
+        this.bookingId = bookingId;
+        this.seatId = seatId;
+        this.screeningTimeId = screeningTimeId;
     }
 }
