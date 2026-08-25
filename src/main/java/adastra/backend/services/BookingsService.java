@@ -23,23 +23,39 @@ public class BookingsService {
     private SeatsService seatsService;
 
 
-    public Booking save(BookingDTO body, User authUser) {
-        Booking booking = null;
-        if (authUser != null) {
-            User found = this.usersService.findById(authUser.getId());
+    public Booking saveLoggedUser(BookingDTO body, User authUser) {
+        Booking booking;
+        User found = this.usersService.findById(authUser.getId());
+        if (body.coupon().isEmpty() || body.coupon().isBlank())
             booking = this.bookingRepository.save(new Booking(found, body.totalCost()));
-        } else {
-            booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost()));
+        else {
+            booking = this.bookingRepository.save(new Booking(found, body.totalCost(), body.coupon()));
         }
-        Booking finalBooking = booking;
         ScreeningTime time = this.screeningTimeService.findById(body.screenTimeId());
 
         body.maxSeats().forEach(seat -> {
             Seat seatFound = this.seatsService.findById(seat.id());
-            this.ticketsService.save(finalBooking, time, seatFound);
+            this.ticketsService.save(booking, time, seatFound);
         });
 
-        return finalBooking;
+        return booking;
+    }
+
+    public Booking savePublic(BookingDTO body) {
+        Booking booking;
+        if (body.coupon().isEmpty() || body.coupon().isBlank())
+            booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost()));
+        else {
+            booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost(), body.coupon()));
+        }
+        ScreeningTime time = this.screeningTimeService.findById(body.screenTimeId());
+
+        body.maxSeats().forEach(seat -> {
+            Seat seatFound = this.seatsService.findById(seat.id());
+            this.ticketsService.save(booking, time, seatFound);
+        });
+
+        return booking;
 
 
     }

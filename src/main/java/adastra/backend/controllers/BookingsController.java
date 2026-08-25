@@ -23,7 +23,7 @@ public class BookingsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseDTO save(@AuthenticationPrincipal User authUser, @Valid @RequestBody BookingDTO body) {
-        Booking saved = this.bookingsService.save(body, authUser);
+        Booking saved = this.bookingsService.saveLoggedUser(body, authUser);
 
         return new ResponseDTO("Acquisto avvenuto con successo", saved.getId(), LocalDateTime.now());
     }
