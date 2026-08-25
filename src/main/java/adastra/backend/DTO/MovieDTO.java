@@ -4,9 +4,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+import java.time.LocalDate;
+
 public record MovieDTO(
         @NotBlank(message = "Il campo starring non può essere lasciato vuoto")
         String starring,
+        @NotNull(message = "Il campo non può essere lasciato vuoto")
+//        @FutureOrPresent
+        LocalDate releaseDate,
         @NotNull
         @Positive(message = "la duration può essere solo un numero positivo")
         int duration,

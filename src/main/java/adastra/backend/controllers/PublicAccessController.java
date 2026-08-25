@@ -1,9 +1,7 @@
 package adastra.backend.controllers;
 
-import adastra.backend.DTO.FilterByCinemaDTO;
-import adastra.backend.DTO.FilterSeatsDTO;
-import adastra.backend.DTO.FindTicketByScreenTimeIdDTO;
-import adastra.backend.DTO.ScreeningTimeMappedDTO;
+import adastra.backend.DTO.*;
+import adastra.backend.entities.Booking;
 import adastra.backend.entities.Cinema;
 import adastra.backend.entities.Movie;
 import adastra.backend.entities.Seat;
@@ -12,7 +10,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -24,6 +24,7 @@ public class PublicAccessController {
     private SeatsService seatsService;
     private TicketsService ticketsService;
     private MoviesService moviesService;
+    private BookingsService bookingsService;
 
     @PostMapping("/tickets")
     @ResponseStatus(HttpStatus.OK)
@@ -54,6 +55,20 @@ public class PublicAccessController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Movie> getMovies() {
         return this.moviesService.findAll();
+    }
+
+    @GetMapping("/movies/{movieId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Movie getMoviesDetails(@PathVariable UUID movieId) {
+        return this.moviesService.findById(movieId);
+    }
+
+    @PostMapping("/booking")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseDTO save(@RequestBody BookingDTO body) {
+        Booking saved = this.bookingsService.savePublic(body);
+
+        return new ResponseDTO("Acquisto avvenuto con successo", saved.getId(), LocalDateTime.now());
     }
 
 }
