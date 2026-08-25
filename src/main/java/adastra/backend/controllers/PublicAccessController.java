@@ -5,11 +5,9 @@ import adastra.backend.DTO.FilterSeatsDTO;
 import adastra.backend.DTO.FindTicketByScreenTimeIdDTO;
 import adastra.backend.DTO.ScreeningTimeMappedDTO;
 import adastra.backend.entities.Cinema;
+import adastra.backend.entities.Movie;
 import adastra.backend.entities.Seat;
-import adastra.backend.services.CinemasService;
-import adastra.backend.services.ScreeningTimeService;
-import adastra.backend.services.SeatsService;
-import adastra.backend.services.TicketsService;
+import adastra.backend.services.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +23,7 @@ public class PublicAccessController {
     private ScreeningTimeService screeningTimeService;
     private SeatsService seatsService;
     private TicketsService ticketsService;
+    private MoviesService moviesService;
 
     @PostMapping("/tickets")
     @ResponseStatus(HttpStatus.OK)
@@ -49,6 +48,12 @@ public class PublicAccessController {
     public List<Seat> getSeats(@RequestBody FilterSeatsDTO body) {
 
         return this.seatsService.findAll(body.cinemaId(), body.screenId());
+    }
+
+    @GetMapping("/movies")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Movie> getMovies() {
+        return this.moviesService.findAll();
     }
 
 }
