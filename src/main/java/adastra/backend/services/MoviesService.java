@@ -6,13 +6,10 @@ import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.MoviesRepository;
 import adastra.backend.softDelete.SoftDeleteMethod;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,9 +18,9 @@ public class MoviesService extends SoftDeleteMethod<Movie, UUID> {
 
     private MoviesRepository moviesRepository;
 
-    public Page<Movie> findAll(int page, int size, String searchBy) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(searchBy));
-        return this.moviesRepository.findAll(pageable);
+    public List<Movie> findAll() {
+        ;
+        return this.moviesRepository.findAll();
     }
 
     public Movie findById(UUID movieId) {
