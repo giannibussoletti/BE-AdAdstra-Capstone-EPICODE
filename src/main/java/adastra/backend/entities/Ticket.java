@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
-@Table(name = "tickets", uniqueConstraints = {@UniqueConstraint(columnNames = {"screeningTimeId", "seatId"})}
+@Table(name = "tickets", uniqueConstraints = {@UniqueConstraint(columnNames = {"screening_time_id", "seat_id"})}
 )
 
 public class Ticket {

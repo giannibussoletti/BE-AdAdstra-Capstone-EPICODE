@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -42,7 +43,10 @@ public class Movie implements SoftDeleteInt {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String plot;
 
-    public Movie(String starring, int duration, String title, String posterLink, String plot) {
+    @Column(nullable = false, name = "release_date")
+    private LocalDate releaseDate;
+
+    public Movie(String starring, int duration, String title, String posterLink, String plot, LocalDate releaseDate) {
 
         this.starring = starring;
         this.duration = duration;
@@ -50,6 +54,7 @@ public class Movie implements SoftDeleteInt {
         this.posterLink = posterLink;
         this.plot = plot;
         this.isDeleted = IsDeleted.FALSE;
+        this.releaseDate = releaseDate;
     }
 }
 
