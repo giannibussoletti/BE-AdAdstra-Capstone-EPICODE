@@ -56,4 +56,18 @@ public class PublicAccessController {
         return this.moviesService.findAll();
     }
 
+    @GetMapping("/movies/{movieId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Movie getMoviesDetails(@PathVariable UUID movieId) {
+        return this.moviesService.findById(movieId);
+    }
+
+    @PostMapping("/bookings")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseDTO save(@RequestBody BookingDTO body) {
+        Booking saved = this.bookingsService.savePublic(body);
+
+        return new ResponseDTO("Acquisto avvenuto con successo", saved.getId(), LocalDateTime.now());
+    }
+
 }
