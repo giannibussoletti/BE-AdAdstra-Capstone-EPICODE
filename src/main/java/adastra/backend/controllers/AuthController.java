@@ -25,7 +25,7 @@ public class AuthController {
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public LoginResponseDTO login(@Valid @RequestBody LoginDTO body) {
-        return new LoginResponseDTO(this.loginService.login(body));
+        return this.loginService.login(body);
     }
 
     @PostMapping("/registration")
