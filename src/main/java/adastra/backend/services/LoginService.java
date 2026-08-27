@@ -29,7 +29,7 @@ public class LoginService {
     }
 
     public void verifyToken(TokenVerificationDTO body) {
-        String accessToken = body.token().replace("Bearer ", "");
-        this.jwtTools.verifyToken(accessToken);
+
+        this.jwtTools.verifyToken(body.token());
     }
 }
