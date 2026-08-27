@@ -2,6 +2,7 @@ package adastra.backend.services;
 
 import adastra.backend.DTO.LoginDTO;
 import adastra.backend.DTO.LoginResponseDTO;
+import adastra.backend.DTO.TokenVerificationDTO;
 import adastra.backend.entities.User;
 import adastra.backend.exceptions.UnauthorizedException;
 import adastra.backend.security.JwtTools;
@@ -25,5 +26,10 @@ public class LoginService {
         } else {
             throw new UnauthorizedException("Credenziali Sbagliate");
         }
+    }
+
+    public void verifyToken(TokenVerificationDTO body) {
+
+        this.jwtTools.verifyToken(body.token());
     }
 }
