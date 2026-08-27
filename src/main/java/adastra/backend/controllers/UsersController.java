@@ -1,14 +1,17 @@
 package adastra.backend.controllers;
 
-import adastra.backend.DTO.*;
+import adastra.backend.DTO.EmailUpdateDTO;
+import adastra.backend.DTO.PasswordUpdateDTO;
+import adastra.backend.DTO.ResponseNoIdDTO;
+import adastra.backend.DTO.UserUpdateDTO;
 import adastra.backend.entities.User;
 import adastra.backend.services.UsersService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -48,6 +51,13 @@ public class UsersController {
         this.usersService.passwordUpdate(authenticatedUser.getId(), body);
     }
 
+    @PostMapping("profile/avatar")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateAvatar(@AuthenticationPrincipal User authenticatedUser, @RequestParam("avatar_pic") MultipartFile file) {
+        this.usersService.avatarUpdate(authenticatedUser, file);
+    }
+
+    ;
 
     @DeleteMapping("/delete")
     public void deleteOwnProfile(@AuthenticationPrincipal User authenticatedUser) {
