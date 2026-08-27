@@ -1,9 +1,6 @@
 package adastra.backend.controllers;
 
-import adastra.backend.DTO.LoginDTO;
-import adastra.backend.DTO.LoginResponseDTO;
-import adastra.backend.DTO.ResponseDTO;
-import adastra.backend.DTO.UserRegistrationDTO;
+import adastra.backend.DTO.*;
 import adastra.backend.entities.User;
 import adastra.backend.services.LoginService;
 import adastra.backend.services.UsersService;
@@ -33,5 +30,11 @@ public class AuthController {
     public ResponseDTO saveUser(@Valid @RequestBody UserRegistrationDTO body) {
         User saved = this.usersService.save(body);
         return new ResponseDTO("Registrazione avvenuta con successo", saved.getId(), LocalDateTime.now());
+    }
+
+    @PostMapping("/token")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void verifyToken(@RequestBody TokenVerificationDTO body) {
+        this.loginService.verifyToken(body);
     }
 }
