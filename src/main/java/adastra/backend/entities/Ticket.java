@@ -21,7 +21,7 @@ public class Ticket {
     private UUID id;
 
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(nullable = false, name = "seat_id")
     private Seat seatId;
 

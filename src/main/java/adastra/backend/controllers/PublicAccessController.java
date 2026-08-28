@@ -63,7 +63,7 @@ public class PublicAccessController {
         return this.moviesService.findById(movieId);
     }
 
-    @PostMapping("/booking")
+    @PostMapping("/bookings")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseDTO save(@RequestBody BookingDTO body) {
         Booking saved = this.bookingsService.savePublic(body);
