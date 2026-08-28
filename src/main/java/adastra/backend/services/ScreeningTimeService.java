@@ -34,7 +34,7 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
 
     public List<ScreeningTimeMappedDTO> findAll(UUID cinemaId) {
 
-        List<ScreeningTime> listScreenTime = this.screeningTimesRepository.findTimeByCinema(cinemaId);
+        List<ScreeningTime> listScreenTime = this.screeningTimesRepository.findTimeByCinema(cinemaId, IsDeleted.FALSE);
         return listScreenTime.stream()
                 .sorted(Comparator.comparing(ScreeningTime::getDateTime))
                 .collect(Collectors.groupingBy(
