@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,4 +16,7 @@ public interface ScreeningTimesRepository extends JpaRepository<ScreeningTime, U
 
     @Query("SELECT s FROM ScreeningTime s JOIN s.screenId sc JOIN sc.cinemaId c WHERE c.id = :cinemaId")
     List<ScreeningTime> findTimeByCinema(@Param("cinemaId") UUID cinemaId);
+
+    @Query("SELECT s FROM ScreeningTime s WHERE s.dateTime BETWEEN :endDate AND :startDate ")
+    List<ScreeningTime> findOldScreeningTime(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 }
