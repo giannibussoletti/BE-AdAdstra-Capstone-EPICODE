@@ -28,9 +28,9 @@ public class BookingsService {
         Booking booking;
         User found = this.usersService.findById(authUser.getId());
         if (body.coupon().isEmpty() || body.coupon().isBlank())
-            booking = this.bookingRepository.save(new Booking(found, body.totalCost()));
+            booking = this.bookingRepository.save(new Booking(found, body.totalCost(), body.guestEmail()));
         else {
-            booking = this.bookingRepository.save(new Booking(found, body.totalCost(), body.coupon()));
+            booking = this.bookingRepository.save(new Booking(found, body.totalCost(), body.coupon(), body.guestEmail()));
         }
         createTicket(booking, body);
 

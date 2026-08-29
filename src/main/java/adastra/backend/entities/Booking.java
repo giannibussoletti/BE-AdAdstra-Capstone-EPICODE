@@ -39,10 +39,11 @@ public class Booking {
         this.price = price;
     }
 
-    public Booking(User userId, Double price) {
+    public Booking(User userId, Double price, String guestMail) {
         this.userId = userId;
         this.createdAt = LocalDateTime.now();
         this.price = price;
+        this.guestMail = guestMail;
     }
 
     public Booking(String guestMail, Double price, String coupon) {
@@ -52,7 +53,8 @@ public class Booking {
         this.coupon = coupon;
     }
 
-    public Booking(User userId, Double price, String coupon) {
+    public Booking(User userId, Double price, String coupon, String guestMail) {
+        this.guestMail = guestMail;
         this.userId = userId;
         this.createdAt = LocalDateTime.now();
         this.price = price;
