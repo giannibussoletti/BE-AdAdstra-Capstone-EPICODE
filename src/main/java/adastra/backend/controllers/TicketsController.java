@@ -1,6 +1,6 @@
 package adastra.backend.controllers;
 
-import adastra.backend.entities.Movie;
+import adastra.backend.DTO.UserMoviesDTO;
 import adastra.backend.entities.User;
 import adastra.backend.services.TicketsService;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class TicketsController {
 
     @GetMapping("/user-movies")
     @ResponseStatus(HttpStatus.OK)
-    public Set<Movie> findByUser(@AuthenticationPrincipal User authUser) {
+    public Set<UserMoviesDTO> findByUser(@AuthenticationPrincipal User authUser) {
         return this.ticketsService.findMovieByUser(authUser.getId());
     }
 

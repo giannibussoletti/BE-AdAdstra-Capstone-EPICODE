@@ -1,5 +1,6 @@
 package adastra.backend.services;
 
+import adastra.backend.DTO.UserMoviesDTO;
 import adastra.backend.entities.*;
 import adastra.backend.repository.TicketsRepository;
 import lombok.AllArgsConstructor;
@@ -30,9 +31,12 @@ public class TicketsService {
         return ticketsFound.stream().map(Ticket::getSeatId).toList();
     }
 
-    public Set<Movie> findMovieByUser(UUID userId) {
+    public Set<UserMoviesDTO> findMovieByUser(UUID userId) {
         User found = this.usersService.findById(userId);
         List<Ticket> ticketList = this.ticketsRepository.findMovieByUser(found);
-        return ticketList.stream().map(Ticket::getScreeningTimeId).map(ScreeningTime::getMovieId).collect(Collectors.toSet());
+        return ticketList.stream().map(Ticket::getScreeningTimeId)
+                .map(ScreeningTime::getMovieId)
+                .map(movie -> new UserMoviesDTO(movie.getTitle(), movie.getReleaseDate(), movie.getId())).collect(Collectors.toSet());
     }
+
 }
