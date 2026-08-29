@@ -30,7 +30,6 @@ public class ScreeningTime implements SoftDeleteInt {
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "movie_id")
-    @JsonIgnore
     private Movie movieId;
 
     @ManyToOne
