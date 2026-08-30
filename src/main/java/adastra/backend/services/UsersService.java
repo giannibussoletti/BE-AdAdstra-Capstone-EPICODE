@@ -9,6 +9,7 @@ import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.UsersRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,6 +41,7 @@ public class UsersService {
         return this.usersRepository.findById(userId).orElseThrow(() -> new NotFoundException("Utente non trovato"));
     }
 
+    @Transactional
     public void profileUpdate(UserUpdateDTO body, UUID userId) {
         User found = this.findById(userId);
         found.setBirthDate(body.birthDate());
@@ -48,18 +50,26 @@ public class UsersService {
         this.usersRepository.save(found);
     }
 
+    @Transactional
     public void emailUpdate(EmailUpdateDTO body, UUID userId) {
         User found = this.findById(userId);
         found.setEmail(body.email());
         this.usersRepository.save(found);
     }
 
+    @Transactional
     public void passwordUpdate(UUID userId, PasswordUpdateDTO body) throws BadRequestException {
         User found = this.findById(userId);
 
-        if (this.bcrypt.matches(body.oldPassword(), found.getPassword())) {
-            found.setPassword(this.bcrypt.encode(body.newPassword()));
-        } else throw new BadRequestException("Le password non corrispondono!");
+        if (!this.bcrypt.matches(body.oldPassword(), found.getPassword())) {
+            throw new BadRequestException("La vecchia password non è corretta!");
+        }
+
+        if (this.bcrypt.matches(body.newPassword(), found.getPassword())) {
+            throw new BadRequestException("La nuova password deve essere diversa dalla vecchia!");
+        }
+
+        found.setPassword(this.bcrypt.encode(body.newPassword()));
         this.usersRepository.save(found);
     }
 
@@ -68,6 +78,7 @@ public class UsersService {
         this.usersRepository.delete(found);
     }
 
+    @Transactional
     public void avatarUpdate(User user, MultipartFile file) {
 
         User found = this.findById(user.getId());
