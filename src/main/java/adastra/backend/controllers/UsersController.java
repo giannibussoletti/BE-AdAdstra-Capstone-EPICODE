@@ -41,14 +41,15 @@ public class UsersController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseNoIdDTO updateMail(@AuthenticationPrincipal User authenticatedUser, @RequestBody EmailUpdateDTO body) {
         this.usersService.emailUpdate(body, authenticatedUser.getId());
-        return new ResponseNoIdDTO("email aggiornata", LocalDateTime.now());
+        return new ResponseNoIdDTO("email aggiornata correttamente", LocalDateTime.now());
 
     }
 
     @PatchMapping("profile/password")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePassword(@AuthenticationPrincipal User authenticatedUser, @RequestBody PasswordUpdateDTO body) throws BadRequestException {
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseNoIdDTO updatePassword(@AuthenticationPrincipal User authenticatedUser, @RequestBody PasswordUpdateDTO body) throws BadRequestException {
         this.usersService.passwordUpdate(authenticatedUser.getId(), body);
+        return new ResponseNoIdDTO("password aggiornata correttamente", LocalDateTime.now());
     }
 
     @PostMapping("profile/avatar")
