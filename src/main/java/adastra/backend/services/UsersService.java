@@ -68,7 +68,7 @@ public class UsersService {
     }
 
     @Transactional
-    public void avatarUpdate(User user, MultipartFile file) {
+    public User avatarUpdate(User user, MultipartFile file) {
 
         User found = this.findById(user.getId());
 
@@ -76,7 +76,7 @@ public class UsersService {
             Map result = uploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
             String url = (String) result.get("secure_url");
             found.setProfilePicLink(url);
-            this.usersRepository.save(found);
+            return this.usersRepository.save(found);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
