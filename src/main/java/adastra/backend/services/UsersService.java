@@ -3,7 +3,6 @@ package adastra.backend.services;
 import adastra.backend.DTO.EmailUpdateDTO;
 import adastra.backend.DTO.PasswordUpdateDTO;
 import adastra.backend.DTO.UserRegistrationDTO;
-import adastra.backend.DTO.UserUpdateDTO;
 import adastra.backend.entities.User;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.UsersRepository;
@@ -41,23 +40,13 @@ public class UsersService {
         return this.usersRepository.findById(userId).orElseThrow(() -> new NotFoundException("Utente non trovato"));
     }
 
-    @Transactional
-    public void profileUpdate(UserUpdateDTO body, UUID userId) {
-        User found = this.findById(userId);
-        found.setBirthDate(body.birthDate());
-        found.setName(body.name());
-        found.setSurname(body.surname());
-        this.usersRepository.save(found);
-    }
 
-    @Transactional
     public void emailUpdate(EmailUpdateDTO body, UUID userId) {
         User found = this.findById(userId);
-        found.setEmail(body.email());
+        found.setEmail(body.newEmail());
         this.usersRepository.save(found);
     }
 
-    @Transactional
     public void passwordUpdate(UUID userId, PasswordUpdateDTO body) throws BadRequestException {
         User found = this.findById(userId);
 
