@@ -3,7 +3,6 @@ package adastra.backend.controllers;
 import adastra.backend.DTO.EmailUpdateDTO;
 import adastra.backend.DTO.PasswordUpdateDTO;
 import adastra.backend.DTO.ResponseNoIdDTO;
-import adastra.backend.DTO.UserUpdateDTO;
 import adastra.backend.entities.User;
 import adastra.backend.services.UsersService;
 import lombok.AllArgsConstructor;
@@ -29,19 +28,11 @@ public class UsersController {
     }
 
 
-    @PutMapping("/profile")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseNoIdDTO updateProfile(@AuthenticationPrincipal User authenticatedUser, @RequestBody UserUpdateDTO body) {
-
-        this.usersService.profileUpdate(body, authenticatedUser.getId());
-        return new ResponseNoIdDTO("Profilo aggiornato con successo", LocalDateTime.now());
-    }
-
-    @PatchMapping("profile/email")
+    @PatchMapping("profile/new-email")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseNoIdDTO updateMail(@AuthenticationPrincipal User authenticatedUser, @RequestBody EmailUpdateDTO body) {
         this.usersService.emailUpdate(body, authenticatedUser.getId());
-        return new ResponseNoIdDTO("email aggiornata correttamente", LocalDateTime.now());
+        return new ResponseNoIdDTO("newEmail aggiornata correttamente", LocalDateTime.now());
 
     }
 

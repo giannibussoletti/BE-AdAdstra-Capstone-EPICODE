@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email;
 
 public record EmailUpdateDTO(
         @Email(message = "La mail non rispetta i requisiti necessari")
-        String email
+        String newEmail
 ) {
 }
 
