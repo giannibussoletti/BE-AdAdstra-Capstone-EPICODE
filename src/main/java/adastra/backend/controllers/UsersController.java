@@ -1,6 +1,7 @@
 package adastra.backend.controllers;
 
 import adastra.backend.DTO.EmailUpdateDTO;
+import adastra.backend.DTO.ImageLinkResponseDTO;
 import adastra.backend.DTO.PasswordUpdateDTO;
 import adastra.backend.DTO.ResponseNoIdDTO;
 import adastra.backend.entities.User;
@@ -44,9 +45,10 @@ public class UsersController {
     }
 
     @PostMapping("profile/avatar")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateAvatar(@AuthenticationPrincipal User authenticatedUser, @RequestParam("avatar_pic") MultipartFile file) {
-        this.usersService.avatarUpdate(authenticatedUser, file);
+    @ResponseStatus(HttpStatus.OK)
+    public ImageLinkResponseDTO updateAvatar(@AuthenticationPrincipal User authenticatedUser, @RequestParam("avatar_pic") MultipartFile file) {
+        User saved = this.usersService.avatarUpdate(authenticatedUser, file);
+        return new ImageLinkResponseDTO(saved.getProfilePicLink());
     }
 
     ;
