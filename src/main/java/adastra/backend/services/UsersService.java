@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.UUID;
 
@@ -29,7 +31,7 @@ public class UsersService {
 
 
     public User save(UserRegistrationDTO body) {
-        return this.usersRepository.save(new User(body.name(), body.surname(), body.email(), body.birthDate(), this.bcrypt.encode(body.password())));
+        return this.usersRepository.save(new User(body.name(), body.surname(), body.email(), LocalDate.parse(body.birthDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy")), this.bcrypt.encode(body.password())));
     }
 
     public User findByEmail(String email) {
