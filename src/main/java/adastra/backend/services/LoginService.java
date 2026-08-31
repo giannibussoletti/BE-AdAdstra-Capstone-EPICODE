@@ -1,6 +1,8 @@
 package adastra.backend.services;
 
 import adastra.backend.DTO.LoginDTO;
+import adastra.backend.DTO.LoginResponseDTO;
+import adastra.backend.DTO.TokenVerificationDTO;
 import adastra.backend.entities.User;
 import adastra.backend.exceptions.UnauthorizedException;
 import adastra.backend.security.JwtTools;
@@ -16,13 +18,18 @@ public class LoginService {
     private PasswordEncoder bcrypt;
     private JwtTools jwtTools;
 
-    public String login(LoginDTO body) {
+    public LoginResponseDTO login(LoginDTO body) {
         User found = this.usersService.findByEmail(body.email());
 
         if (this.bcrypt.matches(body.password(), found.getPassword())) {
-            return this.jwtTools.generateToken(found);
+            return new LoginResponseDTO(this.jwtTools.generateToken(found), found.getName(), found.getSurname(), found.getEmail(), found.getBirthDate(), found.getProfilePicLink(), found.getEmail());
         } else {
             throw new UnauthorizedException("Credenziali Sbagliate");
         }
+    }
+
+    public void verifyToken(TokenVerificationDTO body) {
+
+        this.jwtTools.verifyToken(body.token());
     }
 }

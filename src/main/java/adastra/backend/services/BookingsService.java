@@ -7,6 +7,7 @@ import adastra.backend.entities.Seat;
 import adastra.backend.entities.User;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.BookingRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,26 +23,41 @@ public class BookingsService {
     private ScreeningTimeService screeningTimeService;
     private SeatsService seatsService;
 
-
-    public Booking save(BookingDTO body, User authUser) {
-        Booking booking = null;
-        if (authUser != null) {
-            User found = this.usersService.findById(authUser.getId());
-            booking = this.bookingRepository.save(new Booking(found, body.totalCost()));
-        } else {
-            booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost()));
+    @Transactional
+    public Booking saveLoggedUser(BookingDTO body, User authUser) {
+        Booking booking;
+        User found = this.usersService.findById(authUser.getId());
+        if (body.coupon().isEmpty() || body.coupon().isBlank())
+            booking = this.bookingRepository.save(new Booking(found, body.totalCost(), body.guestEmail()));
+        else {
+            booking = this.bookingRepository.save(new Booking(found, body.totalCost(), body.coupon(), body.guestEmail()));
         }
-        Booking finalBooking = booking;
+        createTicket(booking, body);
+
+        return booking;
+    }
+
+    @Transactional
+    public Booking savePublic(BookingDTO body) {
+        Booking booking;
+        if (body.coupon().isEmpty() || body.coupon().isBlank())
+            booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost()));
+        else {
+            booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost(), body.coupon()));
+        }
+        createTicket(booking, body);
+
+        return booking;
+
+    }
+
+    private void createTicket(Booking booking, BookingDTO body) {
         ScreeningTime time = this.screeningTimeService.findById(body.screenTimeId());
 
         body.maxSeats().forEach(seat -> {
             Seat seatFound = this.seatsService.findById(seat.id());
-            this.ticketsService.save(finalBooking, time, seatFound);
+            this.ticketsService.save(booking, time, seatFound);
         });
-
-        return finalBooking;
-
-
     }
 
     public Booking findById(UUID bookingId) {
