@@ -1,3 +1,9 @@
+INSERT INTO users (birth_date, id, email, name, password, profile_pic_link, surname, user_is_deleted, user_role)
+VALUES ('1994-02-13', 'c111fc10-1948-491b-8fe2-9e54bf0b15d6', 'giangiacomo@mario.it', 'Gianni',
+        '$2a$12$kfiSLC/X8ySMlOQT4G/v6eoy/zIy6kUyGluWh0h9dPZiRSAQzLELe',
+        'https://res.cloudinary.com/yx1tcr1y/image/upload/v1788306311/typ6ft3bererbwymarrc.jpg', 'Bussoletti', 'FALSE',
+        'USER');
+
 INSERT INTO cities (id, city, city_is_deleted)
 VALUES ('f52ff9ba-39f0-45bb-9f23-046d56da56a8', 'milano', 'FALSE'),
        ('a179cf1f-d99e-4a57-9acd-ee5858ee5c35', 'roma', 'FALSE'),
@@ -111,9 +117,23 @@ VALUES ('0c7490f0-d90e-4d30-abc2-edce7bf73241', 109, 'FALSE',
         'Timothée Chalamet, Zendaya, Jason Momoa, Florence Pugh, Rebecca Ferguson', 'Dune - Parte tre');
 
 
--- INSERT INTO screening_time (id, date_time, screening_time_is_deleted, movie_id, screen_id)
--- VALUES ('9319f13f-1271-4dd1-8b62-d6139b5929e4', '2026-09-15 18:50:00', 'FALSE', '297d21eb-de1d-4fd7-9a81-c24ec51d4348',
---         'cc086acb-f411-49b1-b500-57861f8269bb');
+INSERT INTO screening_time (id, date_time, screening_time_is_deleted, movie_id, screen_id)
+VALUES ('9319f13f-1271-4dd1-8b62-d6139b5929e4', '2026-09-12 18:50:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+        'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'),
+       ('b1661637-3a26-4fac-b974-c0aa4b19734e', '2026-09-12 14:20:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+        'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'),
+       ('fc381411-6068-4935-b785-9d9074574069', '2026-09-13 15:35:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+        'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'),
+       ('1c36ace5-5cb3-4b3d-a9a6-3f3477c59df7', '2026-09-13 17:40:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+        'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'),
+       ('d9908322-df31-440a-9329-76125239ec1f', '2026-09-12 17:20:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+        '174a8bcb-ba0e-418a-bedf-46493b7142ac'),
+       ('3480134b-b9d5-4713-88d6-39b96e21c0bb', '2026-09-12 16:30:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+        '174a8bcb-ba0e-418a-bedf-46493b7142ac'),
+       ('c7587ffe-7d71-47c2-a650-7a1739ce4b7f', '2026-09-13 17:25:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+        '174a8bcb-ba0e-418a-bedf-46493b7142ac'),
+       ('9a5c534f-1f80-4848-b6b2-7fde5ca6c306', '2026-09-13 19:20:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+        '174a8bcb-ba0e-418a-bedf-46493b7142ac');
 
 -- NON TOCCARE VANNO BENE
 INSERT INTO seat (id, color, number, "row", seat_status, svg_coordinates)
