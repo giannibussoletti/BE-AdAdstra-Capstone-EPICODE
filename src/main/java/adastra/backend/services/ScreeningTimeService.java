@@ -6,14 +6,17 @@ import adastra.backend.DTO.ScreeningTimeResponseDTO;
 import adastra.backend.entities.Movie;
 import adastra.backend.entities.Screen;
 import adastra.backend.entities.ScreeningTime;
+import adastra.backend.enums.IsDeleted;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.ScreeningTimesRepository;
 import adastra.backend.softDelete.SoftDeleteMethod;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
@@ -31,7 +34,7 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
 
     public List<ScreeningTimeMappedDTO> findAll(UUID cinemaId) {
 
-        List<ScreeningTime> listScreenTime = this.screeningTimesRepository.findTimeByCinema(cinemaId);
+        List<ScreeningTime> listScreenTime = this.screeningTimesRepository.findTimeByCinema(cinemaId, IsDeleted.FALSE);
         return listScreenTime.stream()
                 .sorted(Comparator.comparing(ScreeningTime::getDateTime))
                 .collect(Collectors.groupingBy(
@@ -96,4 +99,25 @@ public class ScreeningTimeService extends SoftDeleteMethod<ScreeningTime, UUID> 
     public void softDeleteGeneric(UUID entityId, String body) {
         super.softDeleteGeneric(entityId, body);
     }
+
+    @Transactional
+    public void sofDeleteOldScreeningTime() {
+        LocalDateTime startDate = LocalDateTime.now().minusDays(1).with(LocalTime.MAX);
+        LocalDateTime endDate = LocalDateTime.now().minusDays(7).with(LocalTime.MIN);
+        List<ScreeningTime> times = this.screeningTimesRepository.findOldScreeningTime(startDate, endDate);
+        times.forEach(time -> time.setIsDeleted(IsDeleted.TRUE));
+
+
+    }
+
+    @Transactional
+    public void hardDeleteOldScreeningTime() {
+        LocalDateTime startDate = LocalDateTime.now().minusDays(30).with(LocalTime.MAX);
+        LocalDateTime endDate = LocalDateTime.now().minusDays(90).with(LocalTime.MIN);
+        List<ScreeningTime> times = this.screeningTimesRepository.findOldScreeningTime(startDate, endDate);
+        times.forEach(time -> this.screeningTimesRepository.delete(time));
+
+
+    }
+
 }

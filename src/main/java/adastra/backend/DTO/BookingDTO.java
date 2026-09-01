@@ -7,7 +7,8 @@ public record BookingDTO(
         UUID screenTimeId,
         List<BookedSeatsDTO> maxSeats,
         Double totalCost,
-        String guestEmail
+        String guestEmail,
+        String coupon
 
 
 ) {

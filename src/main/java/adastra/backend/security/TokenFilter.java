@@ -56,8 +56,7 @@ public class TokenFilter extends OncePerRequestFilter {
         List<String> excludedPaths = List.of(
                 "/tickets",
                 "/public/**",
-                "/auth/**",
-                "/bookings"
+                "/auth/**"
         );
         return excludedPaths.stream()
                 .anyMatch(excludedPath -> new AntPathMatcher().match(excludedPath, request.getServletPath()));
