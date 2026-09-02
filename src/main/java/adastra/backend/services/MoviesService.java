@@ -34,7 +34,11 @@ public class MoviesService extends SoftDeleteMethod<Movie, UUID> {
                 payload.title(),
                 payload.posterLink(),
                 payload.plot(),
-                payload.releaseDate()
+                payload.releaseDate(),
+                payload.director(),
+                payload.bannerLink(),
+                payload.trailer(),
+                payload.tagline()
         ));
     }
 
