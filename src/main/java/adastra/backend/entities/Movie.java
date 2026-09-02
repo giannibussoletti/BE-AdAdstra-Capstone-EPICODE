@@ -46,8 +46,21 @@ public class Movie implements SoftDeleteInt {
     @Column(nullable = false, name = "release_date")
     private LocalDate releaseDate;
 
-    public Movie(String starring, int duration, String title, String posterLink, String plot, LocalDate releaseDate) {
+    @Column(nullable = false)
+    private String director;
 
+    @Column(name = "banner_link")
+    private String bannerLink;
+
+    @Column(columnDefinition = "TEXT")
+    private String trailer;
+
+    @Column(columnDefinition = "TEXT")
+    private String tagline;
+
+    public Movie(String starring, int duration, String title, String posterLink, String plot, LocalDate releaseDate, String director, String bannerLink, String trailer, String tagline) {
+        this.bannerLink = bannerLink;
+        this.director = director;
         this.starring = starring;
         this.duration = duration;
         this.title = title;
@@ -55,6 +68,8 @@ public class Movie implements SoftDeleteInt {
         this.plot = plot;
         this.isDeleted = IsDeleted.FALSE;
         this.releaseDate = releaseDate;
+        this.trailer = trailer;
+        this.tagline = tagline;
     }
 }
 
