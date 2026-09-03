@@ -1,9 +1,11 @@
 package adastra.backend.DTO;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record UserMoviesDTO(String title,
-                            LocalDate releaseDate,
-                            UUID movieId) {
+                            UUID movieId,
+                            String seat,
+                            LocalDateTime screeningDate,
+                            Integer theater) {
 }
