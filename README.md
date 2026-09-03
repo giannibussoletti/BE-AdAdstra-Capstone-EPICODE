@@ -123,6 +123,7 @@ Sono previsti tre ruoli utente:
 - Check di validazione del biglietto, per contrassegnarlo come usato e impedirne il riutilizzo
 - Creazione e invio dei biglietti in formato PDF via email
 - Creazione e gestioni di end-point amministrativi
+- Gestione della fidelity card degli utenti registrati
 
 ---
 
