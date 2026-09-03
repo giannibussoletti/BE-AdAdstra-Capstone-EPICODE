@@ -34,9 +34,24 @@ public class TicketsService {
     public Set<UserMoviesDTO> findMovieByUser(UUID userId) {
         User found = this.usersService.findById(userId);
         List<Ticket> ticketList = this.ticketsRepository.findMovieByUser(found);
-        return ticketList.stream().map(Ticket::getScreeningTimeId)
-                .map(ScreeningTime::getMovieId)
-                .map(movie -> new UserMoviesDTO(movie.getTitle(), movie.getReleaseDate(), movie.getId())).collect(Collectors.toSet());
-    }
 
+        return ticketList.stream()
+                .collect(Collectors.toMap(
+                        ticket -> ticket.getScreeningTimeId().getMovieId().getId(),
+                        ticket -> {
+
+                            Seat seat = ticket.getSeatId();
+                            String seatPos = seat.getRow() + Integer.toString(seat.getNumber());
+                            ScreeningTime screeningTime = ticket.getScreeningTimeId();
+                            Movie movie = screeningTime.getMovieId();
+                            return new UserMoviesDTO(movie.getTitle(), movie.getId(), seatPos, screeningTime.getDateTime(), screeningTime.getScreenId().getScreenNumber()
+                            );
+                        },
+                        (first, _) -> first
+                ))
+                .values()
+                .stream()
+                .collect(Collectors.toSet());
+
+    }
 }

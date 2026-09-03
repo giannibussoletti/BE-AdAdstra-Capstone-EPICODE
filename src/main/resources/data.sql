@@ -10,13 +10,13 @@ VALUES ('f52ff9ba-39f0-45bb-9f23-046d56da56a8', 'milano', 'FALSE'),
        ('2071c9ac-32eb-4890-9803-98a1b48a4ce3', 'napoli', 'FALSE');
 
 INSERT INTO cinemas (id, address, cinema_name, cinema_is_deleted, city_id)
-VALUES ('6d6dcd9d-d616-43ff-b5b9-021c1bbfb876', 'via delle asole 10', 'adastra milano', 'FALSE',
+VALUES ('6d6dcd9d-d616-43ff-b5b9-021c1bbfb876', 'via delle asole 10', 'milano nuova', 'FALSE',
         'f52ff9ba-39f0-45bb-9f23-046d56da56a8');
 INSERT INTO cinemas (id, address, cinema_name, cinema_is_deleted, city_id)
-VALUES ('b52a2a94-7773-4886-898d-8ccc37059902', 'via dei cinque colli 344', 'adastra roma', 'FALSE',
+VALUES ('b52a2a94-7773-4886-898d-8ccc37059902', 'via dei cinque colli 344', 'centro commerciale Tiburtino', 'FALSE',
         'a179cf1f-d99e-4a57-9acd-ee5858ee5c35');
 INSERT INTO cinemas (id, address, cinema_name, cinema_is_deleted, city_id)
-VALUES ('b7e3f747-d1bd-4f14-85be-01ca152b5355', 'Via Sermoneta 58', 'adastra napoli', 'FALSE',
+VALUES ('b7e3f747-d1bd-4f14-85be-01ca152b5355', 'Via Sermoneta 58', 'napoli antica', 'FALSE',
         '2071c9ac-32eb-4890-9803-98a1b48a4ce3');
 
 
@@ -136,23 +136,584 @@ VALUES ('0c7490f0-d90e-4d30-abc2-edce7bf73241', 109, 'FALSE',
         'Denis Villeneuve', 'La fine della trilogia delle sabbie');
 
 
+-- ---------- Sabato 12/09/2026 ----------
 INSERT INTO screening_time (id, date_time, screening_time_is_deleted, movie_id, screen_id)
-VALUES ('9319f13f-1271-4dd1-8b62-d6139b5929e4', '2026-09-12 18:50:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
-        'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'),
-       ('b1661637-3a26-4fac-b974-c0aa4b19734e', '2026-09-12 14:20:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
-        'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'),
-       ('fc381411-6068-4935-b785-9d9074574069', '2026-09-13 15:35:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
-        'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'),
-       ('1c36ace5-5cb3-4b3d-a9a6-3f3477c59df7', '2026-09-13 17:40:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
-        'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'),
-       ('d9908322-df31-440a-9329-76125239ec1f', '2026-09-12 17:20:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
-        '174a8bcb-ba0e-418a-bedf-46493b7142ac'),
-       ('3480134b-b9d5-4713-88d6-39b96e21c0bb', '2026-09-12 16:30:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
-        '174a8bcb-ba0e-418a-bedf-46493b7142ac'),
-       ('c7587ffe-7d71-47c2-a650-7a1739ce4b7f', '2026-09-13 17:25:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
-        '174a8bcb-ba0e-418a-bedf-46493b7142ac'),
-       ('9a5c534f-1f80-4848-b6b2-7fde5ca6c306', '2026-09-13 19:20:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
-        '174a8bcb-ba0e-418a-bedf-46493b7142ac');
+VALUES
+    -- Adastra Milano
+    ('13ae3b68-2e52-4608-9508-a81d0bbca55e', '2026-09-12 11:30:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Spider-Man: Brand New Day (sala 1)
+    ('e9e9121c-4848-44b5-b1eb-f6b5d93e437b', '2026-09-12 14:14:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Spider-Man: Brand New Day (sala 1)
+    ('f2908c59-21d4-4727-a467-a8d33b63149a', '2026-09-12 16:58:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Spider-Man: Brand New Day (sala 1)
+    ('2cc4a1d8-4dc8-4aba-bfb6-aac1f7ddfd63', '2026-09-12 19:42:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Spider-Man: Brand New Day (sala 1)
+    ('04e8c034-5378-454b-9557-e302916592b4', '2026-09-12 22:26:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Spider-Man: Brand New Day (sala 1)
+    ('d05debaa-4815-4728-aadf-14756e11344a', '2026-09-12 11:30:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('c8d57136-6957-4f86-988f-a46c8827924a', '2026-09-12 13:36:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('23e78f3c-0005-47ec-b209-0a877b7b8868', '2026-09-12 15:42:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('c300c512-1536-4ab0-bc11-773a73fdceb9', '2026-09-12 17:48:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('e42b0c8d-0409-46a8-94b8-7f4d8835ca16', '2026-09-12 12:00:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Coyote vs. Acme (sala 3)
+    ('32311bca-2ec7-4743-87f4-6e2dda09850b', '2026-09-12 13:58:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Coyote vs. Acme (sala 3)
+    ('897f9807-bf41-477b-b457-474099b86fcd', '2026-09-12 15:56:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Coyote vs. Acme (sala 3)
+    ('7edf8119-20ab-49ea-8eb6-0f9cc1a3a2f8', '2026-09-12 17:54:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Coyote vs. Acme (sala 3)
+    ('d737385c-ad95-40e3-9214-2cbad94977df', '2026-09-12 11:30:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Camp Miasma - Adolescenza, sesso e morte (sala 4)
+    -- Adastra Napoli
+    ('583d200a-73e1-4ea0-9505-b626995ba978', '2026-09-12 11:30:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Spider-Man: Brand New Day (sala 1)
+    ('9dbc7199-b0ad-45b2-a7b7-60d150a8d71c', '2026-09-12 14:14:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Spider-Man: Brand New Day (sala 1)
+    ('0b9cdcfc-2af5-408c-af84-8a96cd198528', '2026-09-12 16:58:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Spider-Man: Brand New Day (sala 1)
+    ('1ee0ff7d-f01c-46c2-a46d-f411ae5b7f4f', '2026-09-12 19:42:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Spider-Man: Brand New Day (sala 1)
+    ('3c5cee25-3a3d-47cf-b93e-92c7cba76c34', '2026-09-12 12:00:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Coyote vs. Acme (sala 2)
+    ('8872a13b-17e1-4ac5-8606-8389e4a1649d', '2026-09-12 13:58:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Coyote vs. Acme (sala 2)
+    ('0dc6f824-a922-43a7-aeac-1efb906c9c65', '2026-09-12 11:50:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('3bddab55-3534-4689-a68d-8b97eb4d0047', '2026-09-12 13:56:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('7f955360-66a4-446d-a366-5e8fa4d82787', '2026-09-12 11:50:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Onslaught - Assalto finale (sala 4)
+    ('b0374412-917d-4aeb-a784-227ac9aacbb5', '2026-09-12 13:42:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Onslaught - Assalto finale (sala 4)
+    ('6d53b480-6997-4715-8610-928c9189fa19', '2026-09-12 15:34:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Onslaught - Assalto finale (sala 4)
+    -- Adastra Roma
+    ('116b4135-7e70-4035-93d8-c540838cc95b', '2026-09-12 12:00:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('cd9828fe-026a-4614-9b7e-f83af019ac3d', '2026-09-12 14:06:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('3f7016a8-f161-4bb1-8429-09e5a386299e', '2026-09-12 16:12:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('d61a42a9-4207-411a-be8c-6753f75ccf25', '2026-09-12 18:18:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('fab51dac-ee22-4eec-8487-4a5dad18430f', '2026-09-12 12:00:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Camp Miasma - Adolescenza, sesso e morte (sala 2)
+    ('fbf2656a-fd56-4539-920f-0d302594cd73', '2026-09-12 11:50:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Spider-Man: Brand New Day (sala 3)
+    ('95a4234f-d26a-435d-9438-e9ecf91e3664', '2026-09-12 14:34:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Spider-Man: Brand New Day (sala 3)
+    ('a6d44ffa-b247-471d-bc38-9dc3af6f6028', '2026-09-12 17:18:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Spider-Man: Brand New Day (sala 3)
+    ('3053f685-5e40-48bf-a72d-909d61511a4b', '2026-09-12 20:02:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Spider-Man: Brand New Day (sala 3)
+    ('0f876d39-6b41-4c2f-82f8-e2d83e81d585', '2026-09-12 22:46:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Spider-Man: Brand New Day (sala 3)
+    ('f52a58da-9db9-4f4e-b811-030163248cbe', '2026-09-12 11:40:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- Spider-Man: Brand New Day (sala 4)
+    ('a988dcd4-72dd-4e01-83e4-0c1d99fc0c51', '2026-09-12 14:24:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- Spider-Man: Brand New Day (sala 4)
+    ('34984359-a6ae-4369-a7aa-e256b5036922', '2026-09-12 17:08:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0');
+-- Spider-Man: Brand New Day (sala 4)
+
+-- ---------- Domenica 13/09/2026 ----------
+INSERT INTO screening_time (id, date_time, screening_time_is_deleted, movie_id, screen_id)
+VALUES
+    -- Adastra Milano
+    ('b8aa7489-b1b7-4e5c-abc5-cf6d24d841ac', '2026-09-13 11:30:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('75b62972-d360-44a7-9bc2-9cd672c52c00', '2026-09-13 13:32:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('dbadabdc-ad19-432f-973c-bc7487a1cb83', '2026-09-13 15:34:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('2f7b858b-ce32-4281-a786-094b22483047', '2026-09-13 11:50:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('ddc58a4f-8182-4448-b45e-273b075d5297', '2026-09-13 13:52:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('9021cffd-dbac-43fc-a7c2-9049965cc869', '2026-09-13 15:54:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('7378d64a-ca05-47f1-a959-b18f708f778c', '2026-09-13 17:56:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('b54620c1-5bcd-4d06-8f94-b762645d1c84', '2026-09-13 11:50:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('794a78f7-a3cc-4069-ba8e-a8adf6bf4815', '2026-09-13 14:34:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('31fb97ee-4d2f-4c46-b233-a98c44faeb43', '2026-09-13 17:18:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('0f6da465-295b-4473-b66b-771b928ba593', '2026-09-13 20:02:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('49109040-fdc2-44cd-b738-8748c5ea3a7d', '2026-09-13 22:46:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('d3b3a679-e464-485d-8cbb-2bb277a9f9ba', '2026-09-13 11:40:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Onslaught - Assalto finale (sala 4)
+    ('c21f40d1-4fe7-4862-8725-8e0189f23c3c', '2026-09-13 13:32:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Onslaught - Assalto finale (sala 4)
+    ('62589ee0-a48b-4f2a-bf53-3b8b553e7860', '2026-09-13 15:24:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Onslaught - Assalto finale (sala 4)
+    ('9c8bd0db-37d9-4bdf-97a5-3696d2275edc', '2026-09-13 17:16:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Onslaught - Assalto finale (sala 4)
+    -- Adastra Napoli
+    ('f148ab2a-03e2-475d-8ba2-33ee74ac61f7', '2026-09-13 11:30:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('e8360e83-7ebb-4c8b-9bdb-4ad729a74550', '2026-09-13 13:36:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('05f36559-c5f7-47bb-a92e-41fae185c674', '2026-09-13 15:42:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('59addfd9-af08-4c4b-9f89-99753269a3c1', '2026-09-13 17:48:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('9440ec5a-ca85-4688-be4c-a960945f4349', '2026-09-13 11:40:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Coyote vs. Acme (sala 2)
+    ('d3458295-dbbf-4625-ad6a-bbf3a87a4193', '2026-09-13 13:38:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Coyote vs. Acme (sala 2)
+    ('d27174bb-04f9-45a3-8ba6-baa3debc0eab', '2026-09-13 15:36:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Coyote vs. Acme (sala 2)
+    ('1b1e6c3f-3ae5-4f26-8d01-f1ac127c6b86', '2026-09-13 17:34:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Coyote vs. Acme (sala 2)
+    ('1da792c8-7b5e-489f-a321-a7080555600b', '2026-09-13 11:40:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Spider-Man: Brand New Day (sala 3)
+    ('26f023eb-ce8d-40a3-b258-b9bd937aa40e', '2026-09-13 14:24:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Spider-Man: Brand New Day (sala 3)
+    ('fee3b86a-44d9-40e2-a693-2dba4045aca1', '2026-09-13 17:08:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Spider-Man: Brand New Day (sala 3)
+    ('a0215960-6958-48bb-876e-2b88e6874448', '2026-09-13 19:52:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Spider-Man: Brand New Day (sala 3)
+    ('879b7820-462d-4b0a-b18a-27aab8444340', '2026-09-13 22:36:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Spider-Man: Brand New Day (sala 3)
+    ('d506069f-64e3-4891-9714-a5c61d9176af', '2026-09-13 12:00:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Spider-Man: Brand New Day (sala 4)
+    ('59d2d34d-a0bb-48ef-878a-7d7a04fa1e56', '2026-09-13 14:44:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Spider-Man: Brand New Day (sala 4)
+    ('70b005e6-b532-44c4-8e87-8d20af8390f7', '2026-09-13 17:28:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Spider-Man: Brand New Day (sala 4)
+    -- Adastra Roma
+    ('a1cda777-5e6e-4132-9e55-0d8cf127037e', '2026-09-13 11:40:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Spider-Man: Brand New Day (sala 1)
+    ('f3fc5dc1-3bae-4d76-ad8d-29d3e3557120', '2026-09-13 14:24:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Spider-Man: Brand New Day (sala 1)
+    ('3f31ae8c-80b4-4c70-b936-90047ba34f54', '2026-09-13 17:08:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Spider-Man: Brand New Day (sala 1)
+    ('10163687-7d4b-4ab7-afff-13d040bf2d42', '2026-09-13 12:00:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('9d04aff8-2b43-4b28-83e7-47983cb8df85', '2026-09-13 14:06:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('bfdf5ded-6887-4ea0-baec-fa018ac14d0b', '2026-09-13 12:00:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Camp Miasma - Adolescenza, sesso e morte (sala 3)
+    ('e9ed4b8f-fb13-4148-a5d7-8d39a7c99ef1', '2026-09-13 14:12:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Camp Miasma - Adolescenza, sesso e morte (sala 3)
+    ('14b59e0b-bd8f-4418-9acd-48a589eec52d', '2026-09-13 11:50:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- Coyote vs. Acme (sala 4)
+    ('e0cb21ad-96e4-4946-aa90-22c5fa211cf0', '2026-09-13 13:48:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- Coyote vs. Acme (sala 4)
+    ('c70fc3c5-2689-4d48-8a94-5b2c8b164918', '2026-09-13 15:46:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- Coyote vs. Acme (sala 4)
+    ('45782c0f-c75a-4c71-bfc9-b5ac51c2430e', '2026-09-13 17:44:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0');
+-- Coyote vs. Acme (sala 4)
+
+-- ---------- Lunedi 14/09/2026 ----------
+INSERT INTO screening_time (id, date_time, screening_time_is_deleted, movie_id, screen_id)
+VALUES
+    -- Adastra Milano
+    ('3545fa56-4e26-4040-919a-a8f7007f086a', '2026-09-14 15:20:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('e8926e6f-023d-44fa-8714-ec3a5abcc634', '2026-09-14 17:38:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('4e74301a-cf1b-495b-b603-d446faeb2665', '2026-09-14 19:56:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('410884a6-461b-4c15-9756-aafb29c3e2b2', '2026-09-14 22:14:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('5547b5de-fe58-446c-9047-a6f4cbb471f6', '2026-09-14 15:10:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Onslaught - Assalto finale (sala 2)
+    ('9a5c8517-83df-4fcf-a1d4-0f20dddd4406', '2026-09-14 17:02:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Onslaught - Assalto finale (sala 2)
+    ('12712555-9391-48e6-9b70-d4c226358d5b', '2026-09-14 15:20:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('ff9256e3-74a7-4296-8a36-712531559266', '2026-09-14 18:04:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('ac847fc3-1daa-4ec0-af96-4fe6b61175ce', '2026-09-14 20:48:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('80784a56-e451-44da-b5d7-bf4090265aed', '2026-09-14 15:20:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    ('cd3e5010-90e4-4296-aef3-c4ba1d14c145', '2026-09-14 18:04:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    ('e61b1689-626e-4238-95a8-3df3ce0fad0b', '2026-09-14 20:48:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    ('3eefdf92-0892-4eaa-838a-b495d1c4b088', '2026-09-14 23:32:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    -- Adastra Napoli
+    ('994eeec2-c930-4645-9ca3-78b9a6164a3c', '2026-09-14 15:30:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('9435fe8d-f235-46e5-add3-560ec99e850d', '2026-09-14 17:32:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('8df28b2d-f346-4063-abf1-b7d902994cb2', '2026-09-14 19:34:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('f3768a3b-8504-4532-be54-bbd89d20a4ec', '2026-09-14 21:36:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('6638a525-d8ae-4f79-8784-36cde4fcd798', '2026-09-14 15:10:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Spider-Man: Brand New Day (sala 2)
+    ('07129d3c-9556-4f5e-8e22-1790320a33af', '2026-09-14 17:54:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Spider-Man: Brand New Day (sala 2)
+    ('2b19f975-4614-45c3-bacd-9eac1d3662e9', '2026-09-14 20:38:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Spider-Man: Brand New Day (sala 2)
+    ('777f119f-f2cb-4853-b1fe-c18512770d68', '2026-09-14 23:22:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Spider-Man: Brand New Day (sala 2)
+    ('499154c2-bce2-4846-98cf-daec5515bd2f', '2026-09-14 15:30:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- One Night Only - Quando tutto e possibile (sala 3)
+    ('634c9619-372c-4798-acd6-050237c5a86b', '2026-09-14 17:32:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- One Night Only - Quando tutto e possibile (sala 3)
+    ('54dc51ce-74c8-413c-9a3f-5bd89fbf4ccb', '2026-09-14 15:00:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- The Dog Stars - Le stelle dopo la fine (sala 4)
+    ('e6b5be56-4ddc-411a-8bd2-07dbbcc1b5f3', '2026-09-14 17:18:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- The Dog Stars - Le stelle dopo la fine (sala 4)
+    -- Adastra Roma
+    ('68d3d49e-6748-4b67-93f9-ea17dfb77560', '2026-09-14 15:30:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('bbb97bd9-f76b-4bd0-a20a-2fb3b99824de', '2026-09-14 17:36:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('a7db8b6b-4d21-4b7a-80c8-0ed30ab7dddb', '2026-09-14 15:30:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Onslaught - Assalto finale (sala 2)
+    ('83825542-bade-478c-a4ec-1e43d19585ec', '2026-09-14 17:22:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Onslaught - Assalto finale (sala 2)
+    ('20dbffd3-0e48-43ff-b48e-87595a7f1a38', '2026-09-14 19:14:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Onslaught - Assalto finale (sala 2)
+    ('74629b5e-020b-4809-be42-b75a657c4367', '2026-09-14 15:20:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Spider-Man: Brand New Day (sala 3)
+    ('f7f10011-0d98-4a0f-97cf-98b0ffce4a5c', '2026-09-14 18:04:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Spider-Man: Brand New Day (sala 3)
+    ('9d75369c-0032-4d62-8ebd-666cb6e9390b', '2026-09-14 20:48:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Spider-Man: Brand New Day (sala 3)
+    ('403742c2-b498-4321-8e7c-964bf75a6198', '2026-09-14 15:10:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- One Night Only - Quando tutto e possibile (sala 4)
+    ('f9198d52-0b7d-44f3-b88b-f4b9bb73f256', '2026-09-14 17:12:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0');
+-- One Night Only - Quando tutto e possibile (sala 4)
+
+-- ---------- Martedi 15/09/2026 ----------
+INSERT INTO screening_time (id, date_time, screening_time_is_deleted, movie_id, screen_id)
+VALUES
+    -- Adastra Milano
+    ('58bd9b44-c9f6-495c-b232-2271227fdc35', '2026-09-15 15:00:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Onslaught - Assalto finale (sala 1)
+    ('e3b3b6ca-bda2-4d72-a6ec-731f7051d6e9', '2026-09-15 16:52:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Onslaught - Assalto finale (sala 1)
+    ('95187853-6fdf-479b-9426-0c15c927bafa', '2026-09-15 18:44:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Onslaught - Assalto finale (sala 1)
+    ('8042d797-2876-4ace-bf6b-06cac85bfa0e', '2026-09-15 20:36:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Onslaught - Assalto finale (sala 1)
+    ('aed333ca-ffea-4b51-8d1a-d4c3fffcb2b0', '2026-09-15 15:30:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('e8fb7fc7-48a5-4d86-8407-4ca39a299097', '2026-09-15 17:36:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('50cf2a2d-3685-4715-b633-114b7096917e', '2026-09-15 19:42:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('42191956-9e9c-43f8-a199-9545f94b1af4', '2026-09-15 15:30:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('5824d961-14c9-4d4b-8cf7-2bcba358bed3', '2026-09-15 17:36:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('cd2892e8-1de8-48df-99dd-22ee5a254868', '2026-09-15 19:42:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('e819cac1-2366-4d0e-839b-557f35f13b11', '2026-09-15 21:48:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('64a3a268-cfde-4c5a-bd0f-6f29a5eeb06d', '2026-09-15 15:20:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    ('48c07333-f548-43eb-8120-73bb56958cc8', '2026-09-15 18:04:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    ('828fbf01-702c-4cf1-9bd6-c66080f13087', '2026-09-15 20:48:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    ('c396add8-a687-4d50-a5e5-49aff6985264', '2026-09-15 23:32:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    -- Adastra Napoli
+    ('3b43f44e-7c5e-4d4b-b494-25d571d2bab9', '2026-09-15 15:10:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('fd6ec37e-9087-42a2-8257-f42123e55476', '2026-09-15 17:28:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('5c2c4273-eb8c-4918-8974-982789718313', '2026-09-15 19:46:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('9902178e-1b7a-42ce-bd58-b083972e1923', '2026-09-15 22:04:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('0caed796-fa86-48b8-8cd8-dad9afde8191', '2026-09-15 15:00:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Onslaught - Assalto finale (sala 2)
+    ('5c934dd3-46a1-4a86-a464-af4c281fef3f', '2026-09-15 16:52:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Onslaught - Assalto finale (sala 2)
+    ('12ae528b-f247-4384-8dc5-5bb87042ba0a', '2026-09-15 18:44:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Onslaught - Assalto finale (sala 2)
+    ('cd923ca7-2b1f-44e4-8e40-f0c44fb6a4e1', '2026-09-15 20:36:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Onslaught - Assalto finale (sala 2)
+    ('0cc50c4a-663f-42f4-9ab5-c638b81563e4', '2026-09-15 15:20:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Onslaught - Assalto finale (sala 3)
+    ('522e3d88-b717-449b-b407-36d4d9274236', '2026-09-15 17:12:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Onslaught - Assalto finale (sala 3)
+    ('068c918d-f29d-4463-a9a8-47365c0b7f0e', '2026-09-15 19:04:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Onslaught - Assalto finale (sala 3)
+    ('e11960c5-c2c8-443e-be8c-f8c28f0e47b3', '2026-09-15 20:56:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Onslaught - Assalto finale (sala 3)
+    ('950e400f-b871-4c1c-9c96-4fbd5664fc88', '2026-09-15 15:10:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Coyote vs. Acme (sala 4)
+    ('75521cfd-d348-4a46-afec-103462f83db0', '2026-09-15 17:08:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Coyote vs. Acme (sala 4)
+    ('4b9cd4ae-6ab3-4934-9217-a83ce38c0e4f', '2026-09-15 19:06:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Coyote vs. Acme (sala 4)
+    ('fcdd2769-0ed2-40b3-8b7a-3540d4e0d334', '2026-09-15 21:04:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Coyote vs. Acme (sala 4)
+    -- Adastra Roma
+    ('04fba546-b15a-44cd-8522-bfad57481d50', '2026-09-15 15:20:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('22f2a9df-b429-4023-94c1-2af254e4a19c', '2026-09-15 17:12:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('c110c68e-a5f8-4767-88ad-a861ea9b0bb5', '2026-09-15 19:04:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('cce2b8b3-f1c0-45e9-9a6a-a72439d744d9', '2026-09-15 20:56:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('ebbd6a1b-d24e-4549-bd6b-5ca27d06ec8f', '2026-09-15 15:20:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Onslaught - Assalto finale (sala 2)
+    ('7c819e2f-f85e-423f-b918-37e714dad55e', '2026-09-15 17:12:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Onslaught - Assalto finale (sala 2)
+    ('7c4fac7a-5554-4ef7-91e9-b3695495ffa3', '2026-09-15 19:04:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Onslaught - Assalto finale (sala 2)
+    ('7a5bb9a1-a20f-4adf-9789-b70899978107', '2026-09-15 20:56:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Onslaught - Assalto finale (sala 2)
+    ('1b97d376-d775-4daf-befa-d194322609e7', '2026-09-15 15:20:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('e8090f16-80bd-4280-abc0-556db6ab537c', '2026-09-15 17:26:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('0b5584b7-e438-4b56-8c09-2b3f655bafea', '2026-09-15 15:10:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- One Night Only - Quando tutto e possibile (sala 4)
+    ('dcae4adf-1164-4cd7-8d51-45f4b747ca98', '2026-09-15 17:12:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- One Night Only - Quando tutto e possibile (sala 4)
+    ('fd88f190-68f4-4246-9140-85b1f1f90cf9', '2026-09-15 19:14:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0');
+-- One Night Only - Quando tutto e possibile (sala 4)
+
+-- ---------- Mercoledi 16/09/2026 ----------
+INSERT INTO screening_time (id, date_time, screening_time_is_deleted, movie_id, screen_id)
+VALUES
+    -- Adastra Milano
+    ('58e1f625-8672-465b-a799-f71f011c9f91', '2026-09-16 15:00:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('4dd89154-b80a-4865-9555-80084289912d', '2026-09-16 17:06:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('8396b389-d1c7-4b25-8234-698399f5f87f', '2026-09-16 19:12:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('eec2538b-141b-438f-8cd9-90a3c6f73d2d', '2026-09-16 21:18:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('d202d63f-0933-42d9-8762-0bcd3c57fd85', '2026-09-16 15:20:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('8c9995cf-5e07-4eac-82f3-c8b9a675c587', '2026-09-16 17:22:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('3779119e-9e28-4275-9496-87e1f229225c', '2026-09-16 19:24:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('64a01515-1f07-4fd0-b5d7-31f325e21380', '2026-09-16 21:26:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('ca48bb3b-48e3-4b63-a71a-ace1802a07c0', '2026-09-16 15:00:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('8e3738a2-8dcc-4fa5-b126-b3ea2fe402a9', '2026-09-16 17:44:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('adda52c6-003f-496f-b387-65a93366dd3f', '2026-09-16 20:28:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('0dc472ec-bce8-413f-81e4-025f192edf40', '2026-09-16 23:12:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Spider-Man: Brand New Day (sala 3)
+    ('ac00e3bf-5b68-4275-9a2f-1f9beaa01215', '2026-09-16 15:20:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- One Night Only - Quando tutto e possibile (sala 4)
+    ('1af0d7f1-39ef-49b6-b360-8d6665847a72', '2026-09-16 17:22:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- One Night Only - Quando tutto e possibile (sala 4)
+    -- Adastra Napoli
+    ('f757d11e-6dc6-4f11-88fb-447ffaec0ffb', '2026-09-16 15:10:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Onslaught - Assalto finale (sala 1)
+    ('2365882d-b214-431a-9f58-793b9cc0539e', '2026-09-16 17:02:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- Onslaught - Assalto finale (sala 1)
+    ('81f17de3-8676-4251-80f4-8bd79ae1a55e', '2026-09-16 15:20:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('66d6dec9-5eb5-4ccb-ab2b-32358d5b6b78', '2026-09-16 17:26:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('2a91467a-91ae-401a-b576-d16b51e9e2ed', '2026-09-16 19:32:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('927b1f5e-c8ec-4d58-93f4-455bd048c66e', '2026-09-16 21:38:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('6480e78c-ca8f-4a26-8d36-71a77ccde590', '2026-09-16 15:20:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Spider-Man: Brand New Day (sala 3)
+    ('f5859e20-faba-4cdd-8af2-4e65c9955f99', '2026-09-16 18:04:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Spider-Man: Brand New Day (sala 3)
+    ('aaccf82f-a05c-4ffd-b69e-21b2723ff816', '2026-09-16 20:48:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Spider-Man: Brand New Day (sala 3)
+    ('d361967c-8091-4eea-9b0d-68799f1f65c7', '2026-09-16 23:32:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Spider-Man: Brand New Day (sala 3)
+    ('401aabc7-c3e0-459f-97a2-31bcbc35f611', '2026-09-16 15:30:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Spider-Man: Brand New Day (sala 4)
+    ('a7a0c298-927e-42e5-a237-1aabc52d3b06', '2026-09-16 18:14:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Spider-Man: Brand New Day (sala 4)
+    ('be604712-c061-4018-93b4-79fc4fd5d897', '2026-09-16 20:58:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Spider-Man: Brand New Day (sala 4)
+    ('7e831b8a-4a21-43c5-8994-794f40f9b512', '2026-09-16 23:42:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Spider-Man: Brand New Day (sala 4)
+    -- Adastra Roma
+    ('853f148a-c6a3-41e5-ad8c-cb928537341a', '2026-09-16 15:00:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('9b140790-99b2-477e-b345-85869635d7ce', '2026-09-16 16:52:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('06b8c2c9-3206-4944-8075-b00d70cd3f35', '2026-09-16 18:44:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('4830be56-9dda-4752-863a-5ffa81034068', '2026-09-16 20:36:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('7681d7e1-92a1-43ca-89fc-ad77ce5820fb', '2026-09-16 15:30:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('4ed6ae22-0509-4e2e-b0cd-4d7dbfd8efe1', '2026-09-16 17:32:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('449f668e-8e6c-4e08-99aa-cf8829b52547', '2026-09-16 15:10:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Coyote vs. Acme (sala 3)
+    ('c4b3e15e-c2cd-41a7-9834-082698a2f16c', '2026-09-16 17:08:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Coyote vs. Acme (sala 3)
+    ('c8d33d18-3470-4c51-be6f-da233ea8a5b1', '2026-09-16 15:30:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- Insidious - Fuori dall'Altrove (sala 4)
+    ('14cfe094-252a-4e8c-b212-b4c946b935f6', '2026-09-16 17:36:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0');
+-- Insidious - Fuori dall'Altrove (sala 4)
+
+-- ---------- Giovedi 17/09/2026 ----------
+INSERT INTO screening_time (id, date_time, screening_time_is_deleted, movie_id, screen_id)
+VALUES
+    -- Adastra Milano
+    ('e08f4d2b-9bb3-457b-a8f4-3e1fcfd8dad1', '2026-09-17 15:10:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('a292d9c5-6569-40a3-8f75-bf42d91f4e48', '2026-09-17 17:16:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- Insidious - Fuori dall'Altrove (sala 1)
+    ('9f3b25a8-af89-463b-ab12-fffde8abf932', '2026-09-17 15:00:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- Camp Miasma - Adolescenza, sesso e morte (sala 2)
+    ('ecce7082-ffb7-4a52-b41e-1f5a9bd36860', '2026-09-17 15:00:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Coyote vs. Acme (sala 3)
+    ('129a148d-e238-4bfc-afc2-245d3bb65ad4', '2026-09-17 16:58:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Coyote vs. Acme (sala 3)
+    ('2c9b2bb3-8f56-411b-9315-aac0cbf5fc25', '2026-09-17 18:56:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Coyote vs. Acme (sala 3)
+    ('515b25b5-4a7e-4b64-bcaf-13db1f453b2f', '2026-09-17 20:54:00', 'FALSE', 'cad99018-ea36-44da-a09d-12119d5c7edb',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Coyote vs. Acme (sala 3)
+    ('b0dda572-033f-4e09-a34d-0fd879103615', '2026-09-17 15:00:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    ('6fafcf97-cdc6-438e-897e-dfcce9256317', '2026-09-17 17:44:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    ('e488b415-6260-494c-b183-4c5b3763c381', '2026-09-17 20:28:00', 'FALSE', 'ac377062-0940-42d8-b3ab-4edb050ed8ba',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Spider-Man: Brand New Day (sala 4)
+    -- Adastra Napoli
+    ('c7296932-6e74-456b-b9b4-49463362486b', '2026-09-17 15:30:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('3b9bbcd6-610c-422b-a826-6cd61c9c56e9', '2026-09-17 17:32:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('61fb199b-a75e-4414-9b0b-5b23e417a424', '2026-09-17 19:34:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('9a170ffc-7a5e-48e5-80b4-9cec253f34fd', '2026-09-17 15:00:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Camp Miasma - Adolescenza, sesso e morte (sala 2)
+    ('4f63ab35-2f80-42d3-bd90-a9a6432a2a59', '2026-09-17 17:12:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Camp Miasma - Adolescenza, sesso e morte (sala 2)
+    ('066c458c-a444-4465-a9e7-05d71d2c34f1', '2026-09-17 15:00:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('c83f4755-73d1-42eb-91db-b42dc66adcb5', '2026-09-17 17:06:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('0754e906-db53-470a-b42f-2ac8fb995aff', '2026-09-17 19:12:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('aae4f37f-64b8-4304-8702-76bbcc1568a2', '2026-09-17 21:18:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('b661c323-8da1-4582-b914-f17f9b85e56a', '2026-09-17 15:30:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- The Dog Stars - Le stelle dopo la fine (sala 4)
+    ('041e5833-f204-477f-9170-e5126873e400', '2026-09-17 17:48:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- The Dog Stars - Le stelle dopo la fine (sala 4)
+    -- Adastra Roma
+    ('4b10408d-4bab-4ffc-be0b-ca0bf9d26eac', '2026-09-17 15:30:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('96632b8a-7079-4b0b-bc99-1abcbc45ba7d', '2026-09-17 17:22:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('39d9ad7d-0df8-408c-b214-44b7d2bc59fc', '2026-09-17 19:14:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('e54de2c3-3b4d-42b7-a287-468b751ab52f', '2026-09-17 21:06:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('cc96a31d-1201-4cf2-b647-874892495e50', '2026-09-17 15:10:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Onslaught - Assalto finale (sala 2)
+    ('dd1e51de-735c-4588-9343-272cf2efd1f6', '2026-09-17 17:02:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Onslaught - Assalto finale (sala 2)
+    ('7023ed55-19f4-4955-ae01-922d01c6ad6e', '2026-09-17 15:30:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('e1d013d7-5b9e-40f8-b828-dc98aa4671e9', '2026-09-17 17:36:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('ad3d5178-45ff-4d0b-a3f3-6861916adbef', '2026-09-17 19:42:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('99494378-2db4-4463-9392-7e6c86964f02', '2026-09-17 21:48:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('205c28d6-96ea-4694-90b5-a68d06844a2d', '2026-09-17 15:30:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0');
+-- Camp Miasma - Adolescenza, sesso e morte (sala 4)
+
+-- ---------- Venerdi 18/09/2026 ----------
+INSERT INTO screening_time (id, date_time, screening_time_is_deleted, movie_id, screen_id)
+VALUES
+    -- Adastra Milano
+    ('7be70b9c-40f6-47f7-b776-c9639ff824e4', '2026-09-18 15:30:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('59ac47d0-73ea-477e-82be-fe9671a945ad', '2026-09-18 17:32:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('0b2aad72-c6fa-4a86-a071-ad5dca0604c4', '2026-09-18 19:34:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('e4128f33-67f1-4f10-a7e9-89455e9ed10d', '2026-09-18 21:36:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     'd89256d2-1f7a-441e-ba8f-ee2c542fa05e'), -- One Night Only - Quando tutto e possibile (sala 1)
+    ('a41d830a-e299-43e8-9e66-ae407e9f1e8f', '2026-09-18 15:30:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('362f9816-e60f-4236-b0a2-3941d095bd61', '2026-09-18 17:32:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     '174a8bcb-ba0e-418a-bedf-46493b7142ac'), -- One Night Only - Quando tutto e possibile (sala 2)
+    ('ceec8e76-953a-411f-881c-c06b99ac19b1', '2026-09-18 15:20:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('59a38fe4-1f77-413a-bb99-9a26cdd7d611', '2026-09-18 17:26:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '9bb91d2f-8027-4f4d-bb8a-1943bb692ad5'), -- Insidious - Fuori dall'Altrove (sala 3)
+    ('1dbb6d7c-202e-4a16-81c1-569f7ef351f5', '2026-09-18 15:10:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Camp Miasma - Adolescenza, sesso e morte (sala 4)
+    ('d2eba654-417c-4e4a-859f-5c800667ba64', '2026-09-18 17:22:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '40e37956-1a7f-4858-9f63-d49abf9e70ab'), -- Camp Miasma - Adolescenza, sesso e morte (sala 4)
+    -- Adastra Napoli
+    ('8881e5ca-2fc9-480c-9b92-0f5ab1484e37', '2026-09-18 15:00:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('2c1bb915-0f5d-4f7b-a317-69a25afd7edd', '2026-09-18 17:18:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('341796e7-a240-451f-abe0-7f36010adf49', '2026-09-18 19:36:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '4db04ba5-9d79-4c9e-a621-5bf84dc5986d'), -- The Dog Stars - Le stelle dopo la fine (sala 1)
+    ('9c370034-d8ab-424f-b512-7f9bd4b8d3b5', '2026-09-18 15:20:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Camp Miasma - Adolescenza, sesso e morte (sala 2)
+    ('00e9090d-6814-4b7e-89e3-d41754eef479', '2026-09-18 17:32:00', 'FALSE', '5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe',
+     '799af014-9bce-4392-9be3-885ce649b4d6'), -- Camp Miasma - Adolescenza, sesso e morte (sala 2)
+    ('fd712a30-db8b-4c6a-8102-4c8df7b718f5', '2026-09-18 15:20:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- The Dog Stars - Le stelle dopo la fine (sala 3)
+    ('27180186-e2c6-4678-857a-75844fc1dc9f', '2026-09-18 17:38:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- The Dog Stars - Le stelle dopo la fine (sala 3)
+    ('e52d760c-2ed7-4d55-9cee-e15f4ef764ab', '2026-09-18 19:56:00', 'FALSE', '7fd65d01-22aa-4e5b-9f98-4c5dc339ed49',
+     '3bbcd7de-94bb-4f67-80b6-9aeb703171bd'), -- The Dog Stars - Le stelle dopo la fine (sala 3)
+    ('49d3d7b6-02dd-4b75-8fe7-2f7433d4bdee', '2026-09-18 15:30:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Insidious - Fuori dall'Altrove (sala 4)
+    ('000b5fcc-5e08-4e7d-bf17-293d6dafd504', '2026-09-18 17:36:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Insidious - Fuori dall'Altrove (sala 4)
+    ('0e3c9980-2d09-4b39-b3ed-2d0c184c0f6c', '2026-09-18 19:42:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '5684aadd-f3fb-40c5-967d-cfc7bc66500b'), -- Insidious - Fuori dall'Altrove (sala 4)
+    -- Adastra Roma
+    ('f6103169-4ad3-4812-975b-131ef3aad879', '2026-09-18 15:00:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('e96ea442-c3c1-47c7-aacf-b6fd5da2e55c', '2026-09-18 16:52:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     'ce393178-edf9-4196-bc7b-69d605711f09'), -- Onslaught - Assalto finale (sala 1)
+    ('4bdce290-3fc0-4c73-9755-2e156f2a5273', '2026-09-18 15:00:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('4acea172-9492-4538-ade7-3dfec71c26f5', '2026-09-18 17:06:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('2ed5145b-09ac-448f-8412-a8b0a1109c78', '2026-09-18 19:12:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('244ff65c-00a7-4b9a-97dc-652331bd18c4', '2026-09-18 21:18:00', 'FALSE', '1ec659d1-9219-4cbd-91d7-43b17ab3b7b9',
+     '7d451f87-9049-4e45-99eb-46d7d021ba81'), -- Insidious - Fuori dall'Altrove (sala 2)
+    ('da99ab0d-455d-4550-b2f9-2a4a40796026', '2026-09-18 15:10:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- One Night Only - Quando tutto e possibile (sala 3)
+    ('5e2f12a3-8782-4a4c-ba3e-a582e4e1d7a2', '2026-09-18 17:12:00', 'FALSE', 'edcde877-a8eb-4517-a144-dfd3f88538eb',
+     'd8e83a33-794e-4f1d-9c48-f6d77db0a52d'), -- One Night Only - Quando tutto e possibile (sala 3)
+    ('64b12b25-2c13-41de-b84e-a27f9813388e', '2026-09-18 15:30:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0'), -- Onslaught - Assalto finale (sala 4)
+    ('ca47a3b4-19fb-46ab-a6e0-a88a2f16a010', '2026-09-18 17:22:00', 'FALSE', '5b4690f9-854f-4b27-bcba-4932eb1b1cd8',
+     '69d55f01-9a2d-42ee-84da-1b344f204da0');
+-- Onslaught - Assalto finale (sala 4)
+
 
 -- NON TOCCARE VANNO BENE
 INSERT INTO seat (id, color, number, "row", seat_status, svg_coordinates)
