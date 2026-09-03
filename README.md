@@ -118,12 +118,11 @@ Sono previsti tre ruoli utente:
 
 ## 🗺️ Roadmap del progetto
 
-- Prevendita per i film di prossima uscita
+- Gestione prevendita per i film di prossima uscita
 - Gestione della mappa dei posti riservati alle persone diversamente abili
-- Visualizzazione ordinata degli orari (rimando alla pagina dettaglio film quando gli orari sono numerosi)
 - Check di validazione del biglietto, per contrassegnarlo come usato e impedirne il riutilizzo
 - Creazione e invio dei biglietti in formato PDF via email
-- Crop della foto profilo per una migliore gestione dell'aspect ratio dell'avatar (lato front-end)
+- Creazione e gestioni di end-point amministrativi
 
 ---
 
