@@ -22,7 +22,7 @@ public class LoginService {
         User found = this.usersService.findByEmail(body.email());
 
         if (this.bcrypt.matches(body.password(), found.getPassword())) {
-            return new LoginResponseDTO(this.jwtTools.generateToken(found), found.getName(), found.getSurname(), found.getEmail(), found.getBirthDate(), found.getProfilePicLink(), found.getEmail());
+            return new LoginResponseDTO(this.jwtTools.generateToken(found), found.getSurname(), found.getName(), found.getEmail(), found.getBirthDate(), found.getProfilePicLink(), found.getEmail());
         } else {
             throw new UnauthorizedException("Credenziali Sbagliate");
         }

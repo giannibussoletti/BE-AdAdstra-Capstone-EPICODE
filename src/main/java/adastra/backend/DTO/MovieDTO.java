@@ -20,6 +20,11 @@ public record MovieDTO(
         @NotBlank(message = "Il campo posterLink non può essere lasciato vuoto")
         String posterLink,
         @NotBlank(message = "Il campo plot non può essere lasciato vuoto")
-        String plot) {
+        String plot,
+        String trailer,
+        @NotBlank(message = "Il campo plot non può essere lasciato vuoto")
+        String director,
+        String bannerLink,
+        String tagline) {
 }
 
