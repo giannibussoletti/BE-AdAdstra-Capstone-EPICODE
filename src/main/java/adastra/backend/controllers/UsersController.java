@@ -44,7 +44,7 @@ public class UsersController {
         return new ResponseNoIdDTO("password aggiornata correttamente", LocalDateTime.now());
     }
 
-    @PostMapping("profile/avatar")
+    @PatchMapping("profile/avatar")
     @ResponseStatus(HttpStatus.OK)
     public ImageLinkResponseDTO updateAvatar(@AuthenticationPrincipal User authenticatedUser, @RequestParam("avatar_pic") MultipartFile file) {
         User saved = this.usersService.avatarUpdate(authenticatedUser, file);

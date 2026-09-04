@@ -70,7 +70,7 @@ public class User implements SoftDeleteInt, UserDetails {
         this.email = email;
         this.birthDate = birthDate;
         this.password = password;
-        this.profilePicLink = "https://placehold.co/100";
+        this.profilePicLink = "https://res.cloudinary.com/yx1tcr1y/image/upload/logo600x.png";
         this.userRole = UserRole.USER;
         this.isDeleted = IsDeleted.FALSE;
     }
