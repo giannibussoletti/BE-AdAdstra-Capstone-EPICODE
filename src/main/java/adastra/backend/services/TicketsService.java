@@ -47,7 +47,7 @@ public class TicketsService {
                             return new UserMoviesDTO(movie.getTitle(), movie.getId(), seatPos, screeningTime.getDateTime(), screeningTime.getScreenId().getScreenNumber()
                             );
                         },
-                        (first, _) -> first
+                        (first, last) -> first
                 ))
                 .values()
                 .stream()
