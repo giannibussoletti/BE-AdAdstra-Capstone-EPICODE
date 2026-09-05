@@ -1,9 +1,3 @@
-INSERT INTO users (birth_date, id, email, name, password, profile_pic_link, surname, user_is_deleted, user_role)
-VALUES ('1994-02-13', 'c111fc10-1948-491b-8fe2-9e54bf0b15d6', 'giangiacomo@mario.it', 'Gianni',
-        '$2a$12$kfiSLC/X8ySMlOQT4G/v6eoy/zIy6kUyGluWh0h9dPZiRSAQzLELe',
-        'https://res.cloudinary.com/yx1tcr1y/image/upload/v1788306311/typ6ft3bererbwymarrc.jpg', 'Bussoletti', 'FALSE',
-        'USER');
-
 INSERT INTO cities (id, city, city_is_deleted)
 VALUES ('f52ff9ba-39f0-45bb-9f23-046d56da56a8', 'milano', 'FALSE'),
        ('a179cf1f-d99e-4a57-9acd-ee5858ee5c35', 'roma', 'FALSE'),
@@ -13,7 +7,7 @@ INSERT INTO cinemas (id, address, cinema_name, cinema_is_deleted, city_id)
 VALUES ('6d6dcd9d-d616-43ff-b5b9-021c1bbfb876', 'via delle asole 10', 'milano nuova', 'FALSE',
         'f52ff9ba-39f0-45bb-9f23-046d56da56a8');
 INSERT INTO cinemas (id, address, cinema_name, cinema_is_deleted, city_id)
-VALUES ('b52a2a94-7773-4886-898d-8ccc37059902', 'via dei cinque colli 344', 'centro commerciale Tiburtino', 'FALSE',
+VALUES ('b52a2a94-7773-4886-898d-8ccc37059902', 'via dei cinque colli 344', 'roma centro', 'FALSE',
         'a179cf1f-d99e-4a57-9acd-ee5858ee5c35');
 INSERT INTO cinemas (id, address, cinema_name, cinema_is_deleted, city_id)
 VALUES ('b7e3f747-d1bd-4f14-85be-01ca152b5355', 'Via Sermoneta 58', 'napoli antica', 'FALSE',
@@ -67,7 +61,7 @@ VALUES ('0c7490f0-d90e-4d30-abc2-edce7bf73241', 109, 'FALSE',
 
 
        ('5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe', 112, 'FALSE',
-        'Kris è una regista queer di 29 anni che si è fatta conoscere con un film che è un omaggio a Psycho, visto però sotto la prospettiva della tenda della doccia. Ora le viene affidato il reboot di una lunga saga horror, Camp Miasma, il cui capostipite, realizzato negli anni ''80, ha avuto un grandissimo successo al box-office. Successivamente però, nei continui rifacimenti, è entrata in crisi. Entusiasta del progetto, cerca di coinvolgere l''attrice che interpretava la ragazza sopravvissuta del primo film, Billy Presley. La donna, da anni, vive reclusa nello stesso luogo dove è stato girato Camp Miasma che si trova nel Pacifico settentrionale, vicino al Canada. Così Kris la raggiunge nella sua dimora per convincerla ad accettare la parte. Billy invita Kris a cena e poi a dormire a casa sua. Da quel momento la regista s''immergerà totalmente nell''atmosfera terrificante della saga e il suo rapporto con Billy si evolverà in modo sorprendente.',
+        'Kris è una regista queer di 29 anni che si è fatta conoscere con un film che è un omaggio a Psycho, visto però sotto la prospettiva della tenda della doccia. Ora le viene affidato il reboot di una lunga saga horror, Camp Miasma, il cui capostipite è realizzato negli anni ''80.',
         'https://res.cloudinary.com/yx1tcr1y/image/upload/f_auto/q_auto/v1788284384/Campo_miasma.png', '2026-08-07',
         'Hannah Einbinder, Gillian Anderson',
         'Camp Miasma - Adolescenza, sesso e morte ', 'https://www.youtube.com/watch?v=LGhj1E3UbAA', NULL,
