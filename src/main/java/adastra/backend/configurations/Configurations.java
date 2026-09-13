@@ -1,6 +1,7 @@
 package adastra.backend.configurations;
 
 import com.cloudinary.Cloudinary;
+import com.resend.Resend;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class CloudinaryConfig {
+public class Configurations {
+    
+    @Value("${resend.key}")
+    private String resendToken;
+
     @Bean
     public Cloudinary getCloudinaryUploader(@Value("${cloudinary.name}") String cloudName,
                                             @Value("${cloudinary.apikey}") String apiKey,
@@ -22,4 +27,10 @@ public class CloudinaryConfig {
 
         return new Cloudinary(config);
     }
+
+    @Bean
+    public Resend resendClient() {
+        return new Resend(resendToken);
+    }
+
 }
