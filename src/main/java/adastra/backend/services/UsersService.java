@@ -7,6 +7,7 @@ import adastra.backend.entities.User;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.UsersRepository;
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -75,13 +76,26 @@ public class UsersService {
         User found = this.findById(user.getId());
 
         try {
-            Map result = uploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+            // Opzioni di caricamento e ottimizzazione
+            Map uploadParams = ObjectUtils.asMap(
+                    "folder", "avatars",
+                    "transformation", new Transformation()
+                            .width(400)
+                            .height(400)
+                            .crop("fill")
+                            .gravity("face")
+                            .quality("auto:good")
+                            .fetchFormat("auto")
+            );
+
+            Map result = uploader.uploader().upload(file.getBytes(), uploadParams);
             String url = (String) result.get("secure_url");
+
             found.setProfilePicLink(url);
             return this.usersRepository.save(found);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

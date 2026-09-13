@@ -3,14 +3,13 @@ VALUES ('f52ff9ba-39f0-45bb-9f23-046d56da56a8', 'milano', 'FALSE'),
        ('a179cf1f-d99e-4a57-9acd-ee5858ee5c35', 'roma', 'FALSE'),
        ('2071c9ac-32eb-4890-9803-98a1b48a4ce3', 'napoli', 'FALSE');
 
+
 INSERT INTO cinemas (id, address, cinema_name, cinema_is_deleted, city_id)
 VALUES ('6d6dcd9d-d616-43ff-b5b9-021c1bbfb876', 'via delle asole 10', 'milano nuova', 'FALSE',
-        'f52ff9ba-39f0-45bb-9f23-046d56da56a8');
-INSERT INTO cinemas (id, address, cinema_name, cinema_is_deleted, city_id)
-VALUES ('b52a2a94-7773-4886-898d-8ccc37059902', 'via dei cinque colli 344', 'roma centro', 'FALSE',
-        'a179cf1f-d99e-4a57-9acd-ee5858ee5c35');
-INSERT INTO cinemas (id, address, cinema_name, cinema_is_deleted, city_id)
-VALUES ('b7e3f747-d1bd-4f14-85be-01ca152b5355', 'Via Sermoneta 58', 'napoli antica', 'FALSE',
+        'f52ff9ba-39f0-45bb-9f23-046d56da56a8'),
+       ('b52a2a94-7773-4886-898d-8ccc37059902', 'via dei cinque colli 344', 'roma centro', 'FALSE',
+        'a179cf1f-d99e-4a57-9acd-ee5858ee5c35'),
+       ('b7e3f747-d1bd-4f14-85be-01ca152b5355', 'Via Sermoneta 58', 'napoli antica', 'FALSE',
         '2071c9ac-32eb-4890-9803-98a1b48a4ce3');
 
 
