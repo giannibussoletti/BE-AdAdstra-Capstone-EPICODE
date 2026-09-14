@@ -3,6 +3,7 @@ package adastra.backend.services;
 import adastra.backend.DTO.EmailUpdateDTO;
 import adastra.backend.DTO.PasswordUpdateDTO;
 import adastra.backend.DTO.UserRegistrationDTO;
+import adastra.backend.emailSender.UserAccountCreated;
 import adastra.backend.entities.User;
 import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.UsersRepository;
@@ -12,6 +13,7 @@ import com.cloudinary.utils.ObjectUtils;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,10 +31,13 @@ public class UsersService {
     private UsersRepository usersRepository;
     private PasswordEncoder bcrypt;
     private Cloudinary uploader;
+    private ApplicationEventPublisher eventPublisher;
 
-
+    @Transactional
     public User save(UserRegistrationDTO body) {
-        return this.usersRepository.save(new User(body.name(), body.surname(), body.email(), LocalDate.parse(body.birthDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy")), this.bcrypt.encode(body.password())));
+        User userCreated = this.usersRepository.save(new User(body.name(), body.surname(), body.email(), LocalDate.parse(body.birthDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy")), this.bcrypt.encode(body.password())));
+        eventPublisher.publishEvent(new UserAccountCreated(userCreated));
+        return userCreated;
     }
 
     public User findByEmail(String email) {
