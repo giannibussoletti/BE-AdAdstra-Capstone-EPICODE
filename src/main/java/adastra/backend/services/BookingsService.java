@@ -1,6 +1,7 @@
 package adastra.backend.services;
 
 import adastra.backend.DTO.BookingDTO;
+import adastra.backend.emailSender.BookingEventCreated;
 import adastra.backend.entities.Booking;
 import adastra.backend.entities.ScreeningTime;
 import adastra.backend.entities.Seat;
@@ -9,6 +10,7 @@ import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.BookingRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -17,6 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class BookingsService {
 
+    private ApplicationEventPublisher eventPublisher;
     private BookingRepository bookingRepository;
     private UsersService usersService;
     private TicketsService ticketsService;
@@ -33,6 +36,7 @@ public class BookingsService {
             booking = this.bookingRepository.save(new Booking(found, body.totalCost(), body.coupon(), body.guestEmail()));
         }
         createTicket(booking, body);
+        eventPublisher.publishEvent(new BookingEventCreated(booking));
 
         return booking;
     }
@@ -46,11 +50,12 @@ public class BookingsService {
             booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost(), body.coupon()));
         }
         createTicket(booking, body);
-
+        eventPublisher.publishEvent(new BookingEventCreated(booking));
         return booking;
 
     }
 
+    @Transactional
     private void createTicket(Booking booking, BookingDTO body) {
         ScreeningTime time = this.screeningTimeService.findById(body.screenTimeId());
 
