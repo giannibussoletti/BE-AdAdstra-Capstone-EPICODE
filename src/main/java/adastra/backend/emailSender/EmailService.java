@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 public class EmailService {
     private final Resend resendClient;
 
-    public void emailSender(String to, String subject, String htmlBody) {
+    public void emailSender(String from, String to, String subject, String htmlBody) {
         CreateEmailOptions params = CreateEmailOptions.builder()
-                .from("onboarding@resend.dev")
+                .from(from)
                 .to(to)
                 .subject(subject)
                 .html(htmlBody)
