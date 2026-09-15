@@ -118,12 +118,12 @@ Sono previsti tre ruoli utente:
 
 ## 🗺️ Roadmap del progetto
 
-- Gestione prevendita per i film di prossima uscita
-- Gestione della mappa dei posti riservati alle persone diversamente abili
-- Check di validazione del biglietto, per contrassegnarlo come usato e impedirne il riutilizzo
-- Creazione e invio dei biglietti in formato PDF via email
-- Creazione e gestioni di end-point amministrativi
-- Gestione della fidelity card degli utenti registrati
+- ✅ Creazione e invio dei biglietti in formato PDF via email (release [tag 0.3.0](https://github.com/giannibussoletti/BE-AdAdstra-Capstone-EPICODE/releases/tag/0.3.0))
+- ❌ Gestione prevendita per i film di prossima uscita
+- ❌  Gestione della mappa dei posti riservati alle persone diversamente abili
+- ❌ Check di validazione del biglietto, per contrassegnarlo come usato e impedirne il riutilizzo
+- ❌ Creazione e gestioni di end-point amministrativi
+- ❌ Gestione della fidelity card degli utenti registrati
 
 ---
 
