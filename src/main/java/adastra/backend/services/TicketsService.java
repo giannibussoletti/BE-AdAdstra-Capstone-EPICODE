@@ -19,6 +19,7 @@ public class TicketsService {
     private ScreeningTimeService screeningTimeService;
     private UsersService usersService;
 
+
     public Ticket save(Booking booking, ScreeningTime time, Seat seat) {
         return this.ticketsRepository.save(new Ticket(booking, seat, time));
 
@@ -54,5 +55,8 @@ public class TicketsService {
 
     }
 
+    protected List<Ticket> findTicketsByBooking(Booking bookingId) {
+        return this.ticketsRepository.findTicketByBookingId(bookingId);
+    }
 
 }
