@@ -65,7 +65,7 @@ public class PublicAccessController {
 
     @PostMapping("/bookings")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDTO save(@RequestBody BookingDTO body) {
+    public ResponseDTO save(@RequestBody BookingDTO body) throws Exception {
         Booking saved = this.bookingsService.savePublic(body);
 
         return new ResponseDTO("Acquisto avvenuto con successo", saved.getId(), LocalDateTime.now());
