@@ -1,5 +1,6 @@
 package adastra.backend.repository;
 
+import adastra.backend.entities.Booking;
 import adastra.backend.entities.ScreeningTime;
 import adastra.backend.entities.Ticket;
 import adastra.backend.entities.User;
@@ -19,4 +20,5 @@ public interface TicketsRepository extends JpaRepository<Ticket, UUID> {
     @Query("SELECT t FROM Ticket t JOIN t.bookingId bk JOIN t.screeningTimeId st JOIN st.movieId mv WHERE bk.userId = :user")
     List<Ticket> findMovieByUser(@Param("user") User user);
 
+    List<Ticket> findTicketByBookingId(Booking bookingId);
 }
