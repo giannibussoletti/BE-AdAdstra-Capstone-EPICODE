@@ -1,38 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Ticket</title>
+    <meta charset="UTF-8"/>
+    <title>Ticket </title>
+    <style>
+        @page {
+            size: 100mm 150mm;
+            margin: 0;
+        }
+
+        html, body {
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ticket {
+            page-break-after: always;
+        }
+
+        .ticket:last-child {
+            page-break-after: avoid;
+        }
+
+        table {
+            width: 3.5cm;
+            height: 5.5cm;
+            padding: 16px 32px;
+        }
+
+        th {
+            text-align: start;
+            padding-bottom: 16px;
+            font-size: 19px;
+        }
+
+        th,
+        td {
+            text-transform: uppercase;
+        }
+
+        td {
+            padding-bottom: 0.5rem;
+        }
+
+        td:last-child {
+            text-align: end;
+        }
+
+        td:first-child {
+            font-weight: 700;
+            padding-right: 3rem;
+        }
+
+        .img-td {
+
+            text-align: center;
+            padding: 15px !important;
+        }
+
+        .img-td img {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th colspan="2" style="text-align: start">Movie title</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>sala</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>posto</td>
-
-        <td>E12</td>
-    </tr>
-    <tr>
-        <td>data</td>
-        <td>14/09/2026</td>
-    </tr>
-    <tr>
-        <td>orario</td>
-        <td>17:22</td>
-    </tr>
-    <tr>
-        <td colspan="2"> qr code</td>
-    </tr>
-    </tbody>
-</table>
+<div class="ticket" th:each="ticket : ${tickets}">
+    <table>
+        <thead>
+        <tr>
+            <th colspan="2" th:text="${movieTitle}">Movie Title</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>sala</td>
+            <td th:text="${screenNumber}">0</td>
+        </tr>
+        <tr>
+            <td>posto</td>
+            <td th:text="${ticket.seat}">A01</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td th:text="${screeningDate}">01/01/1990</td>
+        </tr>
+        <tr>
+            <td>orario</td>
+            <td th:text="${time}">00:00</td>
+        </tr>
+        <tr>
+            <td class="img-td" colspan="2"><img alt="qr-code"
+                                                th:src="${'data:image/png;base64,' + ticket.qrCodeBase64}"/></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
