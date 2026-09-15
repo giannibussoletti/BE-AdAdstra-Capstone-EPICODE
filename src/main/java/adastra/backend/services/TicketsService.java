@@ -54,4 +54,9 @@ public class TicketsService {
                 .collect(Collectors.toSet());
 
     }
+
+    protected List<Ticket> findTicketsByBooking(Booking bookingId) {
+        return this.ticketsRepository.findTicketByBookingId(bookingId);
+    }
+
 }

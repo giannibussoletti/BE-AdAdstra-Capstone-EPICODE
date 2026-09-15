@@ -1,6 +1,7 @@
 package adastra.backend.services;
 
 import adastra.backend.DTO.BookingDTO;
+import adastra.backend.emailSender.BookingEventCreated;
 import adastra.backend.entities.Booking;
 import adastra.backend.entities.ScreeningTime;
 import adastra.backend.entities.Seat;
@@ -9,6 +10,7 @@ import adastra.backend.exceptions.NotFoundException;
 import adastra.backend.repository.BookingRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -17,14 +19,16 @@ import java.util.UUID;
 @AllArgsConstructor
 public class BookingsService {
 
+    private ApplicationEventPublisher eventPublisher;
     private BookingRepository bookingRepository;
     private UsersService usersService;
     private TicketsService ticketsService;
     private ScreeningTimeService screeningTimeService;
     private SeatsService seatsService;
+    private GeneratePdfTicketService generatePdfTicketService;
 
     @Transactional
-    public Booking saveLoggedUser(BookingDTO body, User authUser) {
+    public Booking saveLoggedUser(BookingDTO body, User authUser) throws Exception {
         Booking booking;
         User found = this.usersService.findById(authUser.getId());
         if (body.coupon().isEmpty() || body.coupon().isBlank())
@@ -33,12 +37,14 @@ public class BookingsService {
             booking = this.bookingRepository.save(new Booking(found, body.totalCost(), body.coupon(), body.guestEmail()));
         }
         createTicket(booking, body);
+        byte[] pdfTickets = this.generatePdfTicketService.generatePdf(body, booking);
+        eventPublisher.publishEvent(new BookingEventCreated(booking, pdfTickets, body));
 
         return booking;
     }
 
     @Transactional
-    public Booking savePublic(BookingDTO body) {
+    public Booking savePublic(BookingDTO body) throws Exception {
         Booking booking;
         if (body.coupon().isEmpty() || body.coupon().isBlank())
             booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost()));
@@ -46,11 +52,13 @@ public class BookingsService {
             booking = this.bookingRepository.save(new Booking(body.guestEmail(), body.totalCost(), body.coupon()));
         }
         createTicket(booking, body);
-
+        byte[] pdfTickets = this.generatePdfTicketService.generatePdf(body, booking);
+        eventPublisher.publishEvent(new BookingEventCreated(booking, pdfTickets, body));
         return booking;
 
     }
 
+    @Transactional
     private void createTicket(Booking booking, BookingDTO body) {
         ScreeningTime time = this.screeningTimeService.findById(body.screenTimeId());
 
