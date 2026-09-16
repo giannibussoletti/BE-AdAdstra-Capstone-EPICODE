@@ -18,7 +18,7 @@ import java.util.List;
 public class EmailService {
     private final Resend resendClient;
 
-    public void emailSender(String from, String to, String subject, String htmlBody, byte[] pdfTickets) {
+    public void emailSenderTicket(String from, String to, String subject, String htmlBody, byte[] pdfTickets) {
 
         String base64pdf = Base64.getEncoder().encodeToString(pdfTickets);
 
@@ -44,4 +44,23 @@ public class EmailService {
             throw new RuntimeException("Invio email fallito", e);
         }
     }
+
+    public void emailSenderUser(String from, String to, String subject, String htmlBody) {
+        
+        CreateEmailOptions params = CreateEmailOptions.builder()
+                .from(from)
+                .to(to)
+                .subject(subject)
+                .html(htmlBody)
+                .build();
+
+        try {
+            CreateEmailResponse response = resendClient.emails().send(params);
+            log.info("Email inviata con id: {}", response.getId());
+        } catch (ResendException e) {
+            log.error("Invio email fallito per {}: {}", to, e.getMessage(), e);
+            throw new RuntimeException("Invio email fallito", e);
+        }
+    }
+
 }
