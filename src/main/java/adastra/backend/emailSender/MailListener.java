@@ -16,7 +16,7 @@ public class MailListener {
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void onBookingCreated(BookingEventCreated event) {
 
-        emailService.emailSender(
+        emailService.emailSenderTicket(
                 "Adastra Cinema <ticket@mail.adastracinema.it>",
                 event.booking().getGuestMail(),
                 "Ecco i tuoi biglietti",
@@ -30,12 +30,12 @@ public class MailListener {
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void onUserCreated(UserAccountCreated userCreated) {
 
-        emailService.emailSender(
+        emailService.emailSenderUser(
                 "Adastra Cinema <created@user.adastracinema.it>",
                 userCreated.user().getEmail(),
                 "Benvenuto su Adastra Cinema",
-                "<p>Preparati a scoprire un mondo di film incredibili!</p>",
-                null
+                "<p>Preparati a scoprire un mondo di film incredibili!</p>"
+
         );
 
     }
