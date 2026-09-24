@@ -4,6 +4,8 @@ aggiorna_data_sql.py - rigenera le date di AdAstra in data.sql
 
 Cosa fa
   * aggiorna la release_date dei film (rispetto al primo giorno di programmazione)
+  * tiene sempre almeno 6 film 'prossimamente' (per il carosello): la loro data è sempre
+    dopo l'ultimo giorno di programmazione, quindi non hanno mai proiezioni
   * riscrive TUTTI i blocchi INSERT INTO screening_time, a partire da oggi
     (o da --data-inizio) per --giorni giorni
   * lascia intatto tutto il resto (città, cinema, sale, trama, poster, posti...)
@@ -17,9 +19,9 @@ Regole di programmazione (le stesse del file originale)
   * ultimo spettacolo che inizia entro le 23:45
 
 Uso
-  python aggiorna_data_sql.py                       # da oggi, 7 giorni, sovrascrive data.sql (crea data.sql.bak)
+  python aggiorna_data_sql.py                       # da oggi, 14 giorni, sovrascrive data.sql (crea data.sql.bak)
   python aggiorna_data_sql.py -i src/main/resources/data.sql
-  python aggiorna_data_sql.py --giorni 14
+  python aggiorna_data_sql.py --giorni 21
   python aggiorna_data_sql.py --data-inizio 2026-09-24
   python aggiorna_data_sql.py --date-reali          # usa le date di uscita reali, non quelle "rolling"
   python aggiorna_data_sql.py -o nuovo_data.sql     # non sovrascrive l'originale
@@ -38,30 +40,38 @@ from pathlib import Path
 NL = "\r\n"  # il file originale usa CRLF
 NAMESPACE = uuid.UUID("6f1c2b7e-0c53-4b1e-9d0e-5a7a1d3c9e11")  # ID delle proiezioni stabili tra un run e l'altro
 
+MIN_GIORNI = 4          # avviso se un film in programmazione ha meno giorni di questi
 PAUSA_MIN = 20          # minuti tra la fine di un film e l'inizio del successivo
 ULTIMO_INIZIO = 23 * 60 + 45
 MAX_SPETTACOLI = 5
 GIORNI_IT = ["Lunedi", "Martedi", "Mercoledi", "Giovedi", "Venerdi", "Sabato", "Domenica"]
 
-# id film: (titolo, data di uscita reale, offset in giorni rispetto al primo giorno di programmazione, popolarità)
-# - l'offset serve per la modalità "rolling": il film esce sempre N giorni dopo (o prima) dell'inizio
-#   della programmazione, così il file ha sempre film già usciti e film in arrivo.
-# - la popolarità decide quante sale/spettacoli ottiene il film.
+# id film: (titolo, data di uscita reale, offset in giorni rispetto al primo giorno di programmazione,
+#           popolarità, prossimamente)
+# - offset: la release_date è sempre "inizio programmazione + offset" (modalità rolling), così il file
+#   ha sempre film già usciti (offset negativo) e film in arrivo (offset positivo).
+# - popolarità: decide quante sale/spettacoli ottiene il film.
+# - prossimamente=True: il film è per il carosello "in arrivo". Lo script garantisce che la sua data
+#   sia SEMPRE successiva all'ultimo giorno di programmazione (quindi mai in sala), anche con --giorni
+#   grandi o con --date-reali.
 # Un film nel file ma NON in questa tabella mantiene la sua release_date e ha popolarità 2.
 FILM = {
-    "ac377062-0940-42d8-b3ab-4edb050ed8ba": ("Spider-Man: Brand New Day", "2026-07-31", -43, 5.0),
-    "5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe": ("Camp Miasma", "2026-08-07", -36, 1.0),
-    "edcde877-a8eb-4517-a144-dfd3f88538eb": ("One Night Only", "2026-08-07", -36, 2.5),
-    "1ec659d1-9219-4cbd-91d7-43b17ab3b7b9": ("Insidious - Fuori dall'Altrove", "2026-08-19", -24, 3.5),
-    "7fd65d01-22aa-4e5b-9f98-4c5dc339ed49": ("The Dog Stars", "2026-08-28", -15, 1.5),
-    "cad99018-ea36-44da-a09d-12119d5c7edb": ("Coyote vs. Acme", "2026-09-02", -10, 2.0),
-    "5b4690f9-854f-4b27-bcba-4932eb1b1cd8": ("Onslaught", "2026-09-04", -8, 3.0),
-    "1765660e-7dbc-4928-a7f6-db2635d2a622": ("Resident Evil", "2026-09-18", 6, 3.5),
-    "a6210149-058b-4021-b5da-d281e202cc61": ("Shaun, vita da pecora", "2026-09-18", 6, 3.0),
-    "0c7490f0-d90e-4d30-abc2-edce7bf73241": ("L'isola dei ricordi", "2026-09-24", 12, 3.5),
-    "b4bf5995-149e-486f-9ee5-d756e7a3c040": ("Dune - Parte tre", "2026-12-15", 94, 4.0),
-    "d42bcd37-892e-454d-a46e-b0f757320633": ("Avengers: Doomsday", "2026-12-18", 97, 5.0),
+    # ---- in sala (già usciti) ----
+    "ac377062-0940-42d8-b3ab-4edb050ed8ba": ("Spider-Man: Brand New Day", "2026-07-31", -43, 5.0, False),
+    "edcde877-a8eb-4517-a144-dfd3f88538eb": ("One Night Only", "2026-08-07", -36, 2.5, False),
+    "1ec659d1-9219-4cbd-91d7-43b17ab3b7b9": ("Insidious - Fuori dall'Altrove", "2026-08-19", -24, 3.5, False),
+    "7fd65d01-22aa-4e5b-9f98-4c5dc339ed49": ("The Dog Stars", "2026-08-28", -15, 2.0, False),
+    "cad99018-ea36-44da-a09d-12119d5c7edb": ("Coyote vs. Acme", "2026-09-02", -10, 2.5, False),
+    "5b4690f9-854f-4b27-bcba-4932eb1b1cd8": ("Onslaught", "2026-09-04", -8, 3.5, False),
+    # ---- prossimamente (carosello "in arrivo") ----
+    "1765660e-7dbc-4928-a7f6-db2635d2a622": ("Resident Evil", "2026-09-18", 16, 3.5, True),
+    "a6210149-058b-4021-b5da-d281e202cc61": ("Shaun, vita da pecora", "2026-09-18", 23, 3.0, True),
+    "0c7490f0-d90e-4d30-abc2-edce7bf73241": ("L'isola dei ricordi", "2026-09-24", 30, 3.5, True),
+    "5907c7d0-bd05-4ee1-9c33-0bd5a2426dbe": ("Camp Miasma", "2026-08-07", 45, 1.0, True),
+    "b4bf5995-149e-486f-9ee5-d756e7a3c040": ("Dune - Parte tre", "2026-12-15", 94, 4.0, True),
+    "d42bcd37-892e-454d-a46e-b0f757320633": ("Avengers: Doomsday", "2026-12-18", 97, 5.0, True),
 }
+MIN_PROSSIMAMENTE = 6   # avviso se i film "in arrivo" sono meno di così
 POP_DEFAULT = 2.0
 
 
@@ -96,16 +106,19 @@ def leggi_struttura(head):
     return cinema, sale_per_cinema, film
 
 
-def aggiorna_uscite(head, inizio, date_reali):
-    """Riscrive la release_date dei film noti."""
+def aggiorna_uscite(head, inizio, giorni, date_reali):
+    """Riscrive la release_date dei film noti. I film 'prossimamente' restano sempre dopo l'ultimo giorno."""
+    fine = inizio + timedelta(days=giorni - 1)
     i0 = head.index("INSERT INTO movies")
-    for mid, (_, reale, offset, _) in FILM.items():
+    for mid, (_, reale, offset, _, prossimamente) in FILM.items():
         pos = head.find(f"'{mid}'", i0)
         if pos < 0:
             continue
-        nuova = reale if date_reali else (inizio + timedelta(days=offset)).isoformat()
+        nuova = date.fromisoformat(reale) if date_reali else inizio + timedelta(days=offset)
+        if prossimamente and nuova <= fine:
+            nuova = inizio + timedelta(days=max(offset, giorni + 1))
         m = re.compile(r"'\d{4}-\d\d-\d\d'").search(head, pos)
-        head = head[:m.start()] + f"'{nuova}'" + head[m.end():]
+        head = head[:m.start()] + f"'{nuova.isoformat()}'" + head[m.end():]
     return head
 
 
@@ -164,6 +177,7 @@ def orari_sala(rnd, giorno, durata, popolarita):
 
 def genera_blocchi(inizio, giorni, cinema, sale_per_cinema, film, seed):
     blocchi = []
+    giorni_film = {}
     for d in range(giorni):
         giorno = inizio + timedelta(days=d)
         rnd = random.Random(f"{seed}|{giorno.isoformat()}")
@@ -172,6 +186,8 @@ def genera_blocchi(inizio, giorni, cinema, sale_per_cinema, film, seed):
         if not attivi:
             continue
 
+        for m in attivi:
+            giorni_film[m] = giorni_film.get(m, 0) + 1
         scelti = scegli_film_del_giorno(rnd, attivi, n_sale)
         assegnazioni = assegna_alle_sale(rnd, scelti, sale_per_cinema)
 
@@ -203,7 +219,7 @@ def genera_blocchi(inizio, giorni, cinema, sale_per_cinema, film, seed):
                 out.append(r[0])
                 out.append(f"{r[1]}{chiusura} {r[2]}")
         blocchi.append(NL.join(out) + NL)
-    return blocchi
+    return blocchi, giorni_film
 
 
 # --------------------------------------------------------------------------- main
@@ -212,7 +228,7 @@ def main():
     ap.add_argument("-i", "--input", default="data.sql", help="file da leggere (default: data.sql)")
     ap.add_argument("-o", "--output", help="file da scrivere (default: sovrascrive l'input, con backup .bak)")
     ap.add_argument("--data-inizio", help="primo giorno di programmazione, YYYY-MM-DD (default: oggi)")
-    ap.add_argument("--giorni", type=int, default=7, help="quanti giorni di programmazione (default: 7)")
+    ap.add_argument("--giorni", type=int, default=14, help="quanti giorni di programmazione (default: 14)")
     ap.add_argument("--date-reali", action="store_true",
                     help="usa le date di uscita reali invece di quelle relative a oggi")
     ap.add_argument("--seed", default="adastra", help="cambia il seed per ottenere una programmazione diversa")
@@ -229,11 +245,11 @@ def main():
         sys.exit("Non trovo i punti di riferimento nel file (blocco movies / commento '-- NON TOCCARE VANNO BENE').")
 
     inizio = date.fromisoformat(a.data_inizio) if a.data_inizio else date.today()
-    head = aggiorna_uscite(testo[:i_giorni], inizio, a.date_reali)
+    head = aggiorna_uscite(testo[:i_giorni], inizio, a.giorni, a.date_reali)
     coda = testo[i_fine:]
 
     cinema, sale_per_cinema, film = leggi_struttura(head)
-    blocchi = genera_blocchi(inizio, a.giorni, cinema, sale_per_cinema, film, a.seed)
+    blocchi, giorni_film = genera_blocchi(inizio, a.giorni, cinema, sale_per_cinema, film, a.seed)
 
     nuovo = head + (NL).join(blocchi) + NL + NL + coda
 
@@ -243,11 +259,20 @@ def main():
     with open(dst, "w", encoding="utf-8", newline="") as fh:
         fh.write(nuovo)
 
-    print(f"OK: {dst}  |  programmazione {inizio:%d/%m/%Y} -> {inizio + timedelta(days=a.giorni - 1):%d/%m/%Y}")
+    fine = inizio + timedelta(days=a.giorni - 1)
+    print(f"OK: {dst}  |  programmazione {inizio:%d/%m/%Y} -> {fine:%d/%m/%Y}")
+    prossimamente = 0
     for mid, f in sorted(film.items(), key=lambda x: x[1]["uscita"]):
-        stato = "in sala" if f["uscita"] <= inizio else "in arrivo"
-        print(f"  {f['uscita']:%d/%m/%Y}  {stato:9}  {f['titolo']}")
-
+        if f["uscita"] <= inizio:
+            stato = "in sala"
+        elif f["uscita"] <= fine:
+            stato = "esce in programmazione"
+        else:
+            stato = "prossimamente"
+            prossimamente += 1
+        print(f"  {f['uscita']:%d/%m/%Y}  {stato:22}  {f['titolo']}")
+    if prossimamente < MIN_PROSSIMAMENTE:
+        print(f"ATTENZIONE: solo {prossimamente} film 'prossimamente' (ne servono almeno {MIN_PROSSIMAMENTE}).")
 
 if __name__ == "__main__":
     main()
