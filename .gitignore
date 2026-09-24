@@ -19,6 +19,7 @@ backend.zip
 *.iws
 *.iml
 *.ipr
+*.bak
 
 ### NetBeans ###
 /nbproject/private/
