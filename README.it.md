@@ -75,6 +75,7 @@ I valori di `CLOUDINARY_*` si ottengono creando un account gratuito su [Cloudina
 > 🔗 Per usare l'applicazione completa, avvia anche il [front-end](https://github.com/giannibussoletti/FE-AdAdstra-Capstone-EPICODE).
 
 > P.S. il progetto dispone già di un data.sql che si occupa di creare i dati necessari alla visione del progetto al suo avvio.
+
 ---
 
 ## 🔐 Autenticazione e ruoli
