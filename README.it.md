@@ -1,3 +1,5 @@
+[English](README.md) | **Italiano**
+
 # 🎬 Adastra Cinema — Back-End
 
 Back-end della web application **Adastra Cinema**, un sistema di gestione per una catena di cinema: espone le API utilizzate dal front-end per la consultazione di cinema, film, orari, la prenotazione dei posti, l'acquisto dei biglietti e la gestione degli utenti.
